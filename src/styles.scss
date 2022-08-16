@@ -3,6 +3,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&display=swap');
 
 
+/* THEME COLOR */
+
+.light-theme{
+    --bg-color: #eeeeee;
+    --text-color: #222222;
+
+    --box-shadow: 0 15px 25px rgba(0,0,0, .1);
+}
+.dark-theme{
+    --bg-color: #263238;
+    --text-color: #ECEFF1;
+
+    --box-shadow: 0 15px 25px #ECEFF1;
+}
+
 /* GLOBAL STYLES */
 
 *{
@@ -11,9 +26,13 @@
     box-sizing: border-box;
 }
 
-html{
+html, body { height: 100%; }
+
+body{
     font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: .3s ease;
 }
 
-html, body { height: 100%; }
 

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor( ) { }
 
   ngOnInit(): void {
+    if( localStorage.getItem('darkMode') === '1' ){
+      this.checked = true
+    }
+  }
+
+  checked: boolean = false;
+
+  @Output() darkModeOn = new EventEmitter<boolean>()
+
+  switchTheme( change: MatSlideToggleChange ){
+    this.darkModeOn.emit(change.checked)
+    
   }
 
 }

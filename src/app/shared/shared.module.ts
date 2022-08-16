@@ -16,6 +16,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
   imports: [
     CommonModule,
     MatSlideToggleModule
+  ],
+  exports: [
+    NavbarComponent
   ]
 })
 export class SharedModule { }
