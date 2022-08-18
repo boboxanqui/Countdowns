@@ -16,6 +16,8 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     if( localStorage.getItem('darkMode') === '1' ){
       this.renderer.setAttribute( this.document.body, 'class', 'dark-theme' )
+    } else {
+      this.renderer.setAttribute( this.document.body, 'class', 'light-theme' )
     }
   }
 

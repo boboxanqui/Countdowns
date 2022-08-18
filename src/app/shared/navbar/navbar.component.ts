@@ -13,10 +13,12 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     if( localStorage.getItem('darkMode') === '1' ){
       this.checked = true
+    } else {
+      this.checked = false;
     }
   }
 
-  checked: boolean = false;
+  checked!: boolean;
 
   @Output() darkModeOn = new EventEmitter<boolean>()
 
