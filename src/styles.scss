@@ -10,12 +10,15 @@
     --text-color: #222222;
 
     --box-shadow: 0 15px 25px rgba(0,0,0, .1);
+    --icon-shadow: 5px 5px 2px #22222241;
+
 }
 .dark-theme{
     --bg-color: #263238;
     --text-color: #ECEFF1;
 
     --box-shadow: 0 15px 25px #ECEFF1;
+    --icon-shadow: 5px 5px 2px #eceff134;
 }
 
 /* GLOBAL STYLES */
@@ -33,6 +36,48 @@ body{
     background-color: var(--bg-color);
     color: var(--text-color);
     transition: .3s ease;
+}
+
+/* COMMON CLASSES */
+
+.display-none{
+    display: none;
+}
+
+.opacity-0{
+    opacity: 0;
+}
+
+.drop-shadow{
+    filter: drop-shadow( var(--icon-shadow) );
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.unselect{
+    user-select: none;
+}
+
+/* ICONS */
+
+.icon-box{
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    user-select: none;
+
+    & > img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        // filter: drop-shadow(3px 3px 2px rgba(0,0,0,0.1));
+        transition: 1s ease-out;
+    }
 }
 
 

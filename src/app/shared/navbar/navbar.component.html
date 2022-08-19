@@ -5,11 +5,33 @@
     <div class="settings">
         <div class="lenguage">Lenguage</div>
         <div class="theme-selector">
-            <mat-slide-toggle (change)="switchTheme($event)"
+            <div class="icon-box" 
+                (click)="switchTheme(false)"
+                [class.pointer]="checked">
+                <img src="../../../assets/icons/sun-clay-80x80.webp" 
+                    alt="Sun icon black and white"
+                    [ngClass]="{'opacity-0': !checked }">
+                <img src="../../../assets/icons/sun-color_80x80.webp" 
+                    alt="Sun icon color"
+                    class="drop-shadow"
+                    [ngClass]="{'opacity-0': checked }">
+            </div>
+            <mat-slide-toggle (change)="switchTheme($event.checked)"
                             [checked]="checked"
                             color="warn">
-                            Dark mode
             </mat-slide-toggle>
+            <div class="icon-box" 
+                (click)="switchTheme(true)"
+                [class.pointer]="!checked">
+                <img src="../../../assets/icons/moon-clay-80x80.webp" 
+                    alt="Moon icon black and white"
+                    class="moon-icon"
+                    [ngClass]="{'opacity-0': checked }">
+                <img src="../../../assets/icons/moon-color-80x80.webp" 
+                    alt="Moon icon color"
+                    class="drop-shadow moon-icon"
+                    [ngClass]="{'opacity-0': !checked }">
+            </div>
         </div>
         <div class="user-account">User</div>
     </div>

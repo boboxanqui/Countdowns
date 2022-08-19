@@ -22,9 +22,9 @@ export class NavbarComponent implements OnInit {
 
   @Output() darkModeOn = new EventEmitter<boolean>()
 
-  switchTheme( change: MatSlideToggleChange ){
-    this.darkModeOn.emit(change.checked)
-    
+  switchTheme( checked: boolean ){
+    this.darkModeOn.emit(checked)
+    this.checked = checked
   }
 
 }
