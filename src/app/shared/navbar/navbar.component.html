@@ -3,7 +3,45 @@
         <h1>Logo</h1>
     </div>
     <div class="settings">
-        <div class="lenguage">Lenguage</div>
+        <div class="lenguage">
+            <mat-form-field appearance="fill">
+                <mat-label>Favorite food</mat-label>
+                    <mat-select  name="food">
+                        <mat-option  value="es" class="lang-option">
+                            <img src="../../../assets/flags/spain-flag-80x53.webp" 
+                                alt="spain flag"
+                                class="flag-lang">
+                            Spanish
+                        </mat-option>
+                        <mat-option value="en" class="lang-option">
+                            <img src="../../../assets/flags/uk-flag-100x50.webp" 
+                                alt="United Kingdom flag"
+                                class="flag-lang">
+                            English
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+        </div>
+        <div class="language-custom">
+            <form>
+                <label for="lang">Lang</label>
+                <select name="lang" id="lang" class="lang-dropdown">
+                        <option value="es">
+                            <span class="es-lang">
+                                Español
+                            </span>
+                        </option>
+                        <option value="en">
+                            <span class="">
+                                <img src="../../../assets/flags/uk-flag-100x50.webp" 
+                                    alt="United Kingdom flag"
+                                    class="">
+                                    English
+                            </span>
+                        </option>
+                </select>
+            </form>
+        </div>
         <div class="theme-selector">
             <div class="icon-box" 
                 (click)="switchTheme(false)"
