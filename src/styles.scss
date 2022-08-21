@@ -7,6 +7,9 @@
 
 .light-theme{
     --bg-color: #eeeeee;
+    --bg-color-neutral: #dbdbdb;
+    --accent: #ddbc4f;
+
     --text-color: #222222;
 
     --box-shadow: 0 15px 25px rgba(0,0,0, .1);
@@ -15,6 +18,9 @@
 }
 .dark-theme{
     --bg-color: #263238;
+    --bg-color-neutral: #2f4753;
+    --accent:  #7cc2e2;
+
     --text-color: #ECEFF1;
 
     --box-shadow: 0 15px 25px #ECEFF1;
@@ -44,12 +50,16 @@ body{
     display: none;
 }
 
+.drop-shadow{
+    filter: drop-shadow( var(--icon-shadow) );
+}
+
 .opacity-0{
     opacity: 0;
 }
 
-.drop-shadow{
-    filter: drop-shadow( var(--icon-shadow) );
+.muted{
+    opacity: .7;
 }
 
 .pointer{

@@ -15,11 +15,19 @@ nav{
     }
 }
 
-// Material dropdown
+// Custom list languages
+
+.custom-list-lang{
+    width: 165px;
+}
 
 .lang-option{
     display: flex;
-    align-items: center;  
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    padding-right: 30px;
+    border-radius: 20px;
 
     .flag-lang{
         width: 30px;
@@ -30,28 +38,47 @@ nav{
     }
 }
 
-// Custom Dropdown
-
-.lang-dropdown{
-    font-size: inherit;
-    color: inherit;
-    background-color: inherit;
-    border: none;
-
-    option{
-        background-color: var(--bg-color);
-        border:none;
-
-        .es-lang::before{
-            content: '';
-            background-color: red;
-            width: 30px;
-            background-image: url(../../../assets/flags/spain-flag-80x53.webp);
-        }
-    }
-
+.selected-lang{
+    position: relative;
+    width: max-content;
+    padding: 10px;
+    background-color: var(--bg-color);
+    z-index: 1;
+    transition: background-color .3s ease;
 }
 
+.lang-list{
+    position: absolute;
+    top: 80px;
+    transform: translateY(-80px);
+    padding: 10px ;
+    margin-top: 10px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    opacity: 0;
+    transition: .5s ease;
+}
+
+.show-lang-list{
+    transform:  translateY(0px);
+    opacity: 1;
+    background-color: var(--bg-color-neutral) 
+}
+
+
+.lang-option-list:hover{
+    background-color: var(--accent);
+}
+
+.fa-solid{
+    transition: .3s ease;
+}
+
+.rotate-180{
+    transform: rotate(180deg);
+}
+
+// THEME SWITCHER
 
 .theme-selector{
     display: flex;
