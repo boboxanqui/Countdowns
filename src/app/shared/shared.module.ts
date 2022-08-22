@@ -6,6 +6,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 //Material
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSelectModule} from '@angular/material/select';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -16,7 +17,8 @@ import {MatSelectModule} from '@angular/material/select';
   imports: [
     CommonModule,
     MatSlideToggleModule,
-    MatSelectModule
+    MatSelectModule,
+    TranslateModule
   ],
   exports: [
     NavbarComponent

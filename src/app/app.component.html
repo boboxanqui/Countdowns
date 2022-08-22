@@ -1,1 +1,12 @@
 <app-navbar (darkModeOn)="switchTheme($event)"></app-navbar>
+
+<div class="btn-box">
+    <button class="btn new-countdown" (click)="openNewCountdownForm()">
+        <h2 class="icon-new">
+            <i class="fa-solid fa-plus"></i>
+        </h2>
+        <h2 class="text-new">
+            {{ 'MAIN.NEW' | translate | titlecase }}
+        </h2>
+    </button>
+</div>

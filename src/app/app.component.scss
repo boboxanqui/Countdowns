@@ -1,0 +1,23 @@
+
+// BUTTON NEW COUNTDOWN
+.btn-box{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.new-countdown{
+    position: fixed;
+    bottom: 10%;
+    width: max-content;
+    height: 60px;
+    border-radius: 60px;
+    overflow: hidden;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    .icon-new{
+        font-size: 1.5rem;
+    }
+}

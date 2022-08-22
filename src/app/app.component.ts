@@ -1,5 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, HostBinding, Inject, OnInit, Renderer2 } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { NewCountdownComponent } from './new-countdown/new-countdown.component';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +12,8 @@ export class AppComponent implements OnInit {
 
   constructor( 
     @Inject(DOCUMENT) private document: Document,
-    private renderer: Renderer2  
+    private renderer: Renderer2,
+    private dialog: MatDialog
   ){}
 
   ngOnInit(): void {
@@ -26,5 +29,11 @@ export class AppComponent implements OnInit {
     const theme = isDark ? 'dark-theme' : 'light-theme'
     this.renderer.setAttribute( this.document.body, 'class', theme )
     localStorage.setItem('darkMode', isDark === true ? '1' : '0')
+  }
+
+  openNewCountdownForm(){
+    this.dialog.open( NewCountdownComponent, {
+      
+    })
   }
 }
