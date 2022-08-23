@@ -5,5 +5,14 @@
 
     "MAIN":{
         "NEW":"new"
+    },
+
+    "NEW-COUNTDOWN":{
+        "NEW-TITLE": "Countdown creation",
+        "EDIT-TITLE": "Countdown edit",
+        "NAME": "name",
+
+
+        "CANCEL": "cancel"
     }
 }

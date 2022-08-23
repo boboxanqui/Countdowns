@@ -14,6 +14,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // Material
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -39,7 +41,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
       defaultLanguage: 'es'
     }),
-    MatDialogModule
+    MatDialogModule,
+    MatDatepickerModule
   ],
   exports:[
     TranslateModule

@@ -5,5 +5,14 @@
     
     "MAIN":{
         "NEW":"nuevo"
+    },
+
+    "NEW-COUNTDOWN":{
+        "NEW-TITLE": "Nuevo contador",
+        "EDIT-TITLE": "Editar contador",
+        "NAME": "nombre",
+
+
+        "CANCEL": "cancelar"
     }
 }

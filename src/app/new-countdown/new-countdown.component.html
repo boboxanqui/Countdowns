@@ -1,1 +1,28 @@
-<p>new-countdown works!</p>
+<h2 mat-dialog-title>
+    {{ 'NEW-COUNTDOWN.NEW-TITLE' | translate | uppercase }}
+</h2>
+
+<mat-dialog-content>
+    <form>
+
+        <div class="name">
+            <label for="name">{{ 'NEW-COUNTDOWN.NAME' | translate | titlecase }}</label>
+            <input type="text" id="name" class="input">
+        </div>
+        <div class="date-inputs">
+            <div class="day-imput">
+
+            </div>
+        </div>
+
+    </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+
+</mat-dialog-actions>
+
+<button class="close-dialog-icon" [mat-dialog-close]="true">
+    {{ "NEW-COUNTDOWN.CANCEL" | translate | titlecase }}
+</button>

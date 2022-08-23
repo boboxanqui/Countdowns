@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -6,13 +6,11 @@ import { MatDialogRef } from '@angular/material/dialog';
   templateUrl: './new-countdown.component.html',
   styleUrls: ['./new-countdown.component.scss']
 })
-export class NewCountdownComponent implements OnInit {
+export class NewCountdownComponent  {
 
   constructor( private dialogRef: MatDialogRef<NewCountdownComponent> ) { 
-    this.dialogRef.addPanelClass('')
+   
   }
 
-  ngOnInit(): void {
-  }
 
 }
