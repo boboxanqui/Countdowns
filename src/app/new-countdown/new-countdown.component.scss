@@ -1,0 +1,113 @@
+*{
+    font-size: 1.5rem;
+}
+
+.name{
+    display: flex;
+    margin-top: 20px;
+
+    input{
+        width: 100%;
+        display: inline;
+        text-align: center;
+    }
+}
+
+.date-inputs{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 30px;
+
+    .day-display{
+        width: 100%;
+        gap: 10px;
+    }    
+
+    img{
+        object-fit: contain;
+    }
+
+    .label-input{
+        width: 100%;
+        text-align: center;
+    }
+
+    .date-selector{
+        background: none;
+        color: var(--text-color);
+        text-align: center;
+        border: none;
+        height: 10px;
+    }
+
+}
+
+.time-selector{
+    display: flex;
+
+    img{
+        object-fit: contain;
+    }
+
+    .timer{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+
+
+        .hours,
+        .minutes{
+            display: flex;
+            flex-direction: column;
+            
+            align-items: center;
+        }
+
+        .clock-dots{
+            font-size: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        input{
+            width: 50px;
+            height: 50px;
+        }
+    }
+
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+}
+
+.caption{
+    margin-top: 30px;
+    display: flex;
+    textarea{
+        width: 100%;
+        border: 2px solid var(--muted);
+        border-radius: 5px !important;
+        padding: 5px;
+        font-size: smaller;
+        resize: vertical;
+    } 
+    textarea:focus{
+        border: 2px solid var(--accent);
+
+    }
+}
+
+.mat-datepicker-content{
+    background-color: var(-bg-color);
+    margin: 0 20px;
+}

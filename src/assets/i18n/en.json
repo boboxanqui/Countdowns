@@ -11,7 +11,12 @@
         "NEW-TITLE": "Countdown creation",
         "EDIT-TITLE": "Countdown edit",
         "NAME": "name",
-
+        "DATE": "date",
+        "DATE-FORMAT":"MM/DD/YYYY",
+        "TIME": "time",
+        "FULL-DAY":"full-day",
+        "CAPTION":"caption",
+        "CREATE":"create",
 
         "CANCEL": "cancel"
     }

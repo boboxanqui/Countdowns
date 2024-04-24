@@ -1,18 +1,99 @@
-<h2 mat-dialog-title>
+<h2 class="text-center" mat-dialog-title>
     {{ 'NEW-COUNTDOWN.NEW-TITLE' | translate | uppercase }}
 </h2>
 
 <mat-dialog-content>
-    <form>
+    <form [formGroup]="countdownForm">
 
+        <!-- NAME INPUT -->
         <div class="name">
-            <label for="name">{{ 'NEW-COUNTDOWN.NAME' | translate | titlecase }}</label>
-            <input type="text" id="name" class="input">
+            <label for="name" class="label-input">{{ 'NEW-COUNTDOWN.NAME' | translate | titlecase }}</label>
+            <input type="text" 
+                id="name" 
+                class="input"
+                autocomplete="off"
+                formControlName="name">
         </div>
+        <!-- DATE INPUT -->
         <div class="date-inputs">
-            <div class="day-imput">
+            <div class="flex-column justify-content-center pointer " (click)="picker.open()">
+                <div class="flex-row">
+                    <img src="../../assets/icons/calender-front-color-80x80.webp" 
+                    alt="Calender icon">
+                    <div class="day-display flex-column align-items-center">
+                        <label for="date" class="label-input" >
+                            {{ "NEW-COUNTDOWN.DATE" | translate | titlecase }}
+                        </label>
+                        <span *ngIf="getValue('day'); else dateFormat" class="unselect">
+                            {{ getValue('day') | dateFormat }}
+                        </span>
+                        <ng-template #dateFormat class="muted">
+                            {{ 'NEW-COUNTDOWN.DATE-FORMAT' | translate | uppercase }}
+                        </ng-template>
+                    </div>
+                </div>
+                <input class="date-selector opacity-0" 
+                    placeholder="{{ 'NEW-COUNTDOWN.DATE-FORMAT' | translate | uppercase }}"
+                    matInput 
+                    [matDatepicker]="picker"
+                    [matDatepickerFilter]="filterDates"
+                    formControlName="day">
+                <mat-datepicker #picker></mat-datepicker>
+            </div>
+            <!-- TIME INPUT -->
+            <div class="time-input">
+                <div class="full-day-checkbox text-center">
+                    <input type="checkbox" 
+                        id="full-day"
+                        formControlName="fullDay"
+                        (change)="fullDayChange($event)">
+                    <label for="full-day" class="unselect"> {{ "NEW-COUNTDOWN.FULL-DAY" | translate | uppercase }}</label>
+                </div>
+                <div class="time-selector">
+                    <img src="../../assets/icons/clock-front-color-80x80.webp" alt="">
+                    <div class="timer">
+                        <div class="hours">
+                            <button class="icon-btn pointer"
+                                (click)="increase('hour')">
+                                <i class="fa-solid fa-angle-up"></i>
+                            </button>
+                            <input type="number" 
+                                class="hour-input text-center"
+                                formControlName="hour">
+                            <button class="icon-btn pointer"
+                                (click)="reduce('hour')">
+                                <i class="fa-solid fa-angle-down"></i>
+                            </button>
+                        </div>
+                        <span class="clock-dots unselect">:</span>
+                        <div class="minutes">
+                            <button class="icon-btn pointer"
+                                (click)="increase('minute')">
+                                <i class="fa-solid fa-angle-up"></i>
+                            </button>
+                            <input type="number" 
+                                class="minute-input text-center"
+                                formControlName="minute">
+                            <button class="icon-btn pointer"
+                                (click)="reduce('minute')">
+                                <i class="fa-solid fa-angle-down"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
             </div>
+        </div>
+        <!-- CAPTION INPUT -->
+        <div class="caption">
+            <label for="caption"> 
+                {{ "NEW-COUNTDOWN.CAPTION" | translate | titlecase }}
+            </label>
+            <textarea class="input" 
+                type="text" 
+                id="caption" 
+                rows="3"
+                formControlName="caption"></textarea>
         </div>
 
     </form>
@@ -20,9 +101,21 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-
+    <button class="close-dialog-icon" [mat-dialog-close]="true">
+        {{ "NEW-COUNTDOWN.CANCEL" | translate | titlecase }}
+    </button>
+    <button>
+        {{ "NEW-COUNTDOWN.CREATE" | translate | titlecase }}
+    </button>
 </mat-dialog-actions>
 
-<button class="close-dialog-icon" [mat-dialog-close]="true">
-    {{ "NEW-COUNTDOWN.CANCEL" | translate | titlecase }}
-</button>
+
+<pre style="margin-top: 50px">
+    FORM VALUES
+    <strong>name:</strong> {{ getValue('name') }} | {{ isValid('name')}} | {{  getError('name') | json }}
+    <strong>day:</strong>  {{ getValue('day') }} | {{ isValid('day')}} | {{  getError('day') | json }}
+    <strong>fullDay:</strong>  {{ getValue('fullDay') }} | {{ isValid('fullDay')}} | {{  getError('fullDay') | json }}
+    <strong>hour:</strong>  {{ getValue('hour') }} | {{ isValid('hour')}} | {{  getError('hour') | json }}
+    <strong>minute:</strong>  {{ getValue('minute') }} | {{ isValid('minute')}} | {{  getError('minute') | json }}
+    <strong>caption:</strong>  {{ getValue('caption') }} | {{ isValid('caption')}} | {{  getError('caption') | json }}
+</pre> 

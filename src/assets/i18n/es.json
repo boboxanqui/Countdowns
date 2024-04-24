@@ -11,8 +11,12 @@
         "NEW-TITLE": "Nuevo contador",
         "EDIT-TITLE": "Editar contador",
         "NAME": "nombre",
-
-
+        "DATE": "fecha",
+        "DATE-FORMAT":"DD/MM/AAAA",
+        "TIME": "hora",
+        "FULL-DAY":"todo el día",
+        "CAPTION":"descripción",
+        "CREATE":"crear",
         "CANCEL": "cancelar"
     }
 }
