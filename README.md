@@ -25,3 +25,10 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## External services/mats
+
+- [Angular Material](https://material.angular.io/)
+- [3Dicons](https://3dicons.co/)
+- [ngx-translate](https://www.npmjs.com/package/@ngx-translate/core)
