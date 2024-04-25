@@ -20,13 +20,13 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     if( localStorage.getItem('darkMode') === '1' ){
-      this.checked = true
+      this.darkMode = true
     } else {
-      this.checked = false;
+      this.darkMode = false;
     }
   }
 
-  checked!: boolean;
+  darkMode!: boolean;
   currentLang: string;
   langOptionsOpen: boolean = false;
   langList: langOption[] = [
@@ -45,9 +45,9 @@ export class NavbarComponent implements OnInit {
 
   @Output() darkModeOn = new EventEmitter<boolean>()
 
-  switchTheme( checked: boolean ){
-    this.darkModeOn.emit(checked)
-    this.checked = checked
+  switchTheme( mode: boolean ){
+    this.darkModeOn.emit(mode)
+    this.darkMode = mode
   }
 
   get langSelected() {

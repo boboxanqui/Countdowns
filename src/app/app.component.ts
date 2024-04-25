@@ -22,13 +22,6 @@ export class AppComponent implements OnInit {
     } else {
       this.renderer.setAttribute( this.document.body, 'class', 'light-theme' )
     }
-
-    NOTE: // TO BE REMOVE
-    this.dialog.open( NewCountdownComponent, {
-      width: '800px',
-      // height: '500px'
-    })
-
   }
 
   

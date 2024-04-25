@@ -28,32 +28,50 @@
         <div class="theme-selector">
             <div class="icon-box" 
                 (click)="switchTheme(false)"
-                [class.pointer]="checked">
+                
+                [class]="darkMode ? 'dark-mode' : 'light-mode'">
+                <img src="../../../assets/icons/sun-color_80x80.webp" 
+                    alt="Sun icon color"
+                    class="sun-icon"
+                    >
+            </div>
+            <div class="icon-box" 
+                (click)="switchTheme(true)"
+                [class]="darkMode ? 'dark-mode' : 'light-mode'">
+                <img src="../../../assets/icons/moon-color-80x80.webp" 
+                    alt="Moon icon color"
+                    class="moon-icon">
+            </div>
+        </div>
+         <!-- <div class="theme-selector">
+            <div class="icon-box" 
+                (click)="switchTheme(false)"
+                [class.pointer]="darkMode">
                 <img src="../../../assets/icons/sun-clay-80x80.webp" 
                     alt="Sun icon black and white"
-                    [ngClass]="{'opacity-0': !checked }">
+                    [ngClass]="{'opacity-0': !darkMode }">
                 <img src="../../../assets/icons/sun-color_80x80.webp" 
                     alt="Sun icon color"
                     class="drop-shadow"
-                    [ngClass]="{'opacity-0': checked }">
+                    [ngClass]="{'opacity-0': darkMode }">
             </div>
             <mat-slide-toggle (change)="switchTheme($event.checked)"
-                            [checked]="checked"
+                            [checked]="darkMode"
                             color="warn">
             </mat-slide-toggle>
             <div class="icon-box" 
                 (click)="switchTheme(true)"
-                [class.pointer]="!checked">
+                [class.pointer]="!darkMode">
                 <img src="../../../assets/icons/moon-clay-80x80.webp" 
                     alt="Moon icon black and white"
                     class="moon-icon"
-                    [ngClass]="{'opacity-0': checked }">
+                    [ngClass]="{'opacity-0': darkMode }">
                 <img src="../../../assets/icons/moon-color-80x80.webp" 
                     alt="Moon icon color"
                     class="drop-shadow moon-icon"
-                    [ngClass]="{'opacity-0': !checked }">
+                    [ngClass]="{'opacity-0': !darkMode }">
             </div>
-        </div>
+        </div>  -->
 
         <!-- AUTH BUTTON -->
         <div class="user-account">{{ 'NAVBAR.USER' | translate }}</div>
