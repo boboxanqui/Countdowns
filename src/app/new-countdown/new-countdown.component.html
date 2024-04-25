@@ -42,41 +42,38 @@
             </div>
             <!-- TIME INPUT -->
             <div class="time-input">
-                <div class="full-day-checkbox text-center">
+                <!-- <div class="full-day-checkbox text-center">
                     <input type="checkbox" 
                         id="full-day"
                         formControlName="fullDay"
                         (change)="fullDayChange($event)">
                     <label for="full-day" class="unselect"> {{ "NEW-COUNTDOWN.FULL-DAY" | translate | uppercase }}</label>
-                </div>
+                </div> -->
                 <div class="time-selector">
                     <img src="../../assets/icons/clock-front-color-80x80.webp" alt="">
                     <div class="timer">
                         <div class="hours">
                             <button class="icon-btn pointer"
                                 (click)="increase('hour')">
-                                <i class="fa-solid fa-angle-up"></i>
+
                             </button>
                             <input type="number" 
                                 class="hour-input text-center"
                                 formControlName="hour">
                             <button class="icon-btn pointer"
                                 (click)="reduce('hour')">
-                                <i class="fa-solid fa-angle-down"></i>
                             </button>
                         </div>
                         <span class="clock-dots unselect">:</span>
                         <div class="minutes">
                             <button class="icon-btn pointer"
                                 (click)="increase('minute')">
-                                <i class="fa-solid fa-angle-up"></i>
                             </button>
                             <input type="number" 
                                 class="minute-input text-center"
                                 formControlName="minute">
                             <button class="icon-btn pointer"
                                 (click)="reduce('minute')">
-                                <i class="fa-solid fa-angle-down"></i>
                             </button>
                         </div>
                     </div>

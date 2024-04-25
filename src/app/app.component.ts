@@ -22,10 +22,10 @@ export class AppComponent implements OnInit {
     } else {
       this.renderer.setAttribute( this.document.body, 'class', 'light-theme' )
     }
+
+    //FIXME: remove open new countdown form
+    this.openNewCountdownForm()
   }
-
-  
-
 
   switchTheme( isDark: boolean ){
     const theme = isDark ? 'dark-theme' : 'light-theme'

@@ -16,6 +16,7 @@
 .date-inputs{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    column-gap: 50px;
     margin-top: 30px;
 
     .day-display{
