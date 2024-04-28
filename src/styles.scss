@@ -51,6 +51,7 @@ button {
   background-color: var(--bg-color-neutral);
   color: var(--text-color);
   border: none;
+  user-select: none;
 
   &:focus,
   &:focus-visible {

@@ -20,6 +20,8 @@
         "CREATE":"crear",
         "CANCEL": "cancelar",
         "INVALID-NAME":"Introduce un nombre",
-        "INVALID-DATE":"Elige una fecha"
+        "INVALID-DATE":"Elige una fecha",
+        "INVALID-TIME":"Hora incorrecta (de 00:00 a 23:59)"
+
     }
 }

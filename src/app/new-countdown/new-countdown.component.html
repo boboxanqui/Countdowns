@@ -65,7 +65,8 @@
                 <mat-datepicker #picker></mat-datepicker>
             </div>
             <!-- TIME INPUT -->
-            <div class="time-input">
+            <div class="time-input"
+                 [class.invalid]="submitted && (!isValid('hour') || !isValid('minute'))">
                 <!-- NOTE: FULLDAY FORMCONTROL 
                 <div class="full-day-checkbox text-center">
                     <input type="checkbox" 
@@ -84,26 +85,27 @@
                                 <img src="../../assets/icons/arrow-clay-80x80.webp"
                                      alt="Flecha con forma triangular"
                                      width="30"
-                                     class="light-theme-icon">
+                                     class="icon-time-edit light-theme-icon">
                                 <img src="../../assets/icons/arrow-clay-color-80x80.webp"
                                      alt="Flecha con forma triangular"
                                      width="30"
-                                     class="dark-theme-icon">
+                                     class="icon-time-edit dark-theme-icon">
                             </button>
                             <input type="number"
                                    class="hour-input text-center"
                                    formControlName="hour"
-                                   placeholder="00">
+                                   placeholder="00" 
+                                   [class.invalid]="submitted && !isValid('hour')">
                             <button class="btn-arrow pointer"
                                     (click)="reduce('hour')">
                                 <img src="../../assets/icons/arrow-clay-80x80.webp"
                                      alt="Flecha con forma triangular"
                                      width="30"
-                                     class="down-arrow light-theme-icon">
+                                     class="icon-time-edit down-arrow light-theme-icon">
                                 <img src="../../assets/icons/arrow-clay-color-80x80.webp"
                                      alt="Flecha con forma triangular"
                                      width="30"
-                                     class="down-arrow dark-theme-icon">
+                                     class="icon-time-edit down-arrow dark-theme-icon">
                             </button>
                         </div>
                         <span class="clock-dots unselect">:</span>
@@ -113,27 +115,32 @@
                                 <img src="../../assets/icons/arrow-clay-80x80.webp"
                                      alt="Flecha con forma triangular"
                                      width="30"
-                                     class="light-theme-icon">
+                                     class="icon-time-edit light-theme-icon">
                                 <img src="../../assets/icons/arrow-clay-color-80x80.webp"
                                      alt="Flecha con forma triangular"
                                      width="30"
-                                     class="dark-theme-icon">
+                                     class="icon-time-edit dark-theme-icon">
                             </button>
                             <input type="number"
                                    class="minute-input text-center"
-                                   formControlName="minute">
+                                   formControlName="minute"
+                                   [class.invalid]="submitted && !isValid('minute')">
                             <button class="btn-arrow pointer"
                                     (click)="reduce('minute')">
                                 <img src="../../assets/icons/arrow-clay-80x80.webp"
                                      alt="Flecha con forma triangular"
                                      width="30"
-                                     class="down-arrow light-theme-icon">
+                                     class="icon-time-edit down-arrow light-theme-icon">
                                 <img src="../../assets/icons/arrow-clay-color-80x80.webp"
                                      alt="Flecha con forma triangular"
                                      width="30"
-                                     class="down-arrow dark-theme-icon">
+                                     class="icon-time-edit down-arrow dark-theme-icon">
                             </button>
                         </div>
+                    </div>
+                    <div class="invalid-time-msg"
+                         *ngIf="submitted && (!isValid('hour') || !isValid('minute'))">
+                        <small>{{ 'NEW-COUNTDOWN.INVALID-TIME' | translate }}</small>
                     </div>
                 </div>
 

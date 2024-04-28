@@ -20,6 +20,7 @@
         "CREATE":"create",
         "CANCEL": "cancel",
         "INVALID-NAME":"Add a name",
-        "INVALID-DATE":"Chose a date"
+        "INVALID-DATE":"Chose a date",
+        "INVALID-TIME":"Invalid time (from 00:00 to 23:59)"
     }
 }

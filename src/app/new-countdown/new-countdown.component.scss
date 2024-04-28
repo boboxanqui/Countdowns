@@ -72,9 +72,15 @@
   }
 
   .time-input {
+    position: relative;
     border-radius: 10px;
     padding: 10px;
     background-color: var(--bg-color-neutral);
+    border: 2px solid transparent;
+
+    &.invalid {
+      border-color: red;
+    }
   }
 
   .day-display {
@@ -119,6 +125,19 @@
       background-color: transparent !important;
       border: none;
       color: var(--text-color);
+      
+      img{
+        transition: .2s ease;
+      }
+
+      &:hover img{
+        scale: 1.15;
+      }
+
+      &:active img{
+        scale: 1.10;
+        filter: brightness(1.5);
+      }
     }
 
     .hours,
@@ -129,7 +148,8 @@
     }
 
     .clock-dots {
-      font-size: 2rem;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -139,6 +159,12 @@
       width: 50px;
       height: 50px;
       font-size: 1.5rem;
+      border-color: transparent;
+      border-radius: 5px;
+      
+      &.invalid{
+        color: red;
+      }
     }
 
     .down-arrow {
@@ -209,14 +235,20 @@
 // ERROR MESSAGES
 
 .invalid-name-msg,
-.invalid-date-msg {
+.invalid-date-msg,
+.invalid-time-msg {
   position: absolute;
   color: red;
+  font-size: 1.2rem;
   margin: 0 10px;
   padding: 0 5px;
   width: 100%;
 }
 
 .invalid-date-msg {
-  bottom: -35px;
+  bottom: -30px;
+}
+.invalid-time-msg {
+  bottom: -30px;
+  margin: 0;
 }
