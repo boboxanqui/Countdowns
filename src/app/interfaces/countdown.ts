@@ -3,5 +3,6 @@ export interface Countdown {
     caption?: string,
     date: Date,
     style?: string,
-    creationDate: Date
+    creationDate: Date,
+    id: number
 }
