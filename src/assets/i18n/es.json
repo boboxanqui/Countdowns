@@ -16,7 +16,10 @@
         "TIME": "hora",
         "FULL-DAY":"todo el día",
         "CAPTION":"descripción",
+        "OPTIONAL":"opcional",
         "CREATE":"crear",
-        "CANCEL": "cancelar"
+        "CANCEL": "cancelar",
+        "INVALID-NAME":"Introduce un nombre",
+        "INVALID-DATE":"Elige una fecha"
     }
 }

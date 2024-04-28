@@ -36,6 +36,7 @@ export class AppComponent implements OnInit {
   openNewCountdownForm(){
     this.dialog.open( NewCountdownComponent, {
       width: '800px',
+      panelClass: 'dialog-panel'
     })
   }
 }

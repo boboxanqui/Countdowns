@@ -1,48 +1,71 @@
-<h2 class="text-center" mat-dialog-title>
-    {{ 'NEW-COUNTDOWN.NEW-TITLE' | translate | uppercase }}
-</h2>
+<div class="dialog-title">
+    <h2 class="text-center"
+        mat-dialog-title>
+        {{ 'NEW-COUNTDOWN.NEW-TITLE' | translate | uppercase }}
+    </h2>
+
+    <button class="close-dialog-icon"
+            [mat-dialog-close]="true">
+        <div class="close-icon "></div>
+        <div class="close-icon"></div>
+    </button>
+</div>
+
 
 <mat-dialog-content>
-    <form [formGroup]="countdownForm">
+    <form class="date-form" [formGroup]="countdownForm">
 
         <!-- NAME INPUT -->
         <div class="name">
-            <label for="name" class="label-input">{{ 'NEW-COUNTDOWN.NAME' | translate | titlecase }}</label>
-            <input type="text" 
-                id="name" 
-                class="input"
-                autocomplete="off"
-                formControlName="name">
+            <label for="name"
+                   class="label-input">{{ 'NEW-COUNTDOWN.NAME' | translate | titlecase }}</label>
+            <div class="input-wrapper">
+                <input type="text"
+                       id="name"
+                       class="input"
+                       [class.invalid]="submitted && !isValid('name')"
+                       autocomplete="off"
+                       formControlName="name">
+                <div class="invalid-name-msg" *ngIf="submitted && !isValid('name')">
+                    <small>{{ 'NEW-COUNTDOWN.INVALID-NAME' | translate }}</small>
+                </div>
+            </div>
         </div>
         <!-- DATE INPUT -->
         <div class="date-inputs">
-            <div class="flex-column justify-content-center pointer " (click)="picker.open()">
+            <div class="day-input flex-column justify-content-center pointer "
+                 (click)="picker.open()"
+                 [class.invalid]="submitted && !isValid('day')">
                 <div class="flex-row">
-                    <img src="../../assets/icons/calender-front-color-80x80.webp" 
-                    alt="Calender icon">
+                    <img src="../../assets/icons/calender-front-color-80x80.webp"
+                         alt="Calender icon">
                     <div class="day-display flex-column align-items-center">
-                        <label for="date" class="label-input" >
+                        <label for="date"
+                               class="label-input pointer">
                             {{ "NEW-COUNTDOWN.DATE" | translate | titlecase }}
                         </label>
-                        <span *ngIf="getValue('day'); else dateFormat" class="unselect">
+                        <span *ngIf="getValue('day'); else dateFormat"
+                              class="unselect">
                             {{ getValue('day') | dateFormat }}
                         </span>
-                        <ng-template #dateFormat class="muted">
+                        <ng-template #dateFormat
+                                     class="muted">
                             {{ 'NEW-COUNTDOWN.DATE-FORMAT' | translate | uppercase }}
                         </ng-template>
                     </div>
                 </div>
-                <input class="date-selector opacity-0" 
-                    placeholder="{{ 'NEW-COUNTDOWN.DATE-FORMAT' | translate | uppercase }}"
-                    matInput 
-                    [matDatepicker]="picker"
-                    [matDatepickerFilter]="filterDates"
-                    formControlName="day">
+                <input class="date-selector opacity-0"
+                       placeholder="{{ 'NEW-COUNTDOWN.DATE-FORMAT' | translate | uppercase }}"
+                       matInput
+                       [matDatepicker]="picker"
+                       [matDatepickerFilter]="filterDates"
+                       formControlName="day">
                 <mat-datepicker #picker></mat-datepicker>
             </div>
             <!-- TIME INPUT -->
             <div class="time-input">
-                <!-- <div class="full-day-checkbox text-center">
+                <!-- NOTE: FULLDAY FORMCONTROL 
+                <div class="full-day-checkbox text-center">
                     <input type="checkbox" 
                         id="full-day"
                         formControlName="fullDay"
@@ -50,47 +73,66 @@
                     <label for="full-day" class="unselect"> {{ "NEW-COUNTDOWN.FULL-DAY" | translate | uppercase }}</label>
                 </div> -->
                 <div class="time-selector">
-                    <img src="../../assets/icons/clock-front-color-80x80.webp" alt="">
+                    <img src="../../assets/icons/clock-front-color-80x80.webp"
+                         alt="">
                     <div class="timer">
                         <div class="hours">
-                            <button class="icon-btn pointer"
-                                (click)="increase('hour')">
-
+                            <button class="btn-arrow pointer"
+                                    (click)="increase('hour')">
+                                <img src="../../assets/icons/arrow-clay-80x80.webp"
+                                     alt="Flecha con forma triangular"
+                                     width="30">
                             </button>
-                            <input type="number" 
-                                class="hour-input text-center"
-                                formControlName="hour">
-                            <button class="icon-btn pointer"
-                                (click)="reduce('hour')">
+                            <input type="number"
+                                   class="hour-input text-center"
+                                   formControlName="hour"
+                                   placeholder="00">
+                            <button class="btn-arrow pointer"
+                                    (click)="reduce('hour')">
+                                <img src="../../assets/icons/arrow-clay-80x80.webp"
+                                     alt="Flecha con forma triangular"
+                                     width="30"
+                                     class="down-arrow">
                             </button>
                         </div>
                         <span class="clock-dots unselect">:</span>
                         <div class="minutes">
-                            <button class="icon-btn pointer"
-                                (click)="increase('minute')">
+                            <button class="btn-arrow pointer"
+                                    (click)="increase('minute')">
+                                <img src="../../assets/icons/arrow-clay-80x80.webp"
+                                     alt="Flecha con forma triangular"
+                                     width="30">
                             </button>
-                            <input type="number" 
-                                class="minute-input text-center"
-                                formControlName="minute">
-                            <button class="icon-btn pointer"
-                                (click)="reduce('minute')">
+                            <input type="number"
+                                   class="minute-input text-center"
+                                   formControlName="minute">
+                            <button class="btn-arrow pointer"
+                                    (click)="reduce('minute')">
+                                <img src="../../assets/icons/arrow-clay-80x80.webp"
+                                     alt="Flecha con forma triangular"
+                                     width="30"
+                                     class="down-arrow">
                             </button>
                         </div>
                     </div>
                 </div>
 
             </div>
+            <div class="invalid-date-msg" *ngIf="submitted && !isValid('day')">
+                <small>{{ 'NEW-COUNTDOWN.INVALID-DATE' | translate }}</small>
+            </div>
         </div>
         <!-- CAPTION INPUT -->
         <div class="caption">
-            <label for="caption"> 
+            <label for="caption">
                 {{ "NEW-COUNTDOWN.CAPTION" | translate | titlecase }}
+                <span class="muted">({{ "NEW-COUNTDOWN.OPTIONAL" | translate }})</span>
             </label>
-            <textarea class="input" 
-                type="text" 
-                id="caption" 
-                rows="3"
-                formControlName="caption"></textarea>
+            <textarea class="input"
+                      type="text"
+                      id="caption"
+                      rows="3"
+                      formControlName="caption"></textarea>
         </div>
 
     </form>
@@ -98,21 +140,18 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button class="close-dialog-icon" [mat-dialog-close]="true">
-        {{ "NEW-COUNTDOWN.CANCEL" | translate | titlecase }}
-    </button>
-    <button>
+    <button class="btn-submit" (click)="submit()">
         {{ "NEW-COUNTDOWN.CREATE" | translate | titlecase }}
     </button>
 </mat-dialog-actions>
 
 
-<pre style="margin-top: 50px">
-    FORM VALUES
-    <strong>name:</strong> {{ getValue('name') }} | {{ isValid('name')}} | {{  getError('name') | json }}
-    <strong>day:</strong>  {{ getValue('day') }} | {{ isValid('day')}} | {{  getError('day') | json }}
-    <strong>fullDay:</strong>  {{ getValue('fullDay') }} | {{ isValid('fullDay')}} | {{  getError('fullDay') | json }}
-    <strong>hour:</strong>  {{ getValue('hour') }} | {{ isValid('hour')}} | {{  getError('hour') | json }}
-    <strong>minute:</strong>  {{ getValue('minute') }} | {{ isValid('minute')}} | {{  getError('minute') | json }}
-    <strong>caption:</strong>  {{ getValue('caption') }} | {{ isValid('caption')}} | {{  getError('caption') | json }}
-</pre> 
+<!-- <pre style="margin-top: 50px"> -->
+    <!-- FORM VALUES -->
+    <!-- <strong>name:</strong> {{ getValue('name') }} | {{ isValid('name')}} | {{  getError('name') | json }} -->
+    <!-- <strong>day:</strong>  {{ getValue('day') }} | {{ isValid('day')}} | {{  getError('day') | json }} -->
+    <!-- <strong>fullDay:</strong>  {{ getValue('fullDay') }} | {{ isValid('fullDay')}} | {{  getError('fullDay') | json }} -->
+    <!-- <strong>hour:</strong>  {{ getValue('hour') }} | {{ isValid('hour')}} | {{  getError('hour') | json }} -->
+    <!-- <strong>minute:</strong>  {{ getValue('minute') }} | {{ isValid('minute')}} | {{  getError('minute') | json }} -->
+    <!-- <strong>caption:</strong>  {{ getValue('caption') }} | {{ isValid('caption')}} | {{  getError('caption') | json }} -->
+<!-- </pre> -->

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './new-countdown.component.html',
   styleUrls: ['./new-countdown.component.scss']
 })
-export class NewCountdownComponent implements OnInit {
+export class NewCountdownComponent {
 
   // TODO: date format up to language
   // TODO: 2digits Pipe on Hour & Minute inputs
@@ -19,17 +19,11 @@ export class NewCountdownComponent implements OnInit {
     private translate: TranslateService
   ) {  }
 
-  ngOnInit(): void {
-    this.countdownForm.controls['minute'].disable();
-    this.countdownForm.controls['hour'].disable();
-    console.log( this.getLang() );
-    
-  }
-
   countdownForm: FormGroup = this.fb.group({
     name: ['', Validators.required],
     day: [ , Validators.required],
-    fullDay: [true, Validators.required],
+    // FIXME: fullDay needed?
+    // fullDay: [true, Validators.required],
     hour: [ 0, [Validators.min(0), 
               Validators.max(23), 
               Validators.maxLength(2)]
@@ -40,6 +34,8 @@ export class NewCountdownComponent implements OnInit {
               ],
     caption: ['']
   })
+
+  submitted: boolean = false;
 
   // Current Language 
   getLang(){
@@ -66,37 +62,51 @@ export class NewCountdownComponent implements OnInit {
   }
 
   increase( input: string ){
-    this.countdownForm.get(input)?.setValue( 
-      this.getValue(input) +1
-    )
-    if( !this.isValid(input) ){
-      this.countdownForm.get(input)?.setValue( 
-        this.getValue(input) -1
-      )
+    if( input === 'minute' && this.getValue('minute') == 59){
+      this.countdownForm.get('minute')?.setValue(0)
     }
-  }
-
-  reduce( input: string ){
-    this.countdownForm.get(input)?.setValue( 
-      this.getValue(input) -1
-    )
-    if( !this.isValid(input) ){
+    else if( input === 'hour' && this.getValue('hour') == 23){
+      this.countdownForm.get('hour')?.setValue(0)
+    } else{
       this.countdownForm.get(input)?.setValue( 
         this.getValue(input) +1
       )
     }
   }
 
-  fullDayChange( event: any ){
-    if( this.getValue('fullDay') ){
-      this.countdownForm.get('hour')?.reset(0)
-      this.countdownForm.get('minute')?.reset(0)
-      this.countdownForm.get('hour')?.disable();
-      this.countdownForm.get('minute')?.disable();
-      return
+  reduce( input: string ){
+    if( input === 'minute' && this.getValue('minute') == 0){
+      this.countdownForm.get('minute')?.setValue(59)
     }
-    this.countdownForm.get('hour')?.enable();
-    this.countdownForm.get('minute')?.enable();    
+    else if( input === 'hour' && this.getValue('hour') == 0){
+      this.countdownForm.get('hour')?.setValue(23)
+    } else{
+      this.countdownForm.get(input)?.setValue( 
+        this.getValue(input) -1
+      )
+    }
   }
+
+  submit(){
+    this.submitted = true
+    if( !this.countdownForm.valid ) return
+
+    let date:Date = new Date( this.getValue('day') )
+    date.setHours( this.getValue('hour'), this.getValue('minute'))
+
+    console.log(date);
+  }
+
+  // fullDayChange( event: any ){
+  //   if( this.getValue('fullDay') ){
+  //     this.countdownForm.get('hour')?.reset(0)
+  //     this.countdownForm.get('minute')?.reset(0)
+  //     this.countdownForm.get('hour')?.disable();
+  //     this.countdownForm.get('minute')?.disable();
+  //     return
+  //   }
+    // this.countdownForm.get('hour')?.enable();
+    // this.countdownForm.get('minute')?.enable();    
+  // }
 
 }

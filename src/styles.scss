@@ -1,171 +1,192 @@
 /* ---------- IMPORTS ----------  */
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&display=swap");
 
 /* ---------- THEME COLOR ----------  */
 
-.light-theme{
-    --bg-color: #eeeeee;
-    --bg-color-neutral: #dbdbdb;
-    --accent: #b994e4;
+.light-theme {
+  --bg-color: #eeeeee;
+  --bg-color-neutral: #dbdbdb;
+  --accent: #b994e4;
 
-    --text-color: #222222;
-    --muted: #2222229c;
+  --text-color: #222222;
+  --muted: #2222229c;
 
-    --box-shadow: rgba(0,0,0, .1);
-    --icon-shadow: #22222241;
-
+  --box-shadow: rgba(0, 0, 0, 0.1);
+  --icon-shadow: #22222241;
 }
-.dark-theme{
-    --bg-color: #263238;
-    --bg-color-neutral: #2f4753;
-    --accent:  #cf9c3b;
+.dark-theme {
+  --bg-color: #263238;
+  --bg-color-neutral: #2f4753;
+  --accent: #cf9c3b;
 
-    --text-color: #ECEFF1;
-    --muted: #eceff19c;
+  --text-color: #eceff1;
+  --muted: #b4bbbe;
 
-    --box-shadow: #eceff146;
-    --icon-shadow: #eceff134;
+  --box-shadow: #eceff146;
+  --icon-shadow: #eceff134;
 }
 
 /* ---------- GLOBAL STYLES ---------- */
 
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-html, body { height: 100%; }
+html,
+body {
+  height: 100%;
+}
 
-body{
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: .3s ease;
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: 0.3s ease;
+}
+
+button {
+  background-color: var(--bg-color-neutral);
+  color: var(--text-color);
+  border: none;
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+  }
 }
 
 /* ---------- COMMON CLASSES ---------- */
 
-.dialog{
-    background-color: red !important;
-    border-radius: 30px;
+.dialog {
+  background-color: red !important;
+  border-radius: 30px;
 }
 
-.display-none{
-    display: none;
+.display-none {
+  display: none;
 }
 
-.drop-shadow{
-    filter: drop-shadow( 5px 5px 2px var(--icon-shadow) );
+.drop-shadow {
+  filter: drop-shadow(5px 5px 2px var(--icon-shadow));
 }
 
-.flex-row{
-    display: flex;
+.flex-row {
+  display: flex;
 }
 
-.flex-column{
-    display: flex;
-    flex-direction: column;
+.flex-column {
+  display: flex;
+  flex-direction: column;
 }
 
-.justify-content-center{
-    justify-content: center;
+.justify-content-center {
+  justify-content: center;
 }
 
-.align-items-center{
-    align-items: center;
+.align-items-center {
+  align-items: center;
 }
 
-.opacity-0{
-    opacity: 0;
+.opacity-0 {
+  opacity: 0;
 }
 
-.muted{
-    opacity: .7;
+.muted {
+  opacity: 0.7;
 }
 
-.p-relative{
-    position: relative !important;
+.p-relative {
+  position: relative !important;
 }
 
-.pointer{
-    cursor: pointer;
+.pointer {
+  cursor: pointer;
 }
 
-.text-center{
-    text-align: center;
+.text-center {
+  text-align: center;
 }
 
-.unselect{
-    user-select: none;
+.unselect {
+  user-select: none;
 }
 
-.width-100{
-    width: max-content;
+.width-100 {
+  width: max-content;
 }
 
 /* ---------- DIALOGS ---------- */
 
-.mat-dialog-container{
-    background: var(--bg-color) !important;
-    border-radius: 30px !important;
+.mat-dialog-container {
+  background: var(--bg-color) !important;
+  border-radius: 30px !important;
+}
+
+.dialog-panel {
+  cursor: auto;
+  font-size: 1.5rem;
 }
 
 /* ---------- BUTTON ---------- */
 
-.btn{
-    background-color: var(--bg-color-neutral);
-    color: var(--text-color);
-    border: none;
-    padding: 10px 30px;
-    border-radius: 20px;
-    box-shadow: 0px 0px 20px 2px var(--box-shadow);
-    cursor: pointer;
-    transition: .3s ease;
+.btn {
+  background-color: var(--bg-color-neutral);
+  color: var(--text-color);
+  border: none;
+  padding: 10px 30px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 20px 2px var(--box-shadow);
+  cursor: pointer;
+  transition: 0.3s ease;
 }
 
-.btn:hover{
-    transform: translateY(-5px);
-    background-color: var(--accent);
-    box-shadow: 0px 5px 20px 2px var(--box-shadow);
+.btn:hover {
+  transform: translateY(-5px);
+  background-color: var(--accent);
+  box-shadow: 0px 5px 20px 2px var(--box-shadow);
 }
 
-.btn:active{
-    box-shadow: 0px 0px 10px 0px var(--box-shadow) inset ;
-    transform: translateY(-3px) ;
-    transition: transform .1s ease-in;
+.btn:active {
+  box-shadow: 0px 0px 10px 0px var(--box-shadow) inset;
+  transform: translateY(-3px);
+  transition: transform 0.1s ease-in;
 }
 
-.icon-btn{
-    background-color: transparent !important;
-    border: none;
-    color: var(--text-color);
+.icon-btn {
+  background-color: transparent !important;
+  border: none;
+  color: var(--text-color);
 }
 
 /* ---------- INPUTS ---------- */
 
-.input{
-    background-color: inherit;
-    border: none;
-    border-bottom: 2px solid var(--muted);
-    color: var(--text-color);
-    margin: 0 10px;
-    padding: 2px 10px;
-    transition: background-color .2s ease, border-bottom .2s ease ;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+.input {
+  background-color: inherit;
+  border: none;
+  border-bottom: 2px solid var(--muted);
+  color: var(--text-color);
+  margin: 0 10px;
+  padding: 2px 10px;
+  transition: background-color 0.2s ease, border-bottom 0.2s ease;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+  &.invalid {
+    border-color: red;
+  }
 }
 
-.input:focus-visible{
-    outline: none;
-    border-bottom: 2px solid var(--accent);
-    background-color: var(--bg-color-neutral);
+.input:focus-visible {
+  outline: none;
+  border-bottom: 2px solid var(--accent);
+  background-color: var(--bg-color-neutral);
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
+input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 textarea:-webkit-autofill,
 textarea:-webkit-autofill:hover,
@@ -183,23 +204,21 @@ select:-webkit-autofill:focus {
   background-color: red;
 }
 
-
 /* ---------- ICONS ---------- */
 
-.icon-box{
-    position: relative;
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    user-select: none;
+.icon-box {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  user-select: none;
 
-    & > img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        transition: .5s ease-out;
-    }
+  & > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: 0.5s ease-out;
+  }
 }
-

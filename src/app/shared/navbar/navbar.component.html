@@ -7,18 +7,26 @@
         <!-- LANGUAGE DROPDOWN -->
 
         <div class="custom-list-lang pointer unselect">
-            <div class="selected-lang" (click)="langOptionsOpen = !langOptionsOpen">
+            <div class="selected-lang"
+                 (click)="langOptionsOpen = !langOptionsOpen">
                 <div class="lang-option">
-                    <img [src]="langSelected.flag" class="flag-lang">
+                    <img [src]="langSelected.flag"
+                         class="flag-lang">
                     <span class="lang-name">{{ langSelected.name }}</span>
-                    <i class="fa-solid fa-caret-down" [class.rotate-180]="langOptionsOpen"></i>
+                    <img src="../../../assets/icons/arrow-clay-80x80.webp"
+                         alt="flecha"
+                         class="lang-arrow-menu"
+                         width="20"
+                         [class.rotate-180]="!langOptionsOpen">
                 </div>
             </div>
-            <div class="lang-list" [class.show-lang-list]="langOptionsOpen" >
-                <div class="lang-option lang-option-list" 
-                    *ngFor="let lenguage of langList"
-                    (click)="changeLang(lenguage.lang)">
-                    <img [src]="lenguage.flag" class="flag-lang">
+            <div class="lang-list"
+                 [class.show-lang-list]="langOptionsOpen">
+                <div class="lang-option lang-option-list"
+                     *ngFor="let lenguage of langList"
+                     (click)="changeLang(lenguage.lang)">
+                    <img [src]="lenguage.flag"
+                         class="flag-lang">
                     <span class="lang-name muted"> {{ lenguage.name }} </span>
                 </div>
             </div>
@@ -26,24 +34,22 @@
 
         <!-- THEME SWITCHER -->
         <div class="theme-selector">
-            <div class="icon-box" 
-                (click)="switchTheme(false)"
-                
-                [class]="darkMode ? 'dark-mode' : 'light-mode'">
-                <img src="../../../assets/icons/sun-color_80x80.webp" 
-                    alt="Sun icon color"
-                    class="sun-icon"
-                    >
+            <div class="icon-box"
+                 (click)="switchTheme(false)"
+                 [class]="darkMode ? 'dark-mode' : 'light-mode'">
+                <img src="../../../assets/icons/sun-color_80x80.webp"
+                     alt="Sun icon color"
+                     class="sun-icon">
             </div>
-            <div class="icon-box" 
-                (click)="switchTheme(true)"
-                [class]="darkMode ? 'dark-mode' : 'light-mode'">
-                <img src="../../../assets/icons/moon-color-80x80.webp" 
-                    alt="Moon icon color"
-                    class="moon-icon">
+            <div class="icon-box"
+                 (click)="switchTheme(true)"
+                 [class]="darkMode ? 'dark-mode' : 'light-mode'">
+                <img src="../../../assets/icons/moon-color-80x80.webp"
+                     alt="Moon icon color"
+                     class="moon-icon">
             </div>
         </div>
-         <!-- <div class="theme-selector">
+        <!-- <div class="theme-selector">
             <div class="icon-box" 
                 (click)="switchTheme(false)"
                 [class.pointer]="darkMode">

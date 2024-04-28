@@ -16,8 +16,10 @@
         "TIME": "time",
         "FULL-DAY":"full-day",
         "CAPTION":"caption",
+        "OPTIONAL":"optional",
         "CREATE":"create",
-
-        "CANCEL": "cancel"
+        "CANCEL": "cancel",
+        "INVALID-NAME":"Add a name",
+        "INVALID-DATE":"Chose a date"
     }
 }
