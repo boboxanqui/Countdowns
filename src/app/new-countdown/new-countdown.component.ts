@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './new-countdown.component.html',
   styleUrls: ['./new-countdown.component.scss']
 })
-export class NewCountdownComponent {
+export class NewCountdownComponent implements OnInit {
 
   // TODO: date format up to language
   // TODO: 2digits Pipe on Hour & Minute inputs
@@ -18,6 +18,10 @@ export class NewCountdownComponent {
     private fb: FormBuilder,
     private translate: TranslateService
   ) {  }
+
+  ngOnInit(): void {
+    
+  }
 
   countdownForm: FormGroup = this.fb.group({
     name: ['', Validators.required],

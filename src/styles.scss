@@ -130,6 +130,16 @@ button {
   font-size: 1.5rem;
 }
 
+// Arrow icons theme
+
+body.light-theme .light-theme-icon{
+  display: none;
+}
+body.dark-theme .dark-theme-icon{
+  display: none;
+}
+
+
 /* ---------- BUTTON ---------- */
 
 .btn {

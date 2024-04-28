@@ -13,7 +13,8 @@
 
 
 <mat-dialog-content>
-    <form class="date-form" [formGroup]="countdownForm">
+    <form class="date-form"
+          [formGroup]="countdownForm">
 
         <!-- NAME INPUT -->
         <div class="name">
@@ -26,7 +27,8 @@
                        [class.invalid]="submitted && !isValid('name')"
                        autocomplete="off"
                        formControlName="name">
-                <div class="invalid-name-msg" *ngIf="submitted && !isValid('name')">
+                <div class="invalid-name-msg"
+                     *ngIf="submitted && !isValid('name')">
                     <small>{{ 'NEW-COUNTDOWN.INVALID-NAME' | translate }}</small>
                 </div>
             </div>
@@ -81,7 +83,12 @@
                                     (click)="increase('hour')">
                                 <img src="../../assets/icons/arrow-clay-80x80.webp"
                                      alt="Flecha con forma triangular"
-                                     width="30">
+                                     width="30"
+                                     class="light-theme-icon">
+                                <img src="../../assets/icons/arrow-clay-color-80x80.webp"
+                                     alt="Flecha con forma triangular"
+                                     width="30"
+                                     class="dark-theme-icon">
                             </button>
                             <input type="number"
                                    class="hour-input text-center"
@@ -92,7 +99,11 @@
                                 <img src="../../assets/icons/arrow-clay-80x80.webp"
                                      alt="Flecha con forma triangular"
                                      width="30"
-                                     class="down-arrow">
+                                     class="down-arrow light-theme-icon">
+                                <img src="../../assets/icons/arrow-clay-color-80x80.webp"
+                                     alt="Flecha con forma triangular"
+                                     width="30"
+                                     class="down-arrow dark-theme-icon">
                             </button>
                         </div>
                         <span class="clock-dots unselect">:</span>
@@ -101,7 +112,12 @@
                                     (click)="increase('minute')">
                                 <img src="../../assets/icons/arrow-clay-80x80.webp"
                                      alt="Flecha con forma triangular"
-                                     width="30">
+                                     width="30"
+                                     class="light-theme-icon">
+                                <img src="../../assets/icons/arrow-clay-color-80x80.webp"
+                                     alt="Flecha con forma triangular"
+                                     width="30"
+                                     class="dark-theme-icon">
                             </button>
                             <input type="number"
                                    class="minute-input text-center"
@@ -111,14 +127,19 @@
                                 <img src="../../assets/icons/arrow-clay-80x80.webp"
                                      alt="Flecha con forma triangular"
                                      width="30"
-                                     class="down-arrow">
+                                     class="down-arrow light-theme-icon">
+                                <img src="../../assets/icons/arrow-clay-color-80x80.webp"
+                                     alt="Flecha con forma triangular"
+                                     width="30"
+                                     class="down-arrow dark-theme-icon">
                             </button>
                         </div>
                     </div>
                 </div>
 
             </div>
-            <div class="invalid-date-msg" *ngIf="submitted && !isValid('day')">
+            <div class="invalid-date-msg"
+                 *ngIf="submitted && !isValid('day')">
                 <small>{{ 'NEW-COUNTDOWN.INVALID-DATE' | translate }}</small>
             </div>
         </div>
@@ -140,18 +161,19 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button class="btn-submit" (click)="submit()">
+    <button class="btn-submit"
+            (click)="submit()">
         {{ "NEW-COUNTDOWN.CREATE" | translate | titlecase }}
     </button>
 </mat-dialog-actions>
 
 
 <!-- <pre style="margin-top: 50px"> -->
-    <!-- FORM VALUES -->
-    <!-- <strong>name:</strong> {{ getValue('name') }} | {{ isValid('name')}} | {{  getError('name') | json }} -->
-    <!-- <strong>day:</strong>  {{ getValue('day') }} | {{ isValid('day')}} | {{  getError('day') | json }} -->
-    <!-- <strong>fullDay:</strong>  {{ getValue('fullDay') }} | {{ isValid('fullDay')}} | {{  getError('fullDay') | json }} -->
-    <!-- <strong>hour:</strong>  {{ getValue('hour') }} | {{ isValid('hour')}} | {{  getError('hour') | json }} -->
-    <!-- <strong>minute:</strong>  {{ getValue('minute') }} | {{ isValid('minute')}} | {{  getError('minute') | json }} -->
-    <!-- <strong>caption:</strong>  {{ getValue('caption') }} | {{ isValid('caption')}} | {{  getError('caption') | json }} -->
+<!-- FORM VALUES -->
+<!-- <strong>name:</strong> {{ getValue('name') }} | {{ isValid('name')}} | {{  getError('name') | json }} -->
+<!-- <strong>day:</strong>  {{ getValue('day') }} | {{ isValid('day')}} | {{  getError('day') | json }} -->
+<!-- <strong>fullDay:</strong>  {{ getValue('fullDay') }} | {{ isValid('fullDay')}} | {{  getError('fullDay') | json }} -->
+<!-- <strong>hour:</strong>  {{ getValue('hour') }} | {{ isValid('hour')}} | {{  getError('hour') | json }} -->
+<!-- <strong>minute:</strong>  {{ getValue('minute') }} | {{ isValid('minute')}} | {{  getError('minute') | json }} -->
+<!-- <strong>caption:</strong>  {{ getValue('caption') }} | {{ isValid('caption')}} | {{  getError('caption') | json }} -->
 <!-- </pre> -->
