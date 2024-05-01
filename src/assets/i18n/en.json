@@ -4,7 +4,11 @@
     },
 
     "MAIN":{
-        "NEW":"new"
+        "SLOGAN":"Hey there! How many more days do you have left for those special dates?",
+        "SLOGAN-PART-2":"We know how much you love your dog, so we've got a little something for you.",
+        "SLOGAN-PART-3":"Create so many countdowns to know how much time is left for each special date, including your dog's birthday!",
+        "PRESS-BUTTON":"Start by pressing the button below to create the first countdown",
+        "CREATE-COUNTDOWN":"Create a countdown"
     },
 
     "NEW-COUNTDOWN":{

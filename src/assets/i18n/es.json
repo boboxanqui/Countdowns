@@ -4,7 +4,11 @@
     },
     
     "MAIN":{
-        "NEW":"nuevo"
+        "SLOGAN":"¿Ya sabes cuanto tiempo queda para esas fechas tan especiales?",
+        "SLOGAN-PART-2":"Sabemos lo mucho que quieres a tu perro, así que tenemos algo para ti.",
+        "SLOGAN-PART-3":"Crea tantas cuentas atrás para saber cuánto falta para cada fecha especial, ¡incluido el cumpleaños de tu perro!",
+        "PRESS-BUTTON":"Presiona el siguiente botón para crear la primera cuenta atrás",
+        "CREATE-COUNTDOWN":"Crear cuenta atrás"
     },
 
     "NEW-COUNTDOWN":{

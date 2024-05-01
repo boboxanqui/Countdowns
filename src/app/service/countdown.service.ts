@@ -11,8 +11,8 @@ export class CountdownService {
 
   private _countdowns: Countdown[] = []
 
-  get countdowns$(): Observable<Countdown[]>{
-    return of(this._countdowns)
+  get countdowns():Countdown[]{
+    return this._countdowns
   }
 
   addCountdown(newCountdown: Countdown){

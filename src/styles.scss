@@ -96,7 +96,7 @@ button {
 }
 
 .muted {
-  opacity: 0.7;
+  color: var(--muted);
 }
 
 .p-relative {
@@ -117,6 +117,82 @@ button {
 
 .width-100 {
   width: max-content;
+}
+
+/* ---------- MAIN PAGE ---------- */
+
+main{
+  min-height: calc(90dvh - 110px);
+  max-width: 1200px;
+  margin: 30px auto 0;
+  background-color: var(--bg-color-neutral);
+  border-radius: 50px;
+}
+
+.no-countdowns{
+  height: calc(90dvh - 110px);
+  width: 100%;
+  padding: 50px max(5vw,30px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  h2{
+    font-size: 2.7rem;
+  }
+
+  h3{
+    padding: 0 max(5vw,30px);;
+    font-size: 2rem;
+  }
+  
+  p{
+    padding: 0 max(5vw,30px);;
+    font-size: 1.6rem;
+    font-weight: 700;
+    opacity: .7;
+  }
+
+  .arrow-down{
+    margin: 0 auto;
+    svg{
+      margin-top: 10px;
+      color: var(--muted);
+      opacity: .3;
+    }
+  }
+
+
+}
+
+// BUTTON NEW COUNTDOWN
+.btn-box{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-first-countdown{
+  font-size: 1.8rem;
+  background-color: var(--accent);
+  color: var(--text-color);
+  border: 5px solid var(--bg-color-neutral);
+  padding: 15px 30px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.3s ease;
+
+  &:hover{
+    border-color: var(--accent);
+    background-color: var(--bg-color);
+  }
+  &:active{
+    background-color: var(--bg-color-neutral);
+    outline: 10px solid var(--bg-color);
+    scale: .97;
+
+  }
 }
 
 /* ---------- DIALOGS ---------- */
@@ -147,30 +223,41 @@ body.dark-theme .dark-theme-icon{
   background-color: var(--bg-color-neutral);
   color: var(--text-color);
   border: none;
-  padding: 10px 30px;
-  border-radius: 20px;
-  box-shadow: 0px 0px 20px 2px var(--box-shadow);
+  padding: 15px 30px;
+  border-radius: 15px;
   cursor: pointer;
   transition: 0.3s ease;
 }
 
 .btn:hover {
-  transform: translateY(-5px);
   background-color: var(--accent);
-  box-shadow: 0px 5px 20px 2px var(--box-shadow);
 }
 
 .btn:active {
-  box-shadow: 0px 0px 10px 0px var(--box-shadow) inset;
-  transform: translateY(-3px);
-  transition: transform 0.1s ease-in;
+  color: var(--bg-color);
+  outline: 10px solid var(--bg-color-neutral);
 }
 
-.icon-btn {
-  background-color: transparent !important;
-  border: none;
+.btn-color{
+  background-color: var(--accent);
   color: var(--text-color);
+  border: none;
+  padding: 15px 30px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.3s ease;
 }
+
+.btn-color:hover {
+  background-color: var(--bg-color-neutral);
+}
+
+.btn-color:active {
+  color: var(--accent);
+  outline: 10px solid var(--bg-color-neutral);
+}
+
+
 
 /* ---------- INPUTS ---------- */
 
