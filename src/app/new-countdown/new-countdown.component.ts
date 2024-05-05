@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
+import { CountdownService } from '../service/countdown.service';
+import { Countdown } from '../interfaces/countdown';
 
 @Component({
   selector: 'app-new-countdown',
@@ -16,7 +18,8 @@ export class NewCountdownComponent implements OnInit {
   constructor( 
     private dialogRef: MatDialogRef<NewCountdownComponent>,
     private fb: FormBuilder,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private countdownService: CountdownService
   ) {  }
 
   ngOnInit(): void {
@@ -99,6 +102,19 @@ export class NewCountdownComponent implements OnInit {
     date.setHours( this.getValue('hour'), this.getValue('minute'))
 
     console.log(date);
+
+    const newCountdown: Countdown = {
+      date: date,
+      creationDate: new Date(),
+      id: this.countdownService.countdowns.length,
+      name: this.getValue('name'),
+      caption: this.getValue('caption')
+    }
+
+    this.countdownService.addCountdown(newCountdown)
+    this.countdownForm.reset()
+    this.submitted = false;
+    this.dialogRef.close()
   }
 
   // fullDayChange( event: any ){

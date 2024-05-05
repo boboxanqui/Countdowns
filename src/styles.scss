@@ -125,8 +125,68 @@ main{
   min-height: calc(90dvh - 110px);
   max-width: 1200px;
   margin: 30px auto 0;
+  padding: 30px;
   background-color: var(--bg-color-neutral);
-  border-radius: 50px;
+  border-radius: 40px;
+}
+
+.countdowns-wrapper{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  // grid-template-rows: 1fr 1fr 1fr;
+  gap: 10px 10px;
+}
+
+.countdown-card{
+  background-color: var(--bg-color);
+  padding: 15px 20px;
+  border-radius: 20px;
+
+  .card-title{
+    font-size: 1.3rem;
+    text-align: center;
+  }
+
+  .card-body{
+    margin-top: 10px;
+
+    .countdown-time{
+      text-align: center;
+      font-size: 1.4rem;
+    }
+
+    .countdown-caption{
+      margin-top: 10px;
+      color: var(--muted);
+      line-height: 1rem;
+    }
+  }
+}
+
+.new-countdown-card{
+  background-color: var(--bg-color-neutral);
+  border: 8px dashed var(--bg-color);
+  user-select: none;
+  display: grid;
+  align-items: center;
+  cursor: pointer;
+  opacity: .7;
+  transition: opacity .15s ease-out;
+
+  img{
+    margin: 0 auto;
+    filter: saturate(0) drop-shadow(5px 5px 5px var(--bg-color));
+    transition: .2s ease-out;
+    scale: .95;
+  }
+
+  &:hover{
+    opacity: 1;
+    img{
+      filter: saturate(1) drop-shadow(10px 10px 8px var(--bg-color));
+      scale: 1;
+    }
+  }
 }
 
 .no-countdowns{
@@ -209,10 +269,10 @@ main{
 
 // Arrow icons theme
 
-body.light-theme .light-theme-icon{
+body.dark-theme .light-theme-icon{
   display: none;
 }
-body.dark-theme .dark-theme-icon{
+body.light-theme .dark-theme-icon{
   display: none;
 }
 
