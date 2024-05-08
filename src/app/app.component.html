@@ -3,25 +3,26 @@
 <main>
     <!-- COUNTDOWN RENDER -->
 
-    <div *ngIf="countdowns.length > 0; else noCountdowns">
-        <div class="countdowns-wrapper"
-             *ngFor="let countdown of countdowns">
-    
-            <countdown-card [countdown]="countdown"></countdown-card>
-    
-            <article class="countdown-card new-countdown-card"
-                (click)="openNewCountdownForm()">
-                <img src="../assets/icons/plus-front-color-80x80.webp"
-                     alt="icono con el símbolo más"
-                     width="80"
-                     class="dark-theme-icon">
-                <img src="../assets/icons/plus-front-gradient-80x80.webp"
-                     alt="icono con el símbolo más"
-                     width="80"
-                     class="light-theme-icon">
-            </article>
-        </div>
+
+    <div class="countdowns-wrapper"
+         *ngIf="countdowns.length > 0; else noCountdowns">
+
+        <countdown-card [countdown]="countdown"
+                        *ngFor="let countdown of countdowns"></countdown-card>
+
+        <article class="countdown-card new-countdown-card"
+                 (click)="openNewCountdownForm()">
+            <img src="../assets/icons/plus-front-color-80x80.webp"
+                 alt="icono con el símbolo más"
+                 width="80"
+                 class="dark-theme-icon">
+            <img src="../assets/icons/plus-front-gradient-80x80.webp"
+                 alt="icono con el símbolo más"
+                 width="80"
+                 class="light-theme-icon">
+        </article>
     </div>
+
 
     <!-- NO COUNTDOWN MENU -->
     <ng-template #noCountdowns>

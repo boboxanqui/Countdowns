@@ -210,6 +210,10 @@ main{
     text-align: center;
   }
 
+  .final-date{
+    opacity: .7;
+  }
+
   .card-body{
     margin-top: 10px;
 
@@ -223,15 +227,18 @@ main{
       display: flex;
       flex-direction: column;
       justify-content: center;
+      width: 50px;
     }
     
     .time-number{
       text-align: center;
-      font-size: 1.4rem;
+      font-size: 2rem;
     }
 
     .time-description{
       color: var(--accent);
+      text-align: center;
+      opacity: .7;
     }
 
     .countdown-caption{

@@ -12,11 +12,14 @@
     },
 
     "COUNTDOWN-CARD":{
+        "YEAR": "year",
         "YEARS": "years",
+        "DAY": "day",
         "DAYS": "days",
+        "HOUR": "hour",
         "HOURS": "hours",
-        "MINUTES": "minutes",
-        "SECONDS": "seconds"
+        "MINUTES": "min",
+        "SECONDS": "sec"
     },
 
     "NEW-COUNTDOWN":{

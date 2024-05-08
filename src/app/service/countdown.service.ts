@@ -12,7 +12,7 @@ export class CountdownService {
 
   testCountdown: Countdown = {
     creationDate: new Date(),
-    date: new Date(2024,4,10),
+    date: new Date(2024,4,13),
     id: 1,
     name: 'Contador de prueba',
     caption: 'Descripción de prueba para el primer contador de prueba de la historia del mundo mundial.',
