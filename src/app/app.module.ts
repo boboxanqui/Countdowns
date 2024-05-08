@@ -19,6 +19,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DatePipe } from './pipe/date.pipe';
+import { CountdownCardComponent } from './components/countdown-card/countdown-card.component';
 
 
 
@@ -31,6 +32,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     NewCountdownComponent,
     DatePipe,
+    CountdownCardComponent,
   ],
   imports: [
     BrowserModule,

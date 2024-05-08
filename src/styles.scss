@@ -137,48 +137,6 @@ main{
   gap: 10px 10px;
 }
 
-.countdown-card{
-  background-color: var(--bg-color);
-  padding: 15px 20px;
-  border-radius: 20px;
-
-  .card-title{
-    font-size: 1.3rem;
-    text-align: center;
-  }
-
-  .card-body{
-    margin-top: 10px;
-
-    .countdown-time{
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-    }
-    
-    .time-slot{
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    
-    .time-number{
-      text-align: center;
-      font-size: 1.4rem;
-    }
-
-    .time-description{
-      color: var(--accent);
-    }
-
-    .countdown-caption{
-      margin-top: 10px;
-      color: var(--muted);
-      line-height: 1rem;
-    }
-  }
-}
-
 .new-countdown-card{
   background-color: var(--bg-color-neutral);
   border: 8px dashed var(--bg-color);
@@ -238,8 +196,50 @@ main{
       opacity: .3;
     }
   }
+}
 
+/* ---------- COUNTDOWN CARD ---------- */
 
+.countdown-card{
+  background-color: var(--bg-color);
+  padding: 15px 20px;
+  border-radius: 20px;
+
+  .card-title{
+    font-size: 1.3rem;
+    text-align: center;
+  }
+
+  .card-body{
+    margin-top: 10px;
+
+    .countdown-time{
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .time-slot{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .time-number{
+      text-align: center;
+      font-size: 1.4rem;
+    }
+
+    .time-description{
+      color: var(--accent);
+    }
+
+    .countdown-caption{
+      margin-top: 10px;
+      color: var(--muted);
+      line-height: 1rem;
+    }
+  }
 }
 
 // BUTTON NEW COUNTDOWN
