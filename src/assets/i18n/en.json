@@ -11,6 +11,14 @@
         "CREATE-COUNTDOWN":"Create a countdown"
     },
 
+    "COUNTDOWN-CARD":{
+        "YEARS": "years",
+        "DAYS": "days",
+        "HOURS": "hours",
+        "MINUTES": "minutes",
+        "SECONDS": "seconds"
+    },
+
     "NEW-COUNTDOWN":{
         "NEW-TITLE": "Countdown creation",
         "EDIT-TITLE": "Countdown edit",

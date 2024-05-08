@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Countdown } from '../interfaces/countdown';
+import { Countdown } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +12,11 @@ export class CountdownService {
 
   testCountdown: Countdown = {
     creationDate: new Date(),
-    date: new Date(2024,6,22),
+    date: new Date(2024,4,10),
     id: 1,
     name: 'Contador de prueba',
     caption: 'Descripción de prueba para el primer contador de prueba de la historia del mundo mundial.',
+    timeLeft: 0
   }
 
   private _countdowns: Countdown[] = [this.testCountdown]

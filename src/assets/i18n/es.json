@@ -11,6 +11,14 @@
         "CREATE-COUNTDOWN":"Crear cuenta atrás"
     },
 
+    "COUNTDOWN-CARD":{
+        "YEARS": "años",
+        "DAYS": "días",
+        "HOURS": "horas",
+        "MINUTES": "minutos",
+        "SECONDS": "segundos"
+    },
+
     "NEW-COUNTDOWN":{
         "NEW-TITLE": "Nuevo contador",
         "EDIT-TITLE": "Editar contador",

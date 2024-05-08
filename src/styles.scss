@@ -151,8 +151,24 @@ main{
     margin-top: 10px;
 
     .countdown-time{
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .time-slot{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .time-number{
       text-align: center;
       font-size: 1.4rem;
+    }
+
+    .time-description{
+      color: var(--accent);
     }
 
     .countdown-caption{

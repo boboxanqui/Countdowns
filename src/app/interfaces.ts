@@ -4,12 +4,20 @@ export interface langOption {
         flag: string;
 }
 
-export interface countdown {
-        name: string;
-        fullDay: boolean;
-        date: Date;
-        hour?: number;
-        minute?: number;
-        caption?: string;
-        creationDate: Date;
+export interface Countdown {
+        name: string,
+        caption?: string,
+        date: Date,
+        style?: string,
+        creationDate: Date,
+        id: number;
+        timeLeft?: number;
+}
+
+export interface TimeLeft {
+        years: number,
+        days: number,
+        hours: number,
+        minutes: number,
+        seconds: number
 }

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { CountdownService } from '../service/countdown.service';
-import { Countdown } from '../interfaces/countdown';
+import { Countdown } from '../interfaces';
 
 @Component({
   selector: 'app-new-countdown',
