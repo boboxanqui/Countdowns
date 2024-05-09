@@ -20,6 +20,7 @@ nav{
 .custom-list-lang{
     width: 165px;
     animation: fadeIn .3s ease .3s both ;
+    z-index: 1;
 }
 
 .lang-option{
@@ -64,7 +65,7 @@ nav{
 .show-lang-list{
     transform:  translateY(0px);
     opacity: 1;
-    background-color: var(--bg-color-neutral) 
+    background-color: var(--bg-color-neutral);
 }
 
 

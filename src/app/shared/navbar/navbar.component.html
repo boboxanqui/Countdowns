@@ -5,10 +5,10 @@
     <div class="settings">
 
         <!-- LANGUAGE DROPDOWN -->
-        <div class="custom-list-lang pointer unselect" (mouseleave)="langOptionsOpen = false">
+        <div class="custom-list-lang pointer unselect"
+             (mouseleave)="langOptionsOpen = false">
             <div class="selected-lang"
-                 (click)="langOptionsOpen = !langOptionsOpen"
-                  >
+                 (click)="langOptionsOpen = !langOptionsOpen">
                 <div class="lang-option">
                     <img [src]="langSelected.flag"
                          class="flag-lang">
@@ -26,7 +26,8 @@
                 </div>
             </div>
             <div class="lang-list"
-                 [class.show-lang-list]="langOptionsOpen" (blur)="langOptionsOpen = false">
+                 [class.show-lang-list]="langOptionsOpen"
+                 (blur)="langOptionsOpen = false">
                 <div class="lang-option lang-option-list"
                      *ngFor="let lenguage of langList"
                      (click)="changeLang(lenguage.lang)">
