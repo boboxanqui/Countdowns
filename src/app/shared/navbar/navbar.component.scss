@@ -58,6 +58,7 @@ nav{
     border-bottom-right-radius: 30px;
     opacity: 0;
     transition: .5s ease;
+    box-shadow: 0px 3px 10px var(--box-shadow);
 }
 
 .show-lang-list{

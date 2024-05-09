@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit {
   constructor( private translate: TranslateService ) {
     // get lang from localStorage
     this.currentLang = localStorage.getItem('lang') || 'es'
-    // Default language
+    // NOTE: Default language
     translate.setDefaultLang('es');
     translate.use(this.currentLang);
   }
