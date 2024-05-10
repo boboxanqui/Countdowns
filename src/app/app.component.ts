@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { NewCountdownComponent } from './new-countdown/new-countdown.component';
 import { CountdownService } from './service/countdown.service';
 import { TimeLeft } from './interfaces';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -35,9 +36,6 @@ export class AppComponent implements OnInit {
 
   timer: any;
 
-
-
-
   // THEME TOGGLE
   switchTheme(isDark: boolean) {
     const theme = isDark ? 'dark-theme' : 'light-theme'
@@ -49,7 +47,8 @@ export class AppComponent implements OnInit {
   openNewCountdownForm() {
     this.dialog.open(NewCountdownComponent, {
       width: '800px',
-      panelClass: 'dialog-panel'
+      panelClass: 'dialog-panel',
+      backdropClass: 'dialog-backdrop'
     })
   }
 

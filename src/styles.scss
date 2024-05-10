@@ -121,7 +121,7 @@ button {
 
 /* ---------- MAIN PAGE ---------- */
 
-main{
+main {
   min-height: calc(90dvh - 110px);
   max-width: 1200px;
   margin: 30px auto 0;
@@ -130,121 +130,121 @@ main{
   border-radius: 40px;
 }
 
-.countdowns-wrapper{
+.countdowns-wrapper {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   // grid-template-rows: 1fr 1fr 1fr;
   gap: 15px;
 }
 
-.new-countdown-card{
+.new-countdown-card {
   background-color: var(--bg-color-neutral);
   border: 8px dashed var(--bg-color);
   user-select: none;
   display: grid;
   align-items: center;
   cursor: pointer;
-  opacity: .7;
-  transition: opacity .15s ease-out;
+  opacity: 0.7;
+  transition: opacity 0.15s ease-out;
 
-  img{
+  img {
     margin: 0 auto;
     filter: saturate(0) drop-shadow(5px 5px 5px var(--bg-color));
-    transition: .2s ease-out;
-    scale: .95;
+    transition: 0.2s ease-out;
+    scale: 0.95;
   }
 
-  &:hover{
+  &:hover {
     opacity: 1;
-    img{
+    img {
       filter: saturate(1) drop-shadow(10px 10px 8px var(--bg-color));
       scale: 1;
     }
   }
 }
 
-.no-countdowns{
+.no-countdowns {
   height: calc(90dvh - 110px);
   width: 100%;
-  padding: 50px max(5vw,30px);
+  padding: 50px max(5vw, 30px);
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
 
-  h2{
+  h2 {
     font-size: 2.7rem;
   }
 
-  h3{
-    padding: 0 max(5vw,30px);;
+  h3 {
+    padding: 0 max(5vw, 30px);
     font-size: 2rem;
   }
-  
-  p{
-    padding: 0 max(5vw,30px);;
+
+  p {
+    padding: 0 max(5vw, 30px);
     font-size: 1.6rem;
     font-weight: 700;
-    opacity: .7;
+    opacity: 0.7;
   }
 
-  .arrow-down{
+  .arrow-down {
     margin: 0 auto;
-    svg{
+    svg {
       margin-top: 10px;
       color: var(--muted);
-      opacity: .3;
+      opacity: 0.3;
     }
   }
 }
 
 /* ---------- COUNTDOWN CARD ---------- */
 
-.countdown-card{
+.countdown-card {
   background-color: var(--bg-color);
   padding: 15px 20px;
   border-radius: 20px;
   min-height: 200px;
   z-index: 0;
 
-  .card-title{
+  .card-title {
     font-size: 1.3rem;
     text-align: center;
   }
 
-  .final-date{
-    opacity: .7;
+  .final-date {
+    opacity: 0.7;
   }
 
-  .card-body{
+  .card-body {
     margin-top: 10px;
 
-    .countdown-time{
+    .countdown-time {
       display: flex;
       justify-content: center;
       gap: 10px;
     }
-    
-    .time-slot{
+
+    .time-slot {
       display: flex;
       flex-direction: column;
       justify-content: center;
       width: 55px;
     }
-    
-    .time-number{
+
+    .time-number {
       text-align: center;
       font-size: 2.2rem;
-      height: 47px ;
+      height: 47px;
     }
 
-    .time-description{
+    .time-description {
       color: var(--accent);
       text-align: center;
-      opacity: .7;
+      opacity: 0.7;
     }
 
-    .countdown-caption{
+    .countdown-caption {
       margin-top: 10px;
       color: var(--muted);
       line-height: 1rem;
@@ -257,13 +257,13 @@ main{
 }
 
 // BUTTON NEW COUNTDOWN
-.btn-box{
+.btn-box {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.btn-first-countdown{
+.btn-first-countdown {
   font-size: 1.8rem;
   background-color: var(--accent);
   color: var(--text-color);
@@ -273,15 +273,14 @@ main{
   cursor: pointer;
   transition: 0.3s ease;
 
-  &:hover{
+  &:hover {
     border-color: var(--accent);
     background-color: var(--bg-color);
   }
-  &:active{
+  &:active {
     background-color: var(--bg-color-neutral);
     outline: 10px solid var(--bg-color);
-    scale: .97;
-
+    scale: 0.97;
   }
 }
 
@@ -297,15 +296,20 @@ main{
   font-size: 1.5rem;
 }
 
+.dialog-backdrop {
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(3px) saturate(.7);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 // Arrow icons theme
 
-body.dark-theme .light-theme-icon{
+body.dark-theme .light-theme-icon {
   display: none;
 }
-body.light-theme .dark-theme-icon{
+body.light-theme .dark-theme-icon {
   display: none;
 }
-
 
 /* ---------- BUTTON ---------- */
 
@@ -328,7 +332,7 @@ body.light-theme .dark-theme-icon{
   outline: 10px solid var(--bg-color-neutral);
 }
 
-.btn-color{
+.btn-color {
   background-color: var(--accent);
   color: var(--text-color);
   border: none;
@@ -346,8 +350,6 @@ body.light-theme .dark-theme-icon{
   color: var(--accent);
   outline: 10px solid var(--bg-color-neutral);
 }
-
-
 
 /* ---------- INPUTS ---------- */
 

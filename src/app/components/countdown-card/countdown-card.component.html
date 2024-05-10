@@ -3,9 +3,15 @@
         <h3> {{ countdown.name }} </h3>
     </div>
     <!-- FIXME: detele date -->
-    <small class="muted text-center final-date">
-        <pre> {{ countdown.date | date }} </pre>
-    </small>
+    <div class="final-date muted text-center">
+        <small>
+             {{ countdown.date | date: 'mediumDate': '' : currentLang }} 
+             <span *ngIf="countdown.date.getHours() != 0 && countdown.date.getMinutes() != 0">
+            , {{ countdown.date | date: 'shortTime' : '' : currentLang }}
+            </span>
+        </small>
+    </div>
+
     <!-- FIXME: detele date -->
     <div class="card-body">
         <div class="countdown-time">

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Countdown, TimeLeft } from 'src/app/interfaces';
 
 @Component({
@@ -8,13 +9,13 @@ import { Countdown, TimeLeft } from 'src/app/interfaces';
 })
 export class CountdownCardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private translate: TranslateService) { }
+
 
   ngOnInit(): void {
   }
 
   @Input() countdown!: Countdown
-
 
   secondInMiliseconds:  number = 1000;
   minuteInMiliseconds:  number = 1000 * 60;
@@ -39,6 +40,10 @@ export class CountdownCardComponent implements OnInit {
       return { years, days, hours, minutes, seconds }
     }
     return undefined
+  }
+
+  get currentLang() {
+    return this.translate.currentLang
   }
 
 }

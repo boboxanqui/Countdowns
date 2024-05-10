@@ -13,6 +13,11 @@ import { SharedModule } from './shared/shared.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+// Date local format
+import es from "@angular/common/locales/es";
+import { registerLocaleData } from "@angular/common";
+registerLocaleData(es);
+
 // Material
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatDatepickerModule} from '@angular/material/datepicker';
