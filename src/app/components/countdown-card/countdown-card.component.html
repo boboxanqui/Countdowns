@@ -1,8 +1,8 @@
-<article class="countdown-card">
+<article class="countdown-card" (click)="openCountdownDialog()">
     <div class="card-title">
         <h3> {{ countdown.name }} </h3>
     </div>
-    <!-- FIXME: detele date -->
+
     <div class="final-date muted text-center">
         <small>
              {{ countdown.date | date: 'mediumDate': '' : currentLang }} 
@@ -12,7 +12,6 @@
         </small>
     </div>
 
-    <!-- FIXME: detele date -->
     <div class="card-body">
         <div class="countdown-time">
             <p class="time-slot years"
@@ -27,7 +26,6 @@
                         {{ 'COUNTDOWN-CARD.YEARS' | translate }}
                     </small>
                 </ng-template>
-                <small class="time-description">Y</small>
             </p>
             <p class="time-slot days">
                 <span class="time-number"> {{ getTimeLeft(countdown.timeLeft)?.days }} </span>

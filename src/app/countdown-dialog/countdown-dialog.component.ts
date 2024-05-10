@@ -1,26 +1,23 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Countdown, TimeLeft } from '../interfaces';
 import { TranslateService } from '@ngx-translate/core';
-import { CountdownDialogComponent } from 'src/app/countdown-dialog/countdown-dialog.component';
-import { Countdown, TimeLeft } from 'src/app/interfaces';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: 'countdown-card',
-  templateUrl: './countdown-card.component.html',
-  styleUrls: ['./countdown-card.component.scss']
+  selector: 'app-countdown-dialog',
+  templateUrl: './countdown-dialog.component.html',
+  styles: [
+  ]
 })
-export class CountdownCardComponent implements OnInit {
+export class CountdownDialogComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    private dialog: MatDialog
+    @Inject(MAT_DIALOG_DATA) public countdown: Countdown
   ) { }
-
 
   ngOnInit(): void {
   }
-
-  @Input() countdown!: Countdown
 
   secondInMiliseconds:  number = 1000;
   minuteInMiliseconds:  number = 1000 * 60;
@@ -49,15 +46,6 @@ export class CountdownCardComponent implements OnInit {
 
   get currentLang() {
     return this.translate.currentLang
-  }
-
-  openCountdownDialog(){
-    this.dialog.open( CountdownDialogComponent, {
-      data: this.countdown,
-      width: '800px',
-      panelClass: 'dialog-panel',
-      backdropClass: 'dialog-backdrop',
-    })
   }
 
 }

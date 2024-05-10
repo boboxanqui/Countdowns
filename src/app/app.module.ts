@@ -25,6 +25,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DatePipe } from './pipe/date.pipe';
 import { CountdownCardComponent } from './components/countdown-card/countdown-card.component';
+import { CountdownDialogComponent } from './countdown-dialog/countdown-dialog.component';
 
 
 
@@ -38,6 +39,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     NewCountdownComponent,
     DatePipe,
     CountdownCardComponent,
+    CountdownDialogComponent,
   ],
   imports: [
     BrowserModule,

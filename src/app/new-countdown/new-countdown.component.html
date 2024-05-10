@@ -23,10 +23,11 @@
             <div class="input-wrapper">
                 <input type="text"
                        id="name"
-                       class="input"
+                       class="input name-input"
                        [class.invalid]="submitted && !isValid('name')"
                        autocomplete="off"
-                       formControlName="name">
+                       formControlName="name"
+                       autofocus>
                 <div class="invalid-name-msg"
                      *ngIf="submitted && !isValid('name')">
                     <small>{{ 'NEW-COUNTDOWN.INVALID-NAME' | translate }}</small>

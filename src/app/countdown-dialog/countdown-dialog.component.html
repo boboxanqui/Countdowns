@@ -1,0 +1,72 @@
+<article class="countdown-dialog">
+    <div class="dialog-title">
+        <h2> {{ countdown.name }} </h2>
+    </div>
+
+    <p class="final-date muted text-center">
+        {{ countdown.date | date: 'mediumDate': '' : currentLang }}
+        <span *ngIf="countdown.date.getHours() != 0 && countdown.date.getMinutes() != 0">
+            , {{ countdown.date | date: 'shortTime' : '' : currentLang }}
+        </span>
+    </p>
+
+    <mat-dialog-content>
+        <div class="dialog-body">
+            <div class="countdown-time">
+                <h3 class="time-slot years"
+                   *ngIf="countdown.timeLeft! > yearInMiliseconds">
+                    <span class="time-number"> {{ getTimeLeft(countdown.timeLeft)?.years }} </span>
+                    <small class="time-description"
+                           *ngIf="getTimeLeft(countdown.timeLeft)?.years! === 1; else pluralYear">
+                        {{ 'COUNTDOWN-CARD.YEAR' | translate }}
+                    </small>
+                    <ng-template #pluralYear>
+                        <small class="time-description">
+                            {{ 'COUNTDOWN-CARD.YEARS' | translate }}
+                        </small>
+                    </ng-template>
+                </h3>
+                <h3 class="time-slot days">
+                    <span class="time-number"> {{ getTimeLeft(countdown.timeLeft)?.days }} </span>
+                    <small class="time-description"
+                           *ngIf="getTimeLeft(countdown.timeLeft)?.days! === 1; else pluralDay">
+                        {{ 'COUNTDOWN-CARD.DAY' | translate }}
+                    </small>
+                    <ng-template #pluralDay>
+                        <small class="time-description">
+                            {{ 'COUNTDOWN-CARD.DAYS' | translate }}
+                        </small>
+                    </ng-template>
+                    <!-- <small class="time-description">D</small> -->
+                </h3>
+                <h3 class="time-slot hours">
+                    <span class="time-number"> {{ getTimeLeft(countdown.timeLeft)?.hours }} </span>
+                    <small class="time-description"
+                           *ngIf="getTimeLeft(countdown.timeLeft)?.hours! === 1; else pluralHour">
+                        {{ 'COUNTDOWN-CARD.HOUR' | translate }}
+                    </small>
+                    <ng-template #pluralHour>
+                        <small class="time-description">
+                            {{ 'COUNTDOWN-CARD.HOURS' | translate }}
+                        </small>
+                    </ng-template>
+                    <!-- <small class="time-description"> H </small> -->
+                </h3>
+                <h3 class="time-slot minutes">
+                    <span class="time-number"> {{ getTimeLeft(countdown.timeLeft)?.minutes }} </span>
+                    <small class="time-description"> {{ 'COUNTDOWN-CARD.MINUTES' | translate }} </small>
+                    <!-- <small class="time-description"> Min </small> -->
+                </h3>
+                <h3 class="time-slot seconds">
+                    <span class="time-number"> {{ getTimeLeft(countdown.timeLeft)?.seconds }} </span>
+                    <small class="time-description"> {{ 'COUNTDOWN-CARD.SECONDS' | translate }} </small>
+                    <!-- <small class="time-description"> Sec </small> -->
+                </h3>
+            </div>
+            <div class="countdown-caption-dialog">
+                <p>{{ countdown.caption }}</p>
+            </div>
+        </div>
+    </mat-dialog-content>
+
+</article>

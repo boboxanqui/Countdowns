@@ -48,7 +48,8 @@ export class AppComponent implements OnInit {
     this.dialog.open(NewCountdownComponent, {
       width: '800px',
       panelClass: 'dialog-panel',
-      backdropClass: 'dialog-backdrop'
+      backdropClass: 'dialog-backdrop',
+      autoFocus: 'name-input'
     })
   }
 
