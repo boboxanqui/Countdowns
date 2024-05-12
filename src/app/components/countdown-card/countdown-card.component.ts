@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { CountdownDialogComponent } from 'src/app/countdown-dialog/countdown-dialog.component';
 import { Countdown, TimeLeft } from 'src/app/interfaces';
+import { NewCountdownComponent } from 'src/app/new-countdown/new-countdown.component';
+import { CountdownService } from 'src/app/service/countdown.service';
 
 @Component({
   selector: 'countdown-card',
@@ -13,7 +15,8 @@ export class CountdownCardComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private countdownService: CountdownService
   ) { }
 
 
@@ -51,6 +54,15 @@ export class CountdownCardComponent implements OnInit {
     return this.translate.currentLang
   }
 
+  editCountdown(){
+    this.dialog.open( NewCountdownComponent, {
+      data: this.countdown,
+      width: '800px',
+      panelClass: 'dialog-panel',
+      backdropClass: 'dialog-backdrop',
+    })
+  }
+
   openCountdownDialog(){
     this.dialog.open( CountdownDialogComponent, {
       data: this.countdown,
@@ -58,6 +70,12 @@ export class CountdownCardComponent implements OnInit {
       panelClass: 'dialog-panel',
       backdropClass: 'dialog-backdrop',
     })
+  }
+
+  deleteCountdown(){
+    this.countdownService.removeCountdown(
+      this.countdown
+    )
   }
 
 }

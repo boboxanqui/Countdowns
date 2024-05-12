@@ -1,13 +1,13 @@
-<article class="countdown-card" (click)="openCountdownDialog()">
+<article class="countdown-card">
     <div class="card-title">
         <h3> {{ countdown.name }} </h3>
     </div>
 
     <div class="final-date muted text-center">
         <small>
-             {{ countdown.date | date: 'mediumDate': '' : currentLang }} 
-             <span *ngIf="countdown.date.getHours() != 0 && countdown.date.getMinutes() != 0">
-            , {{ countdown.date | date: 'shortTime' : '' : currentLang }}
+            {{ countdown.date | date: 'mediumDate': '' : currentLang }}
+            <span *ngIf="countdown.date.getHours() != 0 && countdown.date.getMinutes() != 0">
+                , {{ countdown.date | date: 'shortTime' : '' : currentLang }}
             </span>
         </small>
     </div>
@@ -33,7 +33,7 @@
                        *ngIf="getTimeLeft(countdown.timeLeft)?.days! === 1; else pluralDay">
                     {{ 'COUNTDOWN-CARD.DAY' | translate }}
                 </small>
-                <ng-template #pluralDay> 
+                <ng-template #pluralDay>
                     <small class="time-description">
                         {{ 'COUNTDOWN-CARD.DAYS' | translate }}
                     </small>
@@ -46,7 +46,7 @@
                        *ngIf="getTimeLeft(countdown.timeLeft)?.hours! === 1; else pluralHour">
                     {{ 'COUNTDOWN-CARD.HOUR' | translate }}
                 </small>
-                <ng-template #pluralHour> 
+                <ng-template #pluralHour>
                     <small class="time-description">
                         {{ 'COUNTDOWN-CARD.HOURS' | translate }}
                     </small>
@@ -64,8 +64,28 @@
                 <!-- <small class="time-description"> Sec </small> -->
             </p>
         </div>
-        <div class="countdown-caption">
-            <small>{{ countdown.caption }}</small>
+        <div class="countdown-bottom">
+            <div class="caption"> <small> {{ countdown.caption }} </small></div>
+            <div class="actions">
+                <button class="btn-edit"
+                        (click)="editCountdown()">
+                    <img src="./../../../assets/icons/pencil-front-color-80x80.webp"
+                         width="40"
+                         alt="">
+                </button>
+                <button class="btn-zoom"
+                        (click)="openCountdownDialog()">
+                    <img src="./../../../assets/icons/zoom-front-color-80x80.webp"
+                         width="40"
+                         alt="">
+                </button>
+                <button class="btn-delete"
+                        (click)="deleteCountdown()">
+                    <img src="./../../../assets/icons/trash-can-front-red2-80x80.webp"
+                         width="40"
+                         alt="">
+                </button>
+            </div>
         </div>
     </div>
 </article>
