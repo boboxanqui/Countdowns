@@ -10,8 +10,9 @@ export interface Countdown {
         date: Date,
         style?: string,
         creationDate: Date,
-        id: number;
-        timeLeft?: number;
+        id: number,
+        timeLeft?: number,
+        lastUpdate?: Date
 }
 
 export interface TimeLeft {

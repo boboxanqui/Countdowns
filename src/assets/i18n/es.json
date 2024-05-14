@@ -34,6 +34,7 @@
         "OPTIONAL":"opcional",
         "CREATE":"crear",
         "CANCEL": "cancelar",
+        "EDIT": "Modificar",
         "INVALID-NAME":"Introduce un nombre",
         "INVALID-DATE":"Elige una fecha",
         "INVALID-TIME":"Hora incorrecta (de 00:00 a 23:59)"

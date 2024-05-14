@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Countdown, TimeLeft } from '../interfaces';
 import { TranslateService } from '@ngx-translate/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -9,15 +9,12 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styles: [
   ]
 })
-export class CountdownDialogComponent implements OnInit {
+export class CountdownDialogComponent {
 
   constructor(
     private translate: TranslateService,
     @Inject(MAT_DIALOG_DATA) public countdown: Countdown
   ) { }
-
-  ngOnInit(): void {
-  }
 
   secondInMiliseconds:  number = 1000;
   minuteInMiliseconds:  number = 1000 * 60;

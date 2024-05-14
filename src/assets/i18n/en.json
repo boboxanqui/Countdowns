@@ -24,7 +24,7 @@
 
     "NEW-COUNTDOWN":{
         "NEW-TITLE": "Countdown creation",
-        "EDIT-TITLE": "Countdown edit",
+        "EDIT-TITLE": "Edit countdown",
         "NAME": "name",
         "DATE": "date",
         "DATE-FORMAT":"MM/DD/YYYY",
@@ -34,6 +34,7 @@
         "OPTIONAL":"optional",
         "CREATE":"create",
         "CANCEL": "cancel",
+        "EDIT": "Update",
         "INVALID-NAME":"Add a name",
         "INVALID-DATE":"Chose a date",
         "INVALID-TIME":"Invalid time (from 00:00 to 23:59)"

@@ -1,8 +1,16 @@
 <div class="dialog-title">
     <h2 class="text-center"
-        mat-dialog-title>
+        mat-dialog-title
+        *ngIf="!editMode; else editModeTitle">
         {{ 'NEW-COUNTDOWN.NEW-TITLE' | translate | uppercase }}
     </h2>
+
+    <ng-template #editModeTitle>
+        <h2 class="text-center"
+            mat-dialog-title>
+            {{ 'NEW-COUNTDOWN.EDIT-TITLE' | translate | uppercase }}
+        </h2>
+    </ng-template>
 
     <button class="close-dialog-icon"
             [mat-dialog-close]="true">
@@ -67,14 +75,6 @@
             <!-- TIME INPUT -->
             <div class="time-input"
                  [class.invalid]="submitted && (!isValid('hour') || !isValid('minute'))">
-                <!-- NOTE: FULLDAY FORMCONTROL 
-                <div class="full-day-checkbox text-center">
-                    <input type="checkbox" 
-                        id="full-day"
-                        formControlName="fullDay"
-                        (change)="fullDayChange($event)">
-                    <label for="full-day" class="unselect"> {{ "NEW-COUNTDOWN.FULL-DAY" | translate | uppercase }}</label>
-                </div> -->
                 <div class="time-selector">
                     <img src="../../assets/icons/clock-front-color-80x80.webp"
                          alt="">
@@ -94,7 +94,7 @@
                             <input type="number"
                                    class="hour-input text-center"
                                    formControlName="hour"
-                                   placeholder="00" 
+                                   placeholder="00"
                                    [class.invalid]="submitted && !isValid('hour')">
                             <button class="btn-arrow pointer"
                                     (click)="reduce('hour')">
@@ -162,16 +162,22 @@
                       rows="3"
                       formControlName="caption"></textarea>
         </div>
-
     </form>
 
 </mat-dialog-content>
 
 <mat-dialog-actions>
     <button class="btn-submit"
-            (click)="submit()">
+            (click)="submit()"
+            *ngIf="!editMode; else editModeButton">
         {{ "NEW-COUNTDOWN.CREATE" | translate | titlecase }}
     </button>
+    <ng-template #editModeButton>
+        <button class="btn-submit"
+                (click)="edit()">
+            {{ "NEW-COUNTDOWN.EDIT" | translate | titlecase }}
+        </button>
+    </ng-template>
 </mat-dialog-actions>
 
 

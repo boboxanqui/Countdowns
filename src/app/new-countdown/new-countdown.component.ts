@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { CountdownService } from '../service/countdown.service';
 import { Countdown } from '../interfaces';
@@ -19,18 +19,24 @@ export class NewCountdownComponent implements OnInit {
     private dialogRef: MatDialogRef<NewCountdownComponent>,
     private fb: FormBuilder,
     private translate: TranslateService,
-    private countdownService: CountdownService
+    private countdownService: CountdownService,
+    @Inject(MAT_DIALOG_DATA) public countdown: Countdown
   ) {  }
 
   ngOnInit(): void {
-    
+    if(this.countdown){
+      this.editMode = true;
+      this.setValue( 'name', this.countdown.name );
+      this.setValue( 'day', this.countdown.date );
+      this.setValue( 'hour', this.countdown.date.getHours() );
+      this.setValue( 'minute', this.countdown.date.getMinutes() );
+      this.setValue( 'caption', this.countdown.caption )
+    }
   }
 
   countdownForm: FormGroup = this.fb.group({
     name: ['', Validators.required],
     day: [ , Validators.required],
-    // FIXME: fullDay needed?
-    // fullDay: [true, Validators.required],
     hour: [ 0, [Validators.min(0), 
               Validators.max(23), 
               Validators.maxLength(2)]
@@ -43,6 +49,7 @@ export class NewCountdownComponent implements OnInit {
   })
 
   submitted: boolean = false;
+  editMode: boolean = false;
 
   // Current Language 
   getLang(){
@@ -58,6 +65,10 @@ export class NewCountdownComponent implements OnInit {
   // VALUE FORMS
   getValue( input: string ){
     return this.countdownForm.get(input)?.value
+  }
+
+  setValue( input: string, value: any ){
+    this.countdownForm.controls[input].setValue( value )
   }
 
   isValid( input: string ): boolean{
@@ -101,8 +112,6 @@ export class NewCountdownComponent implements OnInit {
     let date:Date = new Date( this.getValue('day') )
     date.setHours( this.getValue('hour'), this.getValue('minute'))
 
-    console.log(date);
-
     const newCountdown: Countdown = {
       date: date,
       creationDate: new Date(),
@@ -117,16 +126,27 @@ export class NewCountdownComponent implements OnInit {
     this.dialogRef.close()
   }
 
-  // fullDayChange( event: any ){
-  //   if( this.getValue('fullDay') ){
-  //     this.countdownForm.get('hour')?.reset(0)
-  //     this.countdownForm.get('minute')?.reset(0)
-  //     this.countdownForm.get('hour')?.disable();
-  //     this.countdownForm.get('minute')?.disable();
-  //     return
-  //   }
-    // this.countdownForm.get('hour')?.enable();
-    // this.countdownForm.get('minute')?.enable();    
-  // }
+  edit(){
+    this.submitted = true
+    if( !this.countdownForm.valid ) return
+
+    let date:Date = new Date( this.getValue('day') )
+    date.setHours( this.getValue('hour'), this.getValue('minute'))
+
+    const newCountdown: Countdown = {
+      date: date,
+      creationDate: this.countdown.creationDate,
+      id: this.countdown.id,
+      name: this.getValue('name'),
+      caption: this.getValue('caption'),
+      lastUpdate: new Date()
+    }
+
+    this.countdownService.editCountdown(this.countdown, newCountdown)
+    this.countdownForm.reset()
+    this.submitted = false;
+    this.dialogRef.close()
+
+  }
 
 }
