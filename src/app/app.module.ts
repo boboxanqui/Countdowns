@@ -26,6 +26,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { DatePipe } from './pipe/date.pipe';
 import { CountdownCardComponent } from './components/countdown-card/countdown-card.component';
 import { CountdownDialogComponent } from './countdown-dialog/countdown-dialog.component';
+import { AuthDialogComponent } from './auth-dialog/auth-dialog.component';
 
 
 
@@ -40,6 +41,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DatePipe,
     CountdownCardComponent,
     CountdownDialogComponent,
+    AuthDialogComponent,
   ],
   imports: [
     BrowserModule,

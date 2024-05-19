@@ -1,7 +1,8 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { TranslateService } from '@ngx-translate/core';
 import { langOption } from "../../interfaces";
+import { MatDialog } from '@angular/material/dialog';
+import { AuthDialogComponent } from 'src/app/auth-dialog/auth-dialog.component';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +11,10 @@ import { langOption } from "../../interfaces";
 })
 export class NavbarComponent implements OnInit {
 
-  constructor( private translate: TranslateService ) {
+  constructor( 
+    private translate: TranslateService,
+    private dialog: MatDialog
+  ) {
     // get lang from localStorage
     this.currentLang = localStorage.getItem('lang') || 'es'
     // NOTE: Default language
@@ -24,6 +28,9 @@ export class NavbarComponent implements OnInit {
     } else {
       this.darkMode = false;
     }
+
+    // FIXME: Delete dialog openning
+    this.openAuthDialog()
   }
 
   darkMode!: boolean;
@@ -59,6 +66,15 @@ export class NavbarComponent implements OnInit {
     this.langOptionsOpen = false;
     this.translate.use(lang)
     localStorage.setItem('lang',lang)
+  }
+
+  openAuthDialog(){
+    this.dialog.open( AuthDialogComponent, {
+      width: '500px',
+      panelClass: ['dialog-panel','auth-dialog'],
+      backdropClass: 'dialog-backdrop',
+      // TODO: autoFocus: 'login-input'
+    })
   }
 
 }

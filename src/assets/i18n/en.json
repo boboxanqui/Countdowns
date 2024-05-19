@@ -1,6 +1,6 @@
 {
     "NAVBAR":{
-        "USER": "user"
+        "LOGIN": "Sign in"
     },
 
     "MAIN":{
@@ -38,5 +38,30 @@
         "INVALID-NAME":"Add a name",
         "INVALID-DATE":"Chose a date",
         "INVALID-TIME":"Invalid time (from 00:00 to 23:59)"
+    },
+
+    "AUTH-DIALOG":{
+        "TITLE": "Welcome back",
+        "SUBTITLE": "Please enter your details",
+        "GOOGLE-LOGIN":"Log in with Google",
+        "GITHUB-LOGIN":"Log in with Github",
+        "OR":"Or",
+        "LABEL-EMAIL":"Email",
+        "EMAIL-EXAMPLE":"example@email.com",
+        "INVALID-EMAIL":"Invalid format",
+        "EMPTY-INPUT":"Missing details",
+        "LABEL-PASSWORD":"Password",
+        "INVALID-PASSWORD":"Must contain:",
+        "PASSWORD-LENGTH": "6 characters length",
+        "PASSWORD-CAPITAL-LETTER":"1 capital letter",
+        "PASSWORD-LOWER-CASE":"1 lower case",
+        "PASSWORD-NUMBER":"1 number",
+        "BUTTON-LOGIN":"Login",
+        "BUTTON-REGISTER":"Create account",
+        "FORGOT-PASSWORD":"Forgot password?",
+        "NO-ACCOUNT": "No account yet?",
+        "CREATE-ACCOUNT":"Sign up",
+        "YES-ACCOUNT":"Already signed up?",
+        "LOGIN":"Log in"
     }
 }

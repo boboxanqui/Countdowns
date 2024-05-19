@@ -1,6 +1,6 @@
 {
     "NAVBAR":{
-        "USER": "usuario"
+        "LOGIN": "Iniciar sesión"
     },
     
     "MAIN":{
@@ -38,6 +38,28 @@
         "INVALID-NAME":"Introduce un nombre",
         "INVALID-DATE":"Elige una fecha",
         "INVALID-TIME":"Hora incorrecta (de 00:00 a 23:59)"
+    },
 
+    "AUTH-DIALOG":{
+        "TITLE": "Bienvenido",
+        "SUBTITLE": "Introduce tus datos",
+        "GOOGLE-LOGIN":"Continuar con Google",
+        "GITHUB-LOGIN":"Continuar con Github",
+        "OR":"O",
+        "LABEL-EMAIL":"Correo",
+        "EMAIL-EXAMPLE":"ejemplo@correo.com",
+        "LABEL-PASSWORD":"Contraseña",
+        "INVALID-PASSWORD":"Debe tener:",
+        "PASSWORD-LENGTH": "6 carácteres",
+        "PASSWORD-CAPITAL-LETTER":"1 mayúscula",
+        "PASSWORD-LOWER-CASE":"1 minúscula",
+        "PASSWORD-NUMBER":"1 número",
+        "BUTTON-LOGIN":"Iniciar sesión",
+        "BUTTON-REGISTER":"Crear cuenta",
+        "FORGOT-PASSWORD":"¿Has olvidado la contraseña?",
+        "NO-ACCOUNT": "¿Aún no tienes una cuenta?",
+        "CREATE-ACCOUNT":"Registrate aquí",
+        "YES-ACCOUNT":"¿Ya tienes una cuenta?",
+        "LOGIN":"Iniciar sesión"
     }
 }

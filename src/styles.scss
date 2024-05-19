@@ -361,6 +361,43 @@ main {
 
 /* ---------- DIALOGS ---------- */
 
+.dialog-title {
+  position: relative;
+  padding: 10px;
+  h2 {
+    font-size: 2rem;
+  }
+
+  .close-dialog-icon {
+    position: absolute;
+    top: -10px;
+    right: 0px;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 4px;
+
+    .close-icon {
+      margin: 0;
+      height: 4px;
+      width: 30px;
+      border-radius: 2px;
+      background-color: var(--muted);
+      transition: background-color 0.2s ease;
+      &:first-child {
+        transform: rotate(50deg) translateY(2px) translateX(3px);
+      }
+      &:last-child {
+        transform: rotate(-50deg);
+      }
+    }
+    &:hover .close-icon {
+      background-color: var(--text-color);
+    }
+  }
+}
+
 .mat-dialog-container {
   background: var(--bg-color) !important;
   border-radius: 30px !important;
@@ -446,6 +483,116 @@ body.light-theme .dark-theme-icon {
       color: var(--muted);
       font-size: smaller;
       white-space: pre-wrap;
+    }
+  }
+}
+
+/* ---------- AUTH DIALOG ---------- */
+
+.auth-dialog{
+
+  .mat-dialog-content{
+    padding: 20px 50px;
+    overflow-x: hidden;
+  }
+
+  p{
+    font-size: 1.2rem;
+  }
+
+  button{
+    width: calc(100%);
+    margin: 20px auto;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .github-logo{
+    fill: var(--text-color);
+  }
+
+  .divider{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px auto ;
+    color: var(--muted);
+
+    hr{
+      width: 100%;
+      opacity: .6;
+    }
+  }
+
+  .form-section{
+    // position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 900px;
+  }
+  .form-login{
+    width: 400px;
+    // position: absolute;
+    // top: 0;
+    // left: 0;
+    transition: .3s ease;
+    &.show-register-form{
+      transform: translateX(-500px);
+    }
+  }
+  
+  .form-register{
+    width: 400px;
+    // position: absolute;
+    // top: 0;
+    // right: 0;
+    transition: .3s ease;
+    &.show-register-form{
+      transform: translateX(-500px);
+    }
+  }
+
+  .input-wrapper{
+    margin-top: 20px;
+    
+    label{
+      display: block;
+      font-size: 1rem;
+    }
+
+    input{
+      font-size: 1.2rem;
+      margin-top: 5px;
+      width: calc(100% - 20px);
+      padding: 7px 10px;
+    }
+  }
+
+  .btn-login{
+    margin-top: 30px;
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+
+  .register-now{
+    margin-top: 30px;
+  }
+
+  .btn-register{
+    background-color: transparent;
+    width: min-content;
+    margin-top: 10px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-wrap: nowrap;
+    cursor: pointer;
+    color: var(--accent);
+    &:hover{
+      text-decoration: underline;
     }
   }
 }

@@ -1,39 +1,4 @@
-.dialog-title {
-  position: relative;
-  padding: 10px;
-  h2 {
-    font-size: 2rem;
-  }
 
-  .close-dialog-icon {
-    position: absolute;
-    top: -10px;
-    right: 0px;
-    width: 40px;
-    height: 40px;
-    background-color: transparent;
-    cursor: pointer;
-    padding: 4px;
-
-    .close-icon {
-      margin: 0;
-      height: 4px;
-      width: 30px;
-      border-radius: 2px;
-      background-color: var(--muted);
-      transition: background-color 0.2s ease;
-      &:first-child {
-        transform: rotate(50deg) translateY(2px) translateX(3px);
-      }
-      &:last-child {
-        transform: rotate(-50deg);
-      }
-    }
-    &:hover .close-icon {
-      background-color: var(--text-color);
-    }
-  }
-}
 
 .date-form{
   padding: 0 10px;
