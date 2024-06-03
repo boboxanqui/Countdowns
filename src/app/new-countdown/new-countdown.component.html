@@ -27,7 +27,7 @@
         <!-- NAME INPUT -->
         <div class="name">
             <label for="name"
-                   class="label-input">{{ 'NEW-COUNTDOWN.NAME' | translate | titlecase }}</label>
+                   class="label-input muted">{{ 'NEW-COUNTDOWN.NAME' | translate | titlecase }}</label>
             <div class="input-wrapper">
                 <input type="text"
                        id="name"
@@ -36,9 +36,9 @@
                        autocomplete="off"
                        formControlName="name"
                        autofocus>
-                <div class="invalid-name-msg"
+                <div class="invalid-input-msg invalid-name-msg"
                      *ngIf="submitted && !isValid('name')">
-                    <small>{{ 'NEW-COUNTDOWN.INVALID-NAME' | translate }}</small>
+                    {{ 'NEW-COUNTDOWN.INVALID-NAME' | translate }}
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
                          alt="Calender icon">
                     <div class="day-display flex-column align-items-center">
                         <label for="date"
-                               class="label-input pointer">
+                               class="label-input pointer muted">
                             {{ "NEW-COUNTDOWN.DATE" | translate | titlecase }}
                         </label>
                         <span *ngIf="getValue('day'); else dateFormat"
@@ -123,6 +123,7 @@
                             </button>
                             <input type="number"
                                    class="minute-input text-center"
+                                   placeholder="00"
                                    formControlName="minute"
                                    [class.invalid]="submitted && !isValid('minute')">
                             <button class="btn-arrow pointer"
@@ -138,16 +139,16 @@
                             </button>
                         </div>
                     </div>
-                    <div class="invalid-time-msg"
+                    <div class="invalid-input-msg invalid-time-msg"
                          *ngIf="submitted && (!isValid('hour') || !isValid('minute'))">
-                        <small>{{ 'NEW-COUNTDOWN.INVALID-TIME' | translate }}</small>
+                        {{ 'NEW-COUNTDOWN.INVALID-TIME' | translate }}
                     </div>
                 </div>
 
             </div>
-            <div class="invalid-date-msg"
+            <div class="invalid-input-msg invalid-date-msg"
                  *ngIf="submitted && !isValid('day')">
-                <small>{{ 'NEW-COUNTDOWN.INVALID-DATE' | translate }}</small>
+                {{ 'NEW-COUNTDOWN.INVALID-DATE' | translate }}
             </div>
         </div>
         <!-- CAPTION INPUT -->

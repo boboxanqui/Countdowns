@@ -199,15 +199,8 @@
 
 // ERROR MESSAGES
 
-.invalid-name-msg,
-.invalid-date-msg,
-.invalid-time-msg {
-  position: absolute;
-  color: red;
-  font-size: 1.2rem;
-  margin: 0 10px;
-  padding: 0 5px;
-  width: 100%;
+.invalid-name-msg{
+  padding: 5px;
 }
 
 .invalid-date-msg {

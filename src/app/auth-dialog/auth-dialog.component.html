@@ -17,7 +17,7 @@
                  width="30">
             {{ "AUTH-DIALOG.GOOGLE-LOGIN" | translate }}
         </button>
-        <button class="google-login btn">
+        <button class="github-login btn">
             <svg height="32"
                  aria-hidden="true"
                  viewBox="0 0 16 16"
@@ -43,85 +43,334 @@
         <!-- LOGIN -->
         <div class="form-login"
              [class.show-register-form]="showRegisterForm">
-            <form>
+            <form [formGroup]="formLogin">
                 <div class="email-input-wrapper input-wrapper">
                     <label class="label-input"
-                           for="email">
+                           for="email-login">
                         {{ "AUTH-DIALOG.LABEL-EMAIL" | translate }}
                     </label>
                     <input type="email"
-                           id="email"
+                           id="email-login"
+                           formControlName="email"
+                           inputmode="email"
                            placeholder="{{ 'AUTH-DIALOG.EMAIL-EXAMPLE' | translate }}"
-                           class="input">
-                    <small></small>
+                           class="input"
+                           [class.invalid]="invalidLogin('email') && submittedLogin">
+                    <div class="invalid-input-msg"
+                         *ngIf="invalidLogin('email') && submittedLogin && getValueLogin('email').length === 0 ">
+                        {{ "AUTH-DIALOG.EMPTY-INPUT" | translate }} </div>
+                    <div class="invalid-input-msg"
+                         *ngIf="invalidLogin('email') && submittedLogin && getValueLogin('email').length > 0">
+                        {{ "AUTH-DIALOG.INVALID-EMAIL" | translate }} </div>
                 </div>
                 <div class="password-input-wrapper input-wrapper">
                     <label class="label-input"
-                           for="password">
+                           for="password-login">
                         {{ "AUTH-DIALOG.LABEL-PASSWORD" | translate }}
                     </label>
                     <input type="password"
-                           id="password"
+                           id="password-login"
+                           formControlName="password"
                            placeholder="********"
-                           class="input">
+                           class="input"
+                           [class.invalid]="invalidLogin('password') && submittedLogin">
+                    <div class="invalid-input-msg"
+                         *ngIf="invalidLogin('password') && submittedLogin"> {{ "AUTH-DIALOG.EMPTY-INPUT" | translate }}
+                    </div>
+
                 </div>
 
-                <a href="#"
-                   style="color: red;text-align: end;font-size: 1rem;float: end;">Forgot password?</a>
+                <button class="btn-forgot-password"> {{ "AUTH-DIALOG.FORGOT-PASSWORD" | translate }} </button>
+
             </form>
 
-            <button class="btn-color btn-login">
+            <button class="btn-color btn-submit-login"
+                    (click)="submitLogin()">
                 {{ "AUTH-DIALOG.BUTTON-LOGIN" | translate }}
             </button>
 
             <div class="register-now ">
                 <p class="text-center"> {{ "AUTH-DIALOG.NO-ACCOUNT" | translate }} </p>
-                <button class="btn-register" (click)="showRegisterForm = true"> {{ "AUTH-DIALOG.CREATE-ACCOUNT" | translate }} </button>
+                <button class="btn-register"
+                        (click)="showRegisterForm = true"> {{ "AUTH-DIALOG.CREATE-ACCOUNT" | translate }} </button>
             </div>
         </div>
 
-        <!-- SIGN UP -->
+        <!-- REGISTER -->
         <div class="form-register"
              [class.show-register-form]="showRegisterForm">
-            <form>
+            <form [formGroup]="formRegister"
+                  (ngSubmit)="submitRegister()">
                 <div class="email-input-wrapper input-wrapper">
                     <label class="label-input"
-                           for="email">
+                           for="email-register">
                         {{ "AUTH-DIALOG.LABEL-EMAIL" | translate }}
                     </label>
                     <input type="email"
-                           id="email"
+                           id="email-register"
+                           formControlName="email"
+                           inputmode="email"
                            placeholder="{{ 'AUTH-DIALOG.EMAIL-EXAMPLE' | translate }}"
-                           class="input">
-                    <small></small>
+                           class="input"
+                           [class.invalid]="invalidRegister('email') && submittedRegister">
+                    <div class="invalid-input-msg"
+                         *ngIf="invalidRegister('email') && submittedRegister && getValueRegister('email').length === 0 ">
+                        {{ "AUTH-DIALOG.EMPTY-INPUT" | translate }} </div>
+                    <div class="invalid-input-msg"
+                         *ngIf="invalidRegister('email') && submittedRegister && getValueRegister('email').length > 0">
+                        {{ "AUTH-DIALOG.INVALID-EMAIL" | translate }} </div>
                 </div>
                 <div class="password-input-wrapper input-wrapper">
                     <label class="label-input"
-                           for="password">
+                           for="password-register">
                         {{ "AUTH-DIALOG.LABEL-PASSWORD" | translate }}
                     </label>
-                    <input type="password"
-                           id="password"
+                    <input [type]="visblePassword()"
+                           id="password-register"
+                           formControlName="password"
                            placeholder="********"
-                           class="input">
+                           class="input password-register-input"
+                           [class.invalid]="invalidRegister('password') && submittedRegister"
+                           #passwordInputRegister>
+                    <div class="invalid-input-msg"
+                         *ngIf="invalidRegister('password') && submittedRegister && getValueRegister('password').length === 0 ">
+                        {{ "AUTH-DIALOG.EMPTY-INPUT" | translate }} </div>
+                    <div class="invalid-input-msg"
+                         *ngIf="invalidRegister('password') && submittedRegister && getValueRegister('password').length > 0">
+                        {{ "AUTH-DIALOG.INVALID-PASSWORD" | translate }} </div>
+                    <button class="password-visible pointer"
+                            (click)="seePassword = true; "
+                            (focus)="passwordInputRegister.focus()"
+                            *ngIf="!seePassword">
+                        <svg width="24"
+                             height="24"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             class="icon-eye-closed"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.645 7C19.9136 9.0494 18.6869 10.8134 17.111 12.0821C15.6182 13.2944 13.8251 13.9169 12 13.8565C10.1748 13.9169 8.38178 13.2944 6.88898 12.0821C5.31302 10.8134 4.08637 9.0494 3.35498 7"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round" />
+                            <path d="M12 13.8565V17"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round" />
+                            <path d="M17.7 15.9047L15.781 12.9584"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round" />
+                            <path d="M8.21899 12.9584L6.29999 15.9047"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round" />
+                            <path d="M21.5 11.5235L19.315 9.63965"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round" />
+                            <path d="M4.685 9.63965L2.5 11.5235"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <button class="password-visible pointer"
+                            (click)="seePassword = false; "
+                            (focus)="passwordInputRegister.focus()"
+                            *ngIf="seePassword">
+                        <svg width="24"
+                             height="24"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             class="icon-eye-opened"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.89899 12.7346C2.80091 12.5052 2.75 12.2542 2.75 12C2.75 11.7458 2.80091 11.4948 2.89899 11.2654C3.70725 9.34502 4.99868 7.72989 6.61515 6.61781C8.23161 5.50574 10.1029 4.945 12 5.00426C13.8971 4.945 15.7684 5.50574 17.3849 6.61781C19.0013 7.72989 20.2928 9.34502 21.101 11.2654C21.1991 11.4948 21.25 11.7458 21.25 12C21.25 12.2542 21.1991 12.5052 21.101 12.7346C20.2928 14.655 19.0013 16.2701 17.3849 17.3822C15.7684 18.4943 13.8971 19.055 12 18.9957C10.1029 19.055 8.23161 18.4943 6.61515 17.3822C4.99868 16.2701 3.70725 14.655 2.89899 12.7346Z"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round" />
+                            <path d="M12 15.5C13.933 15.5 15.5 13.933 15.5 12C15.5 10.067 13.933 8.5 12 8.5C10.067 8.5 8.5 10.067 8.5 12C8.5 13.933 10.067 15.5 12 15.5Z"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                    <div class="password-requirements">
+                        <span>
+                            <svg width="24"
+                                 height="24"
+                                 class="check-icon"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 *ngIf="isPasswordRegisterInputLengthEnough();else passwordNotLength">
+                                <path d="M4.5 11.7948L8.72144 16.0163C8.86993 16.1666 9.04677 16.286 9.24172 16.3674C9.43668 16.4488 9.64586 16.4908 9.85715 16.4908C10.0685 16.4908 10.2776 16.4488 10.4726 16.3674C10.6675 16.286 10.8443 16.1666 10.9929 16.0163L19.5 7.50916"
+                                      stroke="currentColor"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                            </svg>
+                            <ng-template #passwordNotLength>
+                                <svg width="24"
+                                     height="24"
+                                     class="cross-icon"
+                                     viewBox="0 0 24 24"
+                                     fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M19 5L5 19"
+                                          stroke="currentColor"
+                                          stroke-width="1.5"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round" />
+                                    <path d="M19 19L5 5"
+                                          stroke="currentColor"
+                                          stroke-width="1.5"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round" />
+                                </svg>
+                            </ng-template>
+
+                            <small [class.muted]="!isPasswordRegisterInputLengthEnough()"> {{
+                                'AUTH-DIALOG.PASSWORD-LENGTH' | translate }} </small>
+                        </span>
+                        <span>
+                            <svg width="24"
+                                 height="24"
+                                 class="check-icon"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 *ngIf="hasPasswordRegisterInputUpperCase();else passwordNoUpperCase">
+                                <path d="M4.5 11.7948L8.72144 16.0163C8.86993 16.1666 9.04677 16.286 9.24172 16.3674C9.43668 16.4488 9.64586 16.4908 9.85715 16.4908C10.0685 16.4908 10.2776 16.4488 10.4726 16.3674C10.6675 16.286 10.8443 16.1666 10.9929 16.0163L19.5 7.50916"
+                                      stroke="currentColor"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                            </svg>
+                            <ng-template #passwordNoUpperCase>
+                                <svg width="24"
+                                     height="24"
+                                     class="cross-icon"
+                                     viewBox="0 0 24 24"
+                                     fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M19 5L5 19"
+                                          stroke="currentColor"
+                                          stroke-width="1.5"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round" />
+                                    <path d="M19 19L5 5"
+                                          stroke="currentColor"
+                                          stroke-width="1.5"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round" />
+                                </svg>
+                            </ng-template>
+
+                            <small [class.muted]="!hasPasswordRegisterInputUpperCase()"> {{
+                                'AUTH-DIALOG.PASSWORD-CAPITAL-LETTER' | translate }} </small>
+                        </span>
+                        <span>
+                            <svg width="24"
+                                 height="24"
+                                 class="check-icon"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 *ngIf="hasPasswordRegisterInputLowerCase();else passwordNoLowerCase">
+                                <path d="M4.5 11.7948L8.72144 16.0163C8.86993 16.1666 9.04677 16.286 9.24172 16.3674C9.43668 16.4488 9.64586 16.4908 9.85715 16.4908C10.0685 16.4908 10.2776 16.4488 10.4726 16.3674C10.6675 16.286 10.8443 16.1666 10.9929 16.0163L19.5 7.50916"
+                                      stroke="currentColor"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                            </svg>
+                            <ng-template #passwordNoLowerCase>
+                                <svg width="24"
+                                     height="24"
+                                     class="cross-icon"
+                                     viewBox="0 0 24 24"
+                                     fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M19 5L5 19"
+                                          stroke="currentColor"
+                                          stroke-width="1.5"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round" />
+                                    <path d="M19 19L5 5"
+                                          stroke="currentColor"
+                                          stroke-width="1.5"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round" />
+                                </svg>
+                            </ng-template>
+
+                            <small [class.muted]="!hasPasswordRegisterInputLowerCase()"> {{
+                                'AUTH-DIALOG.PASSWORD-LOWER-CASE' | translate }} </small>
+                        </span>
+                        <span>
+                            <svg width="24"
+                                 height="24"
+                                 class="check-icon"
+                                 viewBox="0 0 24 24"
+                                 fill="none"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 *ngIf="hasPasswordRegisterInputNumber();else passwordNoNumber">
+                                <path d="M4.5 11.7948L8.72144 16.0163C8.86993 16.1666 9.04677 16.286 9.24172 16.3674C9.43668 16.4488 9.64586 16.4908 9.85715 16.4908C10.0685 16.4908 10.2776 16.4488 10.4726 16.3674C10.6675 16.286 10.8443 16.1666 10.9929 16.0163L19.5 7.50916"
+                                      stroke="currentColor"
+                                      stroke-width="1.5"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                            </svg>
+                            <ng-template #passwordNoNumber>
+                                <svg width="24"
+                                     height="24"
+                                     class="cross-icon"
+                                     viewBox="0 0 24 24"
+                                     fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M19 5L5 19"
+                                          stroke="currentColor"
+                                          stroke-width="1.5"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round" />
+                                    <path d="M19 19L5 5"
+                                          stroke="currentColor"
+                                          stroke-width="1.5"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round" />
+                                </svg>
+                            </ng-template>
+
+                            <small [class.muted]="!hasPasswordRegisterInputNumber()"> {{ 'AUTH-DIALOG.PASSWORD-NUMBER' |
+                                translate }} </small>
+                        </span>
+                    </div>
+
                 </div>
 
-                <a href="#"
-                   style="color: red;text-align: end;font-size: 1rem;visibility: hidden;">Forgot password?</a>
+                <button class="btn-forgot-password"
+                        style="visibility: hidden;"> {{ "AUTH-DIALOG.FORGOT-PASSWORD" | translate }} </button>
+
+                <button class="btn-color btn-submit-register"
+                        (click)="submitRegister()">
+                    {{ "AUTH-DIALOG.BUTTON-REGISTER" | translate }}
+                </button>
             </form>
 
-            <button class="btn-color btn-login">
-                {{ "AUTH-DIALOG.BUTTON-REGISTER" | translate }}
-            </button>
 
-            <div class="register-now ">
+            <div class="login-now ">
                 <p class="text-center"> {{ "AUTH-DIALOG.YES-ACCOUNT" | translate }} </p>
-                <button class="btn-register" (click)="showRegisterForm = false"> {{ "AUTH-DIALOG.LOGIN" | translate }} </button>
+                <button class="btn-register"
+                        (click)="showRegisterForm = false"> {{ "AUTH-DIALOG.LOGIN" | translate }} </button>
             </div>
-
         </div>
-
     </div>
-
 
 </mat-dialog-content>

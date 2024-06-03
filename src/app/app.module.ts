@@ -7,6 +7,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { NewCountdownComponent } from './new-countdown/new-countdown.component';
+import { CountdownCardComponent } from './components/countdown-card/countdown-card.component';
+import { CountdownDialogComponent } from './countdown-dialog/countdown-dialog.component';
+import { AuthDialogComponent } from './auth-dialog/auth-dialog.component';
 
 import { SharedModule } from './shared/shared.module';
 
@@ -23,10 +26,11 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import { DatePipe } from './pipe/date.pipe';
-import { CountdownCardComponent } from './components/countdown-card/countdown-card.component';
-import { CountdownDialogComponent } from './countdown-dialog/countdown-dialog.component';
-import { AuthDialogComponent } from './auth-dialog/auth-dialog.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
 
 
 
@@ -62,7 +66,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDialogModule,
     MatDatepickerModule,
     MatFormFieldModule,
-    MatNativeDateModule 
+    MatNativeDateModule,
+    MatTooltipModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth())
   ],
   exports:[
     TranslateModule
