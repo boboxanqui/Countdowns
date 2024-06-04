@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-auth-dialog',
@@ -9,7 +10,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AuthDialogComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
 
@@ -30,8 +34,8 @@ export class AuthDialogComponent implements OnInit {
   formRegister: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [
-      Validators.required, 
-      Validators.minLength(6), 
+      Validators.required,
+      Validators.minLength(6),
       Validators.pattern(this.passwordRegex)
     ]]
   })
@@ -76,16 +80,6 @@ export class AuthDialogComponent implements OnInit {
     return anyNummber.test(this.getValueRegister('password'))
   }
 
-  submitLogin() {
-    this.submittedLogin = true;
-    if (this.formLogin.invalid) return
-  }
-
-  submitRegister() {
-    this.submittedRegister = true;
-    if (this.formRegister.invalid) return
-  }
-
   visblePassword() {
     return this.seePassword ? 'text' : 'password'
   }
@@ -94,4 +88,37 @@ export class AuthDialogComponent implements OnInit {
     return this.formRegister.get('password')?.pristine
   }
 
+  submitLogin() {
+    this.submittedLogin = true;
+    if (this.formLogin.invalid) return
+
+    this.authService.loginUser(
+      this.getValueLogin('email'),
+      this.getValueLogin('password')
+    ).then(console.log)
+      .catch(err => console.error(err))
+  }
+
+  submitRegister() {
+    this.submittedRegister = true;
+    if (this.formRegister.invalid) return
+
+    this.authService.registerUser(
+      this.getValueRegister('email'),
+      this.getValueRegister('password')
+    ).then(console.log)
+      .catch(err => console.error(err))
+  }
+
+  loginWithGoogle() {
+    this.authService.loginWithGoogle()
+      .then(console.log)
+      .catch(err => console.error(err))
+  }
+
+  loginWithGithub() {
+    this.authService.loginWithGithub()
+      .then(console.log)
+      .catch(err => console.error(err))
+  }
 }

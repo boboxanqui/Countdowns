@@ -11,13 +11,15 @@
 <mat-dialog-content>
 
     <div class="social-login">
-        <button class="google-login btn">
+        <button class="google-login btn"
+                (click)="loginWithGoogle()">
             <img src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA"
                  alt=""
                  width="30">
             {{ "AUTH-DIALOG.GOOGLE-LOGIN" | translate }}
         </button>
-        <button class="github-login btn">
+        <button class="github-login btn"
+                (click)="loginWithGithub()">
             <svg height="32"
                  aria-hidden="true"
                  viewBox="0 0 16 16"
@@ -43,7 +45,8 @@
         <!-- LOGIN -->
         <div class="form-login"
              [class.show-register-form]="showRegisterForm">
-            <form [formGroup]="formLogin">
+            <form [formGroup]="formLogin"
+                  (ngSubmit)="submitLogin()">
                 <div class="email-input-wrapper input-wrapper">
                     <label class="label-input"
                            for="email-login">
