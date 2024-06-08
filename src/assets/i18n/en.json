@@ -1,6 +1,8 @@
 {
     "NAVBAR":{
-        "LOGIN": "Sign in"
+        "LOGIN": "Sign in",
+        "REGISTER":"Sign up",
+        "LOGOUT":"Log out"
     },
 
     "MAIN":{
@@ -62,6 +64,10 @@
         "NO-ACCOUNT": "No account yet?",
         "CREATE-ACCOUNT":"Sign up",
         "YES-ACCOUNT":"Already signed up?",
-        "LOGIN":"Log in"
+        "LOGIN":"Log in",
+        "ERRORS":{
+            "EMAIL-ALREADY-EXISTS":"This email already exists",
+            "INVALID-LOGIN":"Invalid email or password"
+        }
     }
 }

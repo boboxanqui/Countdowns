@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-auth-dialog',
@@ -12,19 +13,26 @@ export class AuthDialogComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService
+    private dialogRef: MatDialogRef<AuthDialogComponent>,
+    private authService: AuthService,
+    @Inject(MAT_DIALOG_DATA) public registerDialog: boolean
   ) { }
 
   ngOnInit(): void {
-
+    this.showRegisterForm = this.registerDialog
   }
 
   emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+?[a-z0-9](?:[a-z0-9-]*[a-z0-9])+?/g;
   passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])/gm // 6 char, 1 mayus, 1 minus, 1 num
-  showRegisterForm: boolean = true; // FIXME: change to false
+  showRegisterForm!: boolean;
   submittedLogin: boolean = false;
   submittedRegister: boolean = false;
-  seePassword: boolean = false;
+  seeLoginPassword: boolean = false;
+  seeRegisterPassword: boolean = false;
+  showAuthErrors = {
+    emailAlreadyInUse: false,
+    invalidCredentials: false
+  }
 
   formLogin: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -80,8 +88,12 @@ export class AuthDialogComponent implements OnInit {
     return anyNummber.test(this.getValueRegister('password'))
   }
 
-  visblePassword() {
-    return this.seePassword ? 'text' : 'password'
+  visbleLoginPassword() {
+    return this.seeLoginPassword ? 'text' : 'password'
+  }
+
+  visbleRegisterPassword() {
+    return this.seeRegisterPassword ? 'text' : 'password'
   }
 
   inputFocus() {
@@ -92,33 +104,70 @@ export class AuthDialogComponent implements OnInit {
     this.submittedLogin = true;
     if (this.formLogin.invalid) return
 
+    Object.entries(this.showAuthErrors).forEach( ([key,value] ) => {
+      value = false;
+      console.log( key + ' => ' + value)
+    })
+
     this.authService.loginUser(
       this.getValueLogin('email'),
       this.getValueLogin('password')
-    ).then(console.log)
-      .catch(err => console.error(err))
+    ).then(resp => {
+      console.log(resp);
+      this.authService.setUserData(resp);
+      this.dialogRef.close();
+    })
+      .catch(err => {
+        if( err.message.includes('invalid-login-credentials')){
+          this.showAuthErrors.invalidCredentials = true;
+        }
+      })
   }
 
   submitRegister() {
     this.submittedRegister = true;
     if (this.formRegister.invalid) return
 
+    Object.entries(this.showAuthErrors).forEach( ([key,value] ) => {
+      value = false;
+      console.log( key + ' => ' + value)
+    })
+    
     this.authService.registerUser(
       this.getValueRegister('email'),
       this.getValueRegister('password')
-    ).then(console.log)
-      .catch(err => console.error(err))
+    )
+      .then( console.log )
+      .catch(err => {
+        if(err.message.includes('email-already-in-use')){
+          this.showAuthErrors.emailAlreadyInUse = true;
+        }
+      })
   }
 
   loginWithGoogle() {
     this.authService.loginWithGoogle()
-      .then(console.log)
-      .catch(err => console.error(err))
+      .then( resp => {
+        console.log(resp);
+        this.authService.setUserData(resp);
+        this.dialogRef.close();
+      })
+      .catch(err => {
+        console.error(err.code);
+        console.error(err.message)
+      })
   }
 
   loginWithGithub() {
     this.authService.loginWithGithub()
-      .then(console.log)
-      .catch(err => console.error(err))
+      .then(resp => {
+        console.log(resp);
+        this.authService.setUserData(resp);
+        this.dialogRef.close();
+      })
+      .catch(err => {
+        console.error(err.code);
+        console.error(err.message)
+      })
   }
 }

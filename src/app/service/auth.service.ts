@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Auth, UserCredential, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "@angular/fire/auth";
+import { UserData } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,32 @@ import { Auth, UserCredential, createUserWithEmailAndPassword, signInWithEmailAn
 export class AuthService {
 
   constructor(private auth: Auth) { }
+
+  private _userData: UserData = {
+    active: false
+  }
+
+  get userData(): UserData{
+    return this._userData
+  }
+
+  setUserData( resp: UserCredential ){
+    this._userData = {
+      active: true,
+      displayName: resp.user.displayName,
+      email: resp.user.email,
+      UID: resp.user.uid
+    }
+  }
+
+  removeUserData(){
+    this._userData = {
+      active: false,
+      displayName: null,
+      email: null,
+      UID: ''
+    }
+  }
 
   registerUser(email: string, password: string): Promise<UserCredential> {
     return createUserWithEmailAndPassword(this.auth, email, password)

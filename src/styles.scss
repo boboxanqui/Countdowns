@@ -13,7 +13,7 @@
   --muted: #2222229c;
 
   --success: #008000;
-  --warning: #B31B1B;
+  --warning: #b31b1b;
 
   --box-shadow: rgba(0, 0, 0, 0.1);
   --icon-shadow: #22222241;
@@ -26,8 +26,8 @@
   --text-color: #eceff1;
   --muted: #b4bbbe;
 
-  --success: #68E698;
-  --warning: #D82020;
+  --success: #68e698;
+  --warning: red;
 
   --box-shadow: #eceff146;
   --icon-shadow: #eceff134;
@@ -91,6 +91,14 @@ button {
 
 .justify-content-center {
   justify-content: center;
+}
+
+.invisible{
+  visibility: hidden;
+}
+
+.visible{
+  visibility: visible;
 }
 
 .align-items-center {
@@ -553,6 +561,16 @@ body.light-theme .dark-theme-icon {
     }
   }
 
+  .auth-error-msg {
+    color: var(--warning);
+    margin-top: 5px;
+    font-size: medium;
+    line-height: 1rem;
+    svg{
+      vertical-align: bottom;
+    }
+  }
+
   // LOGIN
   .form-login {
     width: 400px;
@@ -563,12 +581,17 @@ body.light-theme .dark-theme-icon {
   }
 
   .password-input-wrapper {
+    position: relative;
     margin-top: 30px;
   }
 
+  .forgot-password-wrapper {
+    text-align: right;
+    margin-top: 20px;
+  }
+
   .btn-forgot-password {
-    margin-top: 30px;
-    float: right;
+    font-size: 1rem;
     width: min-content;
     text-wrap: nowrap;
     cursor: pointer;
@@ -578,22 +601,21 @@ body.light-theme .dark-theme-icon {
       color: var(--text-color);
       text-decoration: underline;
     }
-  };
+  }
 
   .btn-submit-login,
   .btn-submit-register {
-    margin-top: 30px;
+    margin-top: 5px;
     font-size: 1.3rem;
     font-weight: bold;
   }
 
-
-  .icon-eye-opened{
-    animation: openEye .3s ease-out;
+  .icon-eye-opened {
+    animation: openEye 0.3s ease-out;
   }
-  
-  .icon-eye-closed{
-    animation: closeEye .3s ease-out;
+
+  .icon-eye-closed {
+    animation: closeEye 0.3s ease-out;
   }
 
   .register-now,
@@ -610,13 +632,12 @@ body.light-theme .dark-theme-icon {
       transform: translateX(-500px);
     }
   }
-  
-  .password-register-input{
+
+  .password-register-input {
     padding-right: 40px !important;
     z-index: 20;
-    
   }
-  
+
   .password-visible {
     position: absolute;
     background-color: transparent;
@@ -624,14 +645,14 @@ body.light-theme .dark-theme-icon {
     height: 30px;
     margin: 0;
     right: 10px;
-    top: 130px;
+    top: 35px;
   }
 
-  .password-requirements{
+  .password-requirements {
     position: absolute;
     opacity: 0;
     right: 10px;
-    top: 75px;
+    top: -23px;
     padding: 5px 10px 8px 15px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -644,27 +665,27 @@ body.light-theme .dark-theme-icon {
     grid-template-rows: repeat(2, 1fr);
     column-gap: 15px;
     z-index: 1;
-    transition: .2s ease;
-    
-    span{
+    transition: 0.2s ease;
+
+    span {
       display: flex;
       align-items: center;
       gap: 5px;
     }
 
-    svg.check-icon{
+    svg.check-icon {
       color: var(--success);
     }
-    svg.cross-icon{
+    svg.cross-icon {
       color: var(--warning);
       padding: 2px;
     }
   }
 
   .password-register-input:focus ~ .password-requirements,
-  .password-visible:focus ~ .password-requirements{
+  .password-visible:focus ~ .password-requirements {
     opacity: 1;
-    // top: 75px; 
+    // top: 75px;
   }
 
   .btn-register {
@@ -743,14 +764,18 @@ body.light-theme .dark-theme-icon {
 .invalid-input-msg {
   position: absolute;
   margin: 0 10px;
-  color: red;
+  color: var(--warning);
   font-size: medium;
+  svg{
+    vertical-align: sub;
+  }
 }
 
-.input:focus-visible {
+.input:focus-visible,
+.input:focus {
   outline: none;
   border-bottom: 2px solid var(--accent);
-  background-color: var(--bg-color-neutral);
+  background-color: var(--bg-color-neutral) !important;
 }
 
 input:-webkit-autofill,
@@ -763,13 +788,15 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   border: none;
+  border-image-width: 0;
   outline: none;
   border-bottom: 2px solid var(--accent);
   -webkit-text-fill-color: var(--text-color);
-  box-shadow: 0 0 0px 1000px var(--bg-color) inset;
-  -webkit-box-shadow: 0 0 0px 1000px var(--bg-color) inset;
+  box-shadow: 0 0 0px 1000px var(--bg-color) inset, 0 0 0px 1px var(--bg-color);
+  -webkit-box-shadow: 0 0 0px 1000px var(--bg-color) inset,
+    0 0 0px 1px var(--bg-color);
   color: var(--text-color);
-  background-color: red;
+  background-color: var(--bg-color) !important;
 }
 
 /* ---------- ICONS ---------- */
@@ -791,22 +818,21 @@ select:-webkit-autofill:focus {
   }
 }
 
-
 /* ---------- ANIMATIONS ---------- */
 
 @keyframes openEye {
-  from{
+  from {
     transform: rotateX(-60deg);
   }
-  to{
+  to {
     transform: rotateX(0deg);
   }
 }
 @keyframes closeEye {
-  from{
+  from {
     transform: rotateX(60deg);
   }
-  to{
+  to {
     transform: rotateX(0deg);
   }
 }

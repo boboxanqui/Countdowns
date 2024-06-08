@@ -1,6 +1,7 @@
 {
     "NAVBAR":{
-        "LOGIN": "Iniciar sesión"
+        "LOGIN": "Iniciar sesión",
+        "REGISTER":"Registrate"
     },
     
     "MAIN":{
@@ -62,6 +63,10 @@
         "NO-ACCOUNT": "¿Aún no tienes una cuenta?",
         "CREATE-ACCOUNT":"Registrate aquí",
         "YES-ACCOUNT":"¿Ya tienes una cuenta?",
-        "LOGIN":"Iniciar sesión"
+        "LOGIN":"Iniciar sesión",
+        "ERRORS":{
+            "EMAIL-ALREADY-EXISTS":"Este correo ya existe",
+            "INVALID-LOGIN":"Correo o contraseña incorrectos"
+        }
     }
 }

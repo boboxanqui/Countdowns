@@ -22,3 +22,10 @@ export interface TimeLeft {
         minutes: number,
         seconds: number
 }
+
+export interface UserData {
+        active: boolean,
+        email?: string | null,
+        displayName?: string | null,
+        UID?: string,
+}

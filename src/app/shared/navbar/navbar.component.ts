@@ -1,8 +1,9 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { langOption } from "../../interfaces";
+import { UserData, langOption } from "../../interfaces";
 import { MatDialog } from '@angular/material/dialog';
 import { AuthDialogComponent } from 'src/app/auth-dialog/auth-dialog.component';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,8 @@ export class NavbarComponent implements OnInit {
 
   constructor( 
     private translate: TranslateService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private authService: AuthService
   ) {
     // get lang from localStorage
     this.currentLang = localStorage.getItem('lang') || 'es'
@@ -28,14 +30,12 @@ export class NavbarComponent implements OnInit {
     } else {
       this.darkMode = false;
     }
-
-    // FIXME: Delete dialog openning
-    this.openAuthDialog()
   }
 
   darkMode!: boolean;
   currentLang: string;
   langOptionsOpen: boolean = false;
+  userOptionsOpen: boolean = false;
   langList: langOption[] = [
     {
       lang: 'es',
@@ -68,13 +68,27 @@ export class NavbarComponent implements OnInit {
     localStorage.setItem('lang',lang)
   }
 
-  openAuthDialog(){
+  openAuthDialog(registerDialog: Boolean){
     this.dialog.open( AuthDialogComponent, {
+      data: registerDialog,
       width: '500px',
       panelClass: ['dialog-panel','auth-dialog'],
       backdropClass: 'dialog-backdrop',
       // TODO: autoFocus: 'login-input'
     })
+  }
+
+  get userData(): UserData{
+    return this.authService.userData
+  }
+
+  logout(){
+    this.authService.logoutUser()
+      .then( resp => {
+        console.log(resp);
+        this.authService.removeUserData();
+      } )
+      .catch( err =>  console.error(err))
   }
 
 }
