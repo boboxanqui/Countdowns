@@ -1,7 +1,8 @@
 {
     "NAVBAR":{
         "LOGIN": "Iniciar sesión",
-        "REGISTER":"Registrate"
+        "REGISTER":"Registrate",
+        "LOGOUT":"Cerrar sesión"
     },
     
     "MAIN":{
@@ -9,7 +10,8 @@
         "SLOGAN-PART-2":"Sabemos lo mucho que quieres a tu perro, así que tenemos algo para ti.",
         "SLOGAN-PART-3":"Crea tantas cuentas atrás para saber cuánto falta para cada fecha especial, ¡incluido el cumpleaños de tu perro!",
         "PRESS-BUTTON":"Presiona el siguiente botón para crear la primera cuenta atrás",
-        "CREATE-COUNTDOWN":"Crear cuenta atrás"
+        "CREATE-COUNTDOWN":"Crear cuenta atrás",
+        "LOGIN-TO-CREATE":"Inicia sesión para seguir creando contadores"
     },
 
     "COUNTDOWN-CARD":{
@@ -52,7 +54,7 @@
         "INVALID-EMAIL":"Formato inválido",
         "EMPTY-INPUT":"Rellena este campo",
         "LABEL-PASSWORD":"Contraseña",
-        "INVALID-PASSWORD":"No cumple todos los requisitos",
+        "INVALID-PASSWORD":"No cumple los requisitos",
         "PASSWORD-LENGTH": "6 carácteres",
         "PASSWORD-CAPITAL-LETTER":"1 mayúscula",
         "PASSWORD-LOWER-CASE":"1 minúscula",

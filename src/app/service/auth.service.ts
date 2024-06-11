@@ -1,31 +1,47 @@
 import { Injectable } from '@angular/core';
-import { Auth, UserCredential, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "@angular/fire/auth";
+import { Auth, UserCredential, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, GithubAuthProvider, onAuthStateChanged, EmailAuthProvider, User } from "@angular/fire/auth";
 import { UserData } from '../interfaces';
+import { Observable, Subject, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private auth: Auth) { }
+  constructor(private auth: Auth) {
+    this._userData.active ? 
+      this._activeUser.next(true) :
+      this._activeUser.next(false)
+   }
+
+  private _activeUser = new Subject<boolean>();
 
   private _userData: UserData = {
     active: false
+  }
+
+  get activeUser$(): Observable<boolean>{
+    return this._activeUser
   }
 
   get userData(): UserData{
     return this._userData
   }
 
-  setUserData( resp: UserCredential ){
-    this._userData = {
-      active: true,
-      displayName: resp.user.displayName,
-      email: resp.user.email,
-      UID: resp.user.uid
-    }
+  get currentUser$(): Observable<User | null>{
+    return of( this.auth.currentUser )
   }
 
+  setUserData( user: User ){
+    this._userData = {
+      active: true,
+      displayName: user.displayName,
+      email: user.email,
+      UID: user.uid
+    }
+    this._activeUser.next(true)
+  }
+  
   removeUserData(){
     this._userData = {
       active: false,
@@ -33,6 +49,7 @@ export class AuthService {
       email: null,
       UID: ''
     }
+    this._activeUser.next(false)
   }
 
   registerUser(email: string, password: string): Promise<UserCredential> {
@@ -53,5 +70,17 @@ export class AuthService {
 
   logoutUser(): Promise<void> {
     return signOut(this.auth);
+  }
+
+  currentUser(): User | null {
+    return this.auth.currentUser 
+  }
+
+  authStatus(){
+    return onAuthStateChanged(this.auth, 
+      (user) =>{
+        if( user ) this.setUserData( user )
+      } 
+    )
   }
 }

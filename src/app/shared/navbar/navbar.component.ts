@@ -30,6 +30,7 @@ export class NavbarComponent implements OnInit {
     } else {
       this.darkMode = false;
     }
+    this.authService.authStatus()
   }
 
   darkMode!: boolean;
@@ -85,7 +86,6 @@ export class NavbarComponent implements OnInit {
   logout(){
     this.authService.logoutUser()
       .then( resp => {
-        console.log(resp);
         this.authService.removeUserData();
       } )
       .catch( err =>  console.error(err))

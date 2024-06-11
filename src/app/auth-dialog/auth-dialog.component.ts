@@ -104,9 +104,8 @@ export class AuthDialogComponent implements OnInit {
     this.submittedLogin = true;
     if (this.formLogin.invalid) return
 
-    Object.entries(this.showAuthErrors).forEach( ([key,value] ) => {
+    Object.entries(this.showAuthErrors).forEach(([key, value]) => {
       value = false;
-      console.log( key + ' => ' + value)
     })
 
     this.authService.loginUser(
@@ -114,11 +113,12 @@ export class AuthDialogComponent implements OnInit {
       this.getValueLogin('password')
     ).then(resp => {
       console.log(resp);
-      this.authService.setUserData(resp);
+      this.authService.setUserData(resp.user);
       this.dialogRef.close();
     })
       .catch(err => {
-        if( err.message.includes('invalid-login-credentials')){
+        console.error(err)
+        if (err.message.includes('invalid-login-credentials')) {
           this.showAuthErrors.invalidCredentials = true;
         }
       })
@@ -128,18 +128,20 @@ export class AuthDialogComponent implements OnInit {
     this.submittedRegister = true;
     if (this.formRegister.invalid) return
 
-    Object.entries(this.showAuthErrors).forEach( ([key,value] ) => {
+    Object.entries(this.showAuthErrors).forEach(([key, value]) => {
       value = false;
-      console.log( key + ' => ' + value)
     })
-    
+
     this.authService.registerUser(
       this.getValueRegister('email'),
       this.getValueRegister('password')
     )
-      .then( console.log )
+      .then(resp => {
+        this.authService.setUserData(resp.user)
+        this.dialogRef.close();
+      })
       .catch(err => {
-        if(err.message.includes('email-already-in-use')){
+        if (err.message.includes('email-already-in-use')) {
           this.showAuthErrors.emailAlreadyInUse = true;
         }
       })
@@ -147,9 +149,9 @@ export class AuthDialogComponent implements OnInit {
 
   loginWithGoogle() {
     this.authService.loginWithGoogle()
-      .then( resp => {
+      .then(resp => {
         console.log(resp);
-        this.authService.setUserData(resp);
+        this.authService.setUserData(resp.user);
         this.dialogRef.close();
       })
       .catch(err => {
@@ -162,7 +164,7 @@ export class AuthDialogComponent implements OnInit {
     this.authService.loginWithGithub()
       .then(resp => {
         console.log(resp);
-        this.authService.setUserData(resp);
+        this.authService.setUserData(resp.user);
         this.dialogRef.close();
       })
       .catch(err => {

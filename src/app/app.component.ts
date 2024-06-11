@@ -1,10 +1,11 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, HostBinding, Inject, OnInit, Renderer2 } from '@angular/core';
+import { Component, Inject, OnInit, Renderer2 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NewCountdownComponent } from './new-countdown/new-countdown.component';
 import { CountdownService } from './service/countdown.service';
-import { TimeLeft } from './interfaces';
-import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from './service/auth.service';
+import { map } from 'rxjs';
+import { AuthDialogComponent } from './auth-dialog/auth-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,8 @@ export class AppComponent implements OnInit {
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
     private dialog: MatDialog,
-    private countdownService: CountdownService
+    private countdownService: CountdownService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -27,14 +29,22 @@ export class AppComponent implements OnInit {
       this.renderer.setAttribute(this.document.body, 'class', 'light-theme')
     }
 
-    this.countdowns.forEach( countdown => 
+    this.countdowns.forEach(countdown =>
       countdown.timeLeft = countdown.date.getTime() - new Date().getTime()
     )
 
     this.startTimer()
+
+    this.authService.activeUser$.subscribe( resp =>{
+      this.loginToCreate = false
+      console.info('Active User: ' + resp);
+    })
+
   }
 
   timer: any;
+  loginToCreate: boolean = false;
+  activeUser: boolean = false;
 
   // THEME TOGGLE
   switchTheme(isDark: boolean) {
@@ -45,12 +55,18 @@ export class AppComponent implements OnInit {
 
   // NEW COUNTDOWN
   openNewCountdownForm() {
-    this.dialog.open(NewCountdownComponent, {
-      width: '800px',
-      panelClass: 'dialog-panel',
-      backdropClass: 'dialog-backdrop',
-      autoFocus: 'name-input'
-    })
+
+    // TODO: Guard login
+    if (!this.authService.currentUser() && this.countdowns.length > 1) {
+      this.loginToCreate = true;
+    } else {
+      this.dialog.open(NewCountdownComponent, {
+        width: '800px',
+        panelClass: 'dialog-panel',
+        backdropClass: 'dialog-backdrop',
+        autoFocus: 'name-input'
+      })
+    }
   }
 
   // COUNTDOWNS LOGIC
@@ -58,33 +74,28 @@ export class AppComponent implements OnInit {
     return this.countdownService.countdowns
   }
 
-  startTimer(){
-    this.timer = setInterval( () =>{
+  startTimer() {
+    this.timer = setInterval(() => {
       const now = new Date()
-      this.countdowns.forEach( countdown => 
+      this.countdowns.forEach(countdown =>
         countdown.timeLeft = countdown.date.getTime() - now.getTime()
       )
     }, 1000)
   }
 
-  // TODO: New component for every countdown-card
+  // LOGIN GUARD
+  get activeUser$(){
+    return this.authService.activeUser$
+  }
 
+  openAuthDialog(registerDialog: Boolean){
+    this.dialog.open( AuthDialogComponent, {
+      data: registerDialog,
+      width: '500px',
+      panelClass: ['dialog-panel','auth-dialog'],
+      backdropClass: 'dialog-backdrop',
+      // TODO: autoFocus: 'login-input'
+    })
+  }
 
-
-  // getSecondsLeft( miliseconds: number | undefined ){
-  //   return miliseconds
-
-  // }
-
-  // getDaysLeft(miliseconds: number | undefined){
-  //   return miliseconds ? 
-  //     Math.floor( miliseconds / this.dayInMiliseconds ) 
-  //     : undefined
-  // }
-
-  // getYearsLeft( miliseconds: number | undefined ){
-  //   return miliseconds ? 
-  //     Math.floor( miliseconds / this.yearInMiliseconds ) :
-  //     undefined
-  // }
 }
