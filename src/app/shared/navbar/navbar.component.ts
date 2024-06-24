@@ -4,6 +4,7 @@ import { UserData, langOption } from "../../interfaces";
 import { MatDialog } from '@angular/material/dialog';
 import { AuthDialogComponent } from 'src/app/auth-dialog/auth-dialog.component';
 import { AuthService } from 'src/app/service/auth.service';
+import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-navbar',
@@ -12,10 +13,11 @@ import { AuthService } from 'src/app/service/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor( 
+  constructor(
     private translate: TranslateService,
     private dialog: MatDialog,
-    private authService: AuthService
+    private authService: AuthService,
+    private auth: Auth
   ) {
     // get lang from localStorage
     this.currentLang = localStorage.getItem('lang') || 'es'
@@ -25,12 +27,19 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if( localStorage.getItem('darkMode') === '1' ){
+    if (localStorage.getItem('darkMode') === '1') {
       this.darkMode = true
     } else {
       this.darkMode = false;
     }
-    this.authService.authStatus()
+    onAuthStateChanged(this.auth, (user) => {
+      if (user) {
+        this.authService.setUserData(user)
+      } else {
+        this.authService.removeUserData()
+      }
+      console.log(this.authService.userData);
+    })
   }
 
   darkMode!: boolean;
@@ -44,51 +53,51 @@ export class NavbarComponent implements OnInit {
       flag: '../../../assets/flags/spain-flag-80x53.webp'
     },
     {
-       lang: 'en',
-       name: 'English',
-       flag: '../../../assets/flags/uk-flag-100x50.webp'
+      lang: 'en',
+      name: 'English',
+      flag: '../../../assets/flags/uk-flag-100x50.webp'
     }
   ]
 
 
   @Output() darkModeOn = new EventEmitter<boolean>()
 
-  switchTheme( mode: boolean ){
+  switchTheme(mode: boolean) {
     this.darkModeOn.emit(mode)
     this.darkMode = mode
   }
 
   get langSelected() {
-    return this.langList.find( option => this.currentLang == option.lang )!;
+    return this.langList.find(option => this.currentLang == option.lang)!;
   }
 
-  changeLang( lang: string){
+  changeLang(lang: string) {
     this.currentLang = lang;
     this.langOptionsOpen = false;
     this.translate.use(lang)
-    localStorage.setItem('lang',lang)
+    localStorage.setItem('lang', lang)
   }
 
-  openAuthDialog(registerDialog: Boolean){
-    this.dialog.open( AuthDialogComponent, {
+  openAuthDialog(registerDialog: Boolean) {
+    this.dialog.open(AuthDialogComponent, {
       data: registerDialog,
       width: '500px',
-      panelClass: ['dialog-panel','auth-dialog'],
+      panelClass: ['dialog-panel', 'auth-dialog'],
       backdropClass: 'dialog-backdrop',
       // TODO: autoFocus: 'login-input'
     })
   }
 
-  get userData(): UserData{
+  get userData(): UserData {
     return this.authService.userData
   }
 
-  logout(){
+  logout() {
     this.authService.logoutUser()
-      .then( resp => {
+      .then(resp => {
         this.authService.removeUserData();
-      } )
-      .catch( err =>  console.error(err))
+      })
+      .catch(err => console.error(err))
   }
 
 }

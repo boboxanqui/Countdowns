@@ -4,8 +4,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { NewCountdownComponent } from './new-countdown/new-countdown.component';
 import { CountdownService } from './service/countdown.service';
 import { AuthService } from './service/auth.service';
-import { map } from 'rxjs';
+import { Unsubscribable, every, filter, map, mergeMap, sampleTime, switchMap, tap } from 'rxjs';
 import { AuthDialogComponent } from './auth-dialog/auth-dialog.component';
+import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,8 @@ export class AppComponent implements OnInit {
     private renderer: Renderer2,
     private dialog: MatDialog,
     private countdownService: CountdownService,
-    private authService: AuthService
+    private authService: AuthService,
+    private auth: Auth
   ) { }
 
   ngOnInit(): void {
@@ -33,18 +35,36 @@ export class AppComponent implements OnInit {
       countdown.timeLeft = countdown.date.getTime() - new Date().getTime()
     )
 
-    this.startTimer()
-
-    this.authService.activeUser$.subscribe( resp =>{
-      this.loginToCreate = false
-      console.info('Active User: ' + resp);
+    onAuthStateChanged(this.auth, (user) => {
+      if (user) {
+        this.unsubscribe = this.countdownService.getCollection(user.uid).subscribe(
+          resp => { this.countdownService.setCountdowns(
+              resp.map( countdown => {
+                return {
+                  caption: countdown.caption,
+                  creationDate: new Date( countdown.creationDate.seconds *1000 ),
+                  date: new Date( countdown.date.seconds *1000),
+                  id: Number(countdown.id),
+                  name: countdown.name
+                }
+              })
+            )
+          })
+      } else {
+        if(this.unsubscribe){
+          this.unsubscribe.unsubscribe()
+        }
+        // TODO: get countdowns from Local Storage
+        this.countdownService.setCountdowns( [] )
+      }
+      this.startTimer()
     })
-
   }
 
   timer: any;
   loginToCreate: boolean = false;
   activeUser: boolean = false;
+  unsubscribe: Unsubscribable | undefined
 
   // THEME TOGGLE
   switchTheme(isDark: boolean) {
@@ -55,8 +75,6 @@ export class AppComponent implements OnInit {
 
   // NEW COUNTDOWN
   openNewCountdownForm() {
-
-    // TODO: Guard login
     if (!this.authService.currentUser() && this.countdowns.length > 1) {
       this.loginToCreate = true;
     } else {
@@ -84,15 +102,15 @@ export class AppComponent implements OnInit {
   }
 
   // LOGIN GUARD
-  get activeUser$(){
+  get activeUser$() {
     return this.authService.activeUser$
   }
 
-  openAuthDialog(registerDialog: Boolean){
-    this.dialog.open( AuthDialogComponent, {
+  openAuthDialog(registerDialog: Boolean) {
+    this.dialog.open(AuthDialogComponent, {
       data: registerDialog,
       width: '500px',
-      panelClass: ['dialog-panel','auth-dialog'],
+      panelClass: ['dialog-panel', 'auth-dialog'],
       backdropClass: 'dialog-backdrop',
       // TODO: autoFocus: 'login-input'
     })

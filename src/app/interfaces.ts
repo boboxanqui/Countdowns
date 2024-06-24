@@ -29,3 +29,17 @@ export interface UserData {
         displayName?: string | null,
         UID?: string,
 }
+
+export interface CountdownFirestore {
+        name: string;
+        creationDate: CreationDateClass;
+        id: string;
+        date: CreationDateClass;
+        caption: string;
+}
+
+export interface CreationDateClass {
+        seconds: number;
+        nanoseconds: number;
+}
+

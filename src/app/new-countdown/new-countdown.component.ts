@@ -116,7 +116,7 @@ export class NewCountdownComponent implements OnInit {
     const newCountdown: Countdown = {
       date: date,
       creationDate: new Date(),
-      id: this.countdownService.countdowns.length,
+      id: this.countdownService.countdowns.length +1,
       name: this.getValue('name'),
       caption: this.getValue('caption')
     }
