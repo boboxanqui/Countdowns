@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Countdown, CountdownFirestore } from '../interfaces';
-import { Firestore, collection, collectionData, query, setDoc, getDocs, doc, onSnapshot } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, setDoc, getDocs, doc, deleteDoc, updateDoc } from '@angular/fire/firestore';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 import { DocumentData, DocumentSnapshot } from 'rxfire/firestore/interfaces';
@@ -80,7 +80,7 @@ export class CountdownService {
         this.firestore, 
         'userUID', this.authService.userData.UID!, 
         'countdowns', newCountdown.id.toString()
-      )
+      );
       setDoc(docRef,newCountdown)
         .then(console.log)
         .catch(err => console.error(err))
@@ -89,6 +89,16 @@ export class CountdownService {
   }
 
   removeCountdown(countdown: Countdown) {
+    if( this.authService.userData.active){
+      const docRef = doc(
+        this.firestore, 
+        'userUID', this.authService.userData.UID!, 
+        'countdowns', countdown.id.toString()
+      );
+      deleteDoc(docRef)
+        .then(console.log)
+        .catch( err => console.error(err))
+    }
     this._countdowns.splice(
       this._countdowns.indexOf(countdown),
       1
@@ -96,6 +106,17 @@ export class CountdownService {
   }
 
   editCountdown(oldCountdown: Countdown, newCountdown: Countdown) {
+    if( this.authService.userData.active ){
+      const docRef = doc(
+        this.firestore,
+        'userUID', this.authService.userData.UID!, 
+        'countdowns', oldCountdown.id.toString()
+      )
+      updateDoc( docRef, {...newCountdown} )
+        .then(console.log)
+        .catch( err => console.error(err))
+    }
+
     this.countdowns.splice(
       this.countdowns.indexOf(oldCountdown),
       1,

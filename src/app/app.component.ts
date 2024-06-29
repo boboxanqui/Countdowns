@@ -116,4 +116,9 @@ export class AppComponent implements OnInit {
     })
   }
 
+
+  get userData(){
+    return this.authService.userData
+  }
+
 }

@@ -38,7 +38,6 @@ export class NavbarComponent implements OnInit {
       } else {
         this.authService.removeUserData()
       }
-      console.log(this.authService.userData);
     })
   }
 
