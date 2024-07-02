@@ -4,7 +4,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { CountdownService } from '../service/countdown.service';
 import { Countdown } from '../interfaces';
-import { canActivate } from "@angular/fire/auth-guard";
 
 @Component({
   selector: 'app-new-countdown',
