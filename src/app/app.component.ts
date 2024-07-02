@@ -75,7 +75,7 @@ export class AppComponent implements OnInit {
 
   // NEW COUNTDOWN
   openNewCountdownForm() {
-    if (!this.authService.currentUser() && this.countdowns.length > 1) {
+    if (!this.authService.currentUser() && this.countdowns.length >= 1) {
       this.loginToCreate = true;
     } else {
       this.dialog.open(NewCountdownComponent, {
@@ -115,7 +115,6 @@ export class AppComponent implements OnInit {
       // TODO: autoFocus: 'login-input'
     })
   }
-
 
   get userData(){
     return this.authService.userData
