@@ -782,11 +782,11 @@ body.light-theme .dark-theme-icon {
 
 .invalid-input-msg {
   position: absolute;
-  margin: 0 10px;
+  margin: 2px 10px 0;
   color: var(--warning);
   font-size: medium;
   svg{
-    vertical-align: sub;
+    vertical-align: top;
   }
 }
 

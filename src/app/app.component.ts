@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
             } else if ( resp.length === 0 && this.countdowns.length === 1 ){
               this.countdownService.addCountdown( this.countdowns[0] )
             }
-          })
+          });
       } else {
         if(this.unsubscribe){
           this.unsubscribe.unsubscribe()
@@ -58,11 +58,6 @@ export class AppComponent implements OnInit {
         // TODO: get countdowns from Local Storage
         this.countdownService.setCountdowns( [] )
       }
-
-      this.countdowns.forEach(countdown =>
-        countdown.timeLeft = countdown.date.getTime() - new Date().getTime()
-      )
-
       this.startTimer()
     })
   }
@@ -99,11 +94,15 @@ export class AppComponent implements OnInit {
   }
 
   startTimer() {
+    const now = new Date()
+    this.countdowns.forEach(countdown =>
+      countdown.timeLeft = countdown.date.getTime() - now.getTime()
+    )
     this.timer = setInterval(() => {
       const now = new Date()
       this.countdowns.forEach(countdown =>
         countdown.timeLeft = countdown.date.getTime() - now.getTime()
-      )
+      );
     }, 1000)
   }
 
