@@ -75,7 +75,7 @@ export class AppComponent implements OnInit {
 
   // NEW COUNTDOWN
   openNewCountdownForm() {
-    if (!this.authService.currentUser() && this.countdowns.length >= 1) {
+    if (!this.authService.currentUser() && this.countdowns.length > 1) {
       this.loginToCreate = true;
     } else {
       this.dialog.open(NewCountdownComponent, {

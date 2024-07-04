@@ -421,25 +421,12 @@ main {
     width: 40px;
     height: 40px;
     background-color: transparent;
+    opacity: .7;
     cursor: pointer;
     padding: 4px;
 
-    .close-icon {
-      margin: 0;
-      height: 4px;
-      width: 30px;
-      border-radius: 2px;
-      background-color: var(--muted);
-      transition: background-color 0.2s ease;
-      &:first-child {
-        transform: rotate(50deg) translateY(2px) translateX(3px);
-      }
-      &:last-child {
-        transform: rotate(-50deg);
-      }
-    }
-    &:hover .close-icon {
-      background-color: var(--text-color);
+    &:hover {
+      opacity: 1;
     }
   }
 }

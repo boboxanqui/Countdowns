@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-import { createCustomElement } from "@angular/elements";
 
 import { AppComponent } from './app.component';
 import { NewCountdownComponent } from './new-countdown/new-countdown.component';
@@ -34,7 +33,6 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from "@angular/fire/firestore";
-import { CalendarDate, CalendarMonth } from "cally";
 
 
 
@@ -77,24 +75,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     provideAuth(() => getAuth()),
     provideFirestore( () => getFirestore() )
   ],
-  entryComponents:[
-    CalendarDate,
-    CalendarMonth
-  ],
   exports:[
     TranslateModule
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-
-  constructor( private injector: Injector ){
-    const callyDate = createCustomElement(CalendarDate, {injector});
-    customElements.define('calendar-date', callyDate)
-    const callyMonth = createCustomElement(CalendarMonth, {injector});
-    customElements.define('calendar-month', callyMonth)
-  }
-
-
- }
+export class AppModule { }
