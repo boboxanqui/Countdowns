@@ -58,6 +58,7 @@ export class AppComponent implements OnInit {
         // TODO: get countdowns from Local Storage
         this.countdownService.setCountdowns( [] )
       }
+      clearInterval(this.timer)
       this.startTimer()
     })
   }
@@ -100,9 +101,10 @@ export class AppComponent implements OnInit {
     )
     this.timer = setInterval(() => {
       const now = new Date()
-      this.countdowns.forEach(countdown =>
-        countdown.timeLeft = countdown.date.getTime() - now.getTime()
-      );
+      this.countdowns.forEach(countdown =>{
+        countdown.timeLeft = countdown.date.getTime() - now.getTime();
+        console.log('timer');
+    });
     }, 1000)
   }
 
