@@ -34,29 +34,29 @@ export class AppComponent implements OnInit {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
         this.unsubscribe = this.countdownService.getCollection(user.uid).subscribe(
-          resp => { 
-            if( resp.length > 0 ){
+          resp => {
+            if (resp.length > 0) {
               this.countdownService.setCountdowns(
-                resp.map( countdown => {
+                resp.map(countdown => {
                   return {
                     caption: countdown.caption,
-                    creationDate: new Date( countdown.creationDate.seconds *1000 ),
-                    date: new Date( countdown.date.seconds *1000),
+                    creationDate: new Date(countdown.creationDate.seconds * 1000),
+                    date: new Date(countdown.date.seconds * 1000),
                     id: Number(countdown.id),
                     name: countdown.name
                   }
                 })
               )
-            } else if ( resp.length === 0 && this.countdowns.length === 1 ){
-              this.countdownService.addCountdown( this.countdowns[0] )
+            } else if (resp.length === 0 && this.countdowns.length === 1) {
+              this.countdownService.addCountdown(this.countdowns[0])
             }
           });
       } else {
-        if(this.unsubscribe){
+        if (this.unsubscribe) {
           this.unsubscribe.unsubscribe()
         }
         // TODO: get countdowns from Local Storage
-        this.countdownService.setCountdowns( [] )
+        this.countdownService.setCountdowns([])
       }
       clearInterval(this.timer)
       this.startTimer()
@@ -96,15 +96,24 @@ export class AppComponent implements OnInit {
 
   startTimer() {
     const now = new Date()
-    this.countdowns.forEach(countdown =>
-      countdown.timeLeft = countdown.date.getTime() - now.getTime()
-    )
+    this.countdowns
+      .filter(countdown => countdown.date < now)
+      .forEach(countdown => countdown.timeLeft = 0);
+    this.countdowns
+      .filter(countdown => countdown.date > now)
+      .forEach(countdown =>
+        countdown.timeLeft = countdown.date.getTime() - now.getTime()
+      )
     this.timer = setInterval(() => {
       const now = new Date()
-      this.countdowns.forEach(countdown =>{
-        countdown.timeLeft = countdown.date.getTime() - now.getTime();
-        console.log('timer');
-    });
+      this.countdowns
+      .filter(countdown => countdown.date < now)
+      .forEach(countdown => countdown.timeLeft = 0);
+      this.countdowns
+        .filter(countdown => countdown.date > now)
+        .forEach(countdown => {
+          countdown.timeLeft = countdown.date.getTime() - now.getTime();
+        });
     }, 1000)
   }
 
@@ -123,7 +132,7 @@ export class AppComponent implements OnInit {
     })
   }
 
-  get userData(){
+  get userData() {
     return this.authService.userData
   }
 
