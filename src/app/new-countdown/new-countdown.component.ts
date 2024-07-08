@@ -50,6 +50,7 @@ export class NewCountdownComponent implements OnInit {
 
   submitted: boolean = false;
   editMode: boolean = false;
+  yesterday = new Date();
 
   // Current Language 
   getLang(){

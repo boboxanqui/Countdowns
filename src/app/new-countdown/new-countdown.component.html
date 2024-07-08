@@ -91,9 +91,10 @@
                        placeholder="{{ 'NEW-COUNTDOWN.DATE-FORMAT' | translate | uppercase }}"
                        matInput
                        [matDatepicker]="picker"
-                       [matDatepickerFilter]="filterDates"
+                       [min]="yesterday"
                        formControlName="day">
-                <mat-datepicker #picker></mat-datepicker>
+                <mat-datepicker #picker
+                                startView="multi-year"></mat-datepicker>
             </div>
             <!-- TIME INPUT -->
             <div class="time-input"
