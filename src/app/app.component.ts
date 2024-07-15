@@ -107,8 +107,8 @@ export class AppComponent implements OnInit {
     this.timer = setInterval(() => {
       const now = new Date()
       this.countdowns
-      .filter(countdown => countdown.date < now)
-      .forEach(countdown => countdown.timeLeft = 0);
+        .filter(countdown => countdown.date < now)
+        .forEach(countdown => countdown.timeLeft = 0);
       this.countdowns
         .filter(countdown => countdown.date > now)
         .forEach(countdown => {

@@ -1,4 +1,4 @@
-<article class="countdown-card">
+<article class="countdown-card" [id]="'card-'.concat(countdown.id.toString())">
     <div class="card-title">
         <h3> {{ countdown.name }} </h3>
     </div>
@@ -16,7 +16,8 @@
         <div class="countdown-time">
             <p class="time-slot years"
                *ngIf="countdown.timeLeft! > yearInMiliseconds">
-                <span class="time-number"> {{ getTimeLeft(countdown.timeLeft)?.years }} </span>
+                <span class="time-number"
+                      [class.muted]="countdown.timeLeft === 0"> {{ getTimeLeft(countdown.timeLeft)?.years }} </span>
                 <small class="time-description"
                        *ngIf="getTimeLeft(countdown.timeLeft)?.years! === 1; else pluralYear">
                     {{ 'COUNTDOWN-CARD.YEAR' | translate }}
@@ -28,7 +29,8 @@
                 </ng-template>
             </p>
             <p class="time-slot days">
-                <span class="time-number"> {{ getTimeLeft(countdown.timeLeft)?.days }} </span>
+                <span class="time-number"
+                      [class.muted]="countdown.timeLeft === 0"> {{ getTimeLeft(countdown.timeLeft)?.days }} </span>
                 <small class="time-description"
                        *ngIf="getTimeLeft(countdown.timeLeft)?.days! === 1; else pluralDay">
                     {{ 'COUNTDOWN-CARD.DAY' | translate }}
@@ -41,7 +43,8 @@
                 <!-- <small class="time-description">D</small> -->
             </p>
             <p class="time-slot hours">
-                <span class="time-number"> {{ getTimeLeft(countdown.timeLeft)?.hours }} </span>
+                <span class="time-number"
+                      [class.muted]="countdown.timeLeft === 0"> {{ getTimeLeft(countdown.timeLeft)?.hours }} </span>
                 <small class="time-description"
                        *ngIf="getTimeLeft(countdown.timeLeft)?.hours! === 1; else pluralHour">
                     {{ 'COUNTDOWN-CARD.HOUR' | translate }}
@@ -54,38 +57,50 @@
                 <!-- <small class="time-description"> H </small> -->
             </p>
             <p class="time-slot minutes">
-                <span class="time-number"> {{ getTimeLeft(countdown.timeLeft)?.minutes }} </span>
+                <span class="time-number"
+                      [class.muted]="countdown.timeLeft === 0"> {{ getTimeLeft(countdown.timeLeft)?.minutes }} </span>
                 <small class="time-description"> {{ 'COUNTDOWN-CARD.MINUTES' | translate }} </small>
                 <!-- <small class="time-description"> Min </small> -->
             </p>
             <p class="time-slot seconds">
-                <span class="time-number"> {{ getTimeLeft(countdown.timeLeft)?.seconds }} </span>
+                <span class="time-number"
+                      [class.muted]="countdown.timeLeft === 0"> {{ getTimeLeft(countdown.timeLeft)?.seconds }} </span>
                 <small class="time-description"> {{ 'COUNTDOWN-CARD.SECONDS' | translate }} </small>
                 <!-- <small class="time-description"> Sec </small> -->
             </p>
         </div>
-        <div class="countdown-bottom">
-            <div class="caption"> <small> {{ countdown.caption }} </small></div>
-            <div class="actions">
-                <button class="btn-edit"
-                        (click)="editCountdown()">
-                    <img src="./../../../assets/icons/pencil-front-color-80x80.webp"
-                         width="40"
-                         alt="">
-                </button>
-                <button class="btn-zoom"
-                        (click)="openCountdownDialog()">
-                    <img src="./../../../assets/icons/zoom-front-color-80x80.webp"
-                         width="40"
-                         alt="">
-                </button>
-                <button class="btn-delete"
-                        (click)="deleteCountdown()">
-                    <img src="./../../../assets/icons/trash-can-front-red2-80x80.webp"
-                         width="40"
-                         alt="">
-                </button>
-            </div>
+        <div class="countdown-close text-center"
+             *ngIf="countdown.timeLeft === 0; else captionAndOptions">
+            <button class="btn-color text-center close-card-btn"
+                    (click)="confetti('card-'.concat(countdown.id.toString()))">
+                {{ 'COUNTDOWN-CARD.CLOSE-CARD' | translate }}
+            </button>
         </div>
+        <ng-template #captionAndOptions>
+            <div class="countdown-bottom">
+                <div class="caption"> <small> {{ countdown.caption }} </small></div>
+                <div class="actions">
+                    <button class="btn-edit"
+                            (click)="editCountdown()">
+                        <img src="./../../../assets/icons/pencil-front-color-80x80.webp"
+                             width="40"
+                             alt="">
+                    </button>
+                    <button class="btn-zoom"
+                            (click)="openCountdownDialog()">
+                        <img src="./../../../assets/icons/zoom-front-color-80x80.webp"
+                             width="40"
+                             alt="">
+                    </button>
+                    <button class="btn-delete"
+                            (click)="deleteCountdown()">
+                        <img src="./../../../assets/icons/trash-can-front-red2-80x80.webp"
+                             width="40"
+                             alt="">
+                    </button>
+                </div>
+            </div>
+        </ng-template>
     </div>
+    <!-- <canvas class="canvas-confetti" [ngClass]="'id-'.concat(countdown.id.toString())"></canvas> -->
 </article>

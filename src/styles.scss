@@ -348,6 +348,13 @@ main {
         gap: 10px;
       }
     }
+
+    .countdown-close{
+      margin-top: 10px;
+      .close-card-btn{
+        font-size: 1.3rem;
+      }
+    } 
   }
   .btn-edit,
   .btn-delete {
@@ -402,6 +409,14 @@ main {
       opacity: 0;
       transition: opacity 0.15s ease-out;
     }
+  }
+
+  .canvas-confetti{
+    background-color: #008000;
+    position: absolute;
+    overflow: visible;
+    width: 500px;
+    height: 500px;
   }
 }
 

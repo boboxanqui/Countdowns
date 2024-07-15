@@ -5,6 +5,7 @@ import { CountdownDialogComponent } from 'src/app/countdown-dialog/countdown-dia
 import { Countdown, TimeLeft } from 'src/app/interfaces';
 import { NewCountdownComponent } from 'src/app/new-countdown/new-countdown.component';
 import { CountdownService } from 'src/app/service/countdown.service';
+import * as confetti from 'canvas-confetti';
 
 @Component({
   selector: 'countdown-card',
@@ -78,6 +79,31 @@ export class CountdownCardComponent implements OnInit {
     this.countdownService.removeCountdown(
       this.countdown
     )
+  }
+
+  confetti(id:string){
+    const duration = 4000; // in milliseconds
+    const cardPosition = document.getElementById(id)?.getBoundingClientRect();
+    const position = {
+      y: (cardPosition?.top! + cardPosition?.height!/2 ) / window.innerHeight,
+      x: (cardPosition?.left! + cardPosition?.width!/2 ) / window.innerWidth
+    }
+    let myCanvas = document.querySelector('canvas');
+    let myConfetti = confetti.create(myCanvas!,{
+      resize: true,
+      useWorker: true
+    })
+
+    myConfetti({
+      particleCount: 120,
+      spread: 130,
+      startVelocity:30,
+      scalar:0.8,
+      origin: position,
+      disableForReducedMotion: true,
+    });
+
+   setTimeout(() => myConfetti.reset(), duration);
   }
 
 }

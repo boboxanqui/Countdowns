@@ -22,7 +22,8 @@
         "HOUR": "hora",
         "HOURS": "horas",
         "MINUTES": "min",
-        "SECONDS": "seg"
+        "SECONDS": "seg",
+        "CLOSE-CARD":"Cerrar"
     },
 
     "NEW-COUNTDOWN":{
