@@ -12,7 +12,10 @@ export interface Countdown {
         creationDate: Date,
         id: number,
         timeLeft?: number,
-        lastUpdate?: Date
+        lastUpdate?: Date,
+        closed: boolean,
+        removed: boolean,
+        removeDate?: Date 
 }
 
 export interface TimeLeft {
@@ -31,6 +34,8 @@ export interface UserData {
 }
 
 export interface CountdownFirestore {
+        removed: any;
+        closed: any;
         name: string;
         creationDate: CreationDateClass;
         id: string;

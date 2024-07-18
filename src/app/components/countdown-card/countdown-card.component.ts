@@ -5,7 +5,7 @@ import { CountdownDialogComponent } from 'src/app/countdown-dialog/countdown-dia
 import { Countdown, TimeLeft } from 'src/app/interfaces';
 import { NewCountdownComponent } from 'src/app/new-countdown/new-countdown.component';
 import { CountdownService } from 'src/app/service/countdown.service';
-import * as confetti from 'canvas-confetti';
+import { CanvasConfettiService } from 'src/app/service/canvas-confetti.service';
 
 @Component({
   selector: 'countdown-card',
@@ -17,7 +17,8 @@ export class CountdownCardComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private dialog: MatDialog,
-    private countdownService: CountdownService
+    private countdownService: CountdownService,
+    private confettiService: CanvasConfettiService
   ) { }
 
 
@@ -76,34 +77,32 @@ export class CountdownCardComponent implements OnInit {
   }
 
   deleteCountdown(){
-    this.countdownService.removeCountdown(
-      this.countdown
+    this.countdownService.editCountdown(
+      this.countdown,
+      {
+        ...this.countdown,
+        removed: true,
+        removeDate: new Date()
+      }
     )
   }
 
-  confetti(id:string){
+  closeCard( id: string ){
     const duration = 4000; // in milliseconds
-    const cardPosition = document.getElementById(id)?.getBoundingClientRect();
-    const position = {
-      y: (cardPosition?.top! + cardPosition?.height!/2 ) / window.innerHeight,
-      x: (cardPosition?.left! + cardPosition?.width!/2 ) / window.innerWidth
-    }
-    let myCanvas = document.querySelector('canvas');
-    let myConfetti = confetti.create(myCanvas!,{
-      resize: true,
-      useWorker: true
-    })
-
-    myConfetti({
-      particleCount: 120,
-      spread: 130,
-      startVelocity:30,
-      scalar:0.8,
-      origin: position,
-      disableForReducedMotion: true,
+    this.confettiService.confetti(id, duration);
+    setTimeout( () =>{
+      this.countdownService.editCountdown(this.countdown,
+        {
+          ...this.countdown,
+          closed: true
+        }
+      );
+      // this.countdown.closed = true;
+    }, duration)
+    console.log( {
+      ...this.countdown,
+      closed: true
     });
-
-   setTimeout(() => myConfetti.reset(), duration);
   }
 
 }

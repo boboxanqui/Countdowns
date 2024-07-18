@@ -118,7 +118,9 @@ export class NewCountdownComponent implements OnInit {
       creationDate: new Date(),
       id: this.countdownService.countdowns.length +1,
       name: this.getValue('name'),
-      caption: this.getValue('caption')
+      caption: this.getValue('caption'),
+      closed: false,
+      removed: false
     }
 
     this.countdownService.addCountdown(newCountdown)
@@ -140,7 +142,9 @@ export class NewCountdownComponent implements OnInit {
       id: this.countdown.id,
       name: this.getValue('name'),
       caption: this.getValue('caption'),
-      lastUpdate: new Date()
+      lastUpdate: new Date(),
+      closed: this.countdown.closed,
+      removed: this.countdown.removed
     }
 
     this.countdownService.editCountdown(this.countdown, newCountdown)

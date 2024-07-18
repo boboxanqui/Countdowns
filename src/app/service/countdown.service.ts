@@ -15,39 +15,9 @@ export class CountdownService {
     private authService: AuthService
   ) { }
 
-  // FIXME: Countdown de prueba
-
-  testCountdowns = [
-    {
-      creationDate: new Date(),
-      date: new Date(2025, 4, 7, 20, 10),
-      id: 1,
-      name: 'Contador de prueba',
-      caption: 'Descripción de prueba para el primer contador de prueba de la historia del mundo mundial.',
-      timeLeft: 0
-    },
-    {
-      creationDate: new Date(),
-      date: new Date(3016, 6, 22, 13, 13),
-      id: 2,
-      name: 'Contador de prueba 2',
-      caption: 'Descripción de prueba para el primer contador de prueba de la historia del mundo mundial.',
-      timeLeft: 0
-    },
-    {
-      creationDate: new Date(),
-      date: new Date(2024, 11, 25, 0, 0),
-      id: 1,
-      name: 'Contador de prueba XMAS',
-      caption: 'Descripción de prueba para el primer contador de prueba de la historia del mundo mundial.',
-      timeLeft: 0
-    },
-
-  ]
-
   private _countdowns: Countdown[] = []
 
-  get countdowns(): Countdown[] {
+  get countdowns(): Countdown[] { 
     return this._countdowns
   }
 
@@ -71,8 +41,6 @@ export class CountdownService {
     return collectionData( firestorRef, {idField: 'id'}) as Observable<any>
  
   }
-
-
 
   addCountdown(newCountdown: Countdown) {
     if (this.authService.userData.active) {

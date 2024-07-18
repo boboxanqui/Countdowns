@@ -43,13 +43,18 @@ export class AppComponent implements OnInit {
                     creationDate: new Date(countdown.creationDate.seconds * 1000),
                     date: new Date(countdown.date.seconds * 1000),
                     id: Number(countdown.id),
-                    name: countdown.name
+                    name: countdown.name,
+                    closed: countdown.closed,
+                    removed: countdown.removed,
+
                   }
                 })
               )
             } else if (resp.length === 0 && this.countdowns.length === 1) {
               this.countdownService.addCountdown(this.countdowns[0])
             }
+            //FIXME: delete log
+            console.table(resp);
           });
       } else {
         if (this.unsubscribe) {
@@ -91,7 +96,9 @@ export class AppComponent implements OnInit {
 
   // COUNTDOWNS LOGIC
   get countdowns() {
-    return this.countdownService.countdowns
+    return this.countdownService.countdowns.filter( countdown => 
+      !countdown.closed && !countdown.removed
+    )
   }
 
   startTimer() {
