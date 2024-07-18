@@ -7,6 +7,7 @@ import { AuthService } from './service/auth.service';
 import { Unsubscribable, every, filter, map, mergeMap, sampleTime, switchMap, tap } from 'rxjs';
 import { AuthDialogComponent } from './auth-dialog/auth-dialog.component';
 import { Auth, onAuthStateChanged } from '@angular/fire/auth';
+import { CanvasConfettiService } from './service/canvas-confetti.service';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit {
     private renderer: Renderer2,
     private dialog: MatDialog,
     private countdownService: CountdownService,
+    private confettiService: CanvasConfettiService,
     private authService: AuthService,
     private auth: Auth
   ) { }
@@ -108,9 +110,12 @@ export class AppComponent implements OnInit {
       .forEach(countdown => countdown.timeLeft = 0);
     this.countdowns
       .filter(countdown => countdown.date > now)
-      .forEach(countdown =>
-        countdown.timeLeft = countdown.date.getTime() - now.getTime()
-      )
+      .forEach(countdown =>{
+        countdown.timeLeft = countdown.date.getTime() - now.getTime();
+        if(countdown.timeLeft < 1000){
+          this.confettiService.confetti('card-'.concat(countdown.id.toString()),4000)
+        }
+      })
     this.timer = setInterval(() => {
       const now = new Date()
       this.countdowns
@@ -120,6 +125,9 @@ export class AppComponent implements OnInit {
         .filter(countdown => countdown.date > now)
         .forEach(countdown => {
           countdown.timeLeft = countdown.date.getTime() - now.getTime();
+          if(countdown.timeLeft < 1000){
+            this.confettiService.confetti('card-'.concat(countdown.id.toString()),4000)
+          }
         });
     }, 1000)
   }
