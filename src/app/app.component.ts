@@ -55,8 +55,6 @@ export class AppComponent implements OnInit {
             } else if (resp.length === 0 && this.countdowns.length === 1) {
               this.countdownService.addCountdown(this.countdowns[0])
             }
-            //FIXME: delete log
-            console.table(resp);
           });
       } else {
         if (this.unsubscribe) {
@@ -113,7 +111,7 @@ export class AppComponent implements OnInit {
       .forEach(countdown =>{
         countdown.timeLeft = countdown.date.getTime() - now.getTime();
         if(countdown.timeLeft < 1000){
-          this.confettiService.confetti('card-'.concat(countdown.id.toString()),4000)
+          this.launchConfetti(countdown.id.toString(),4000)
         }
       })
     this.timer = setInterval(() => {
@@ -126,10 +124,18 @@ export class AppComponent implements OnInit {
         .forEach(countdown => {
           countdown.timeLeft = countdown.date.getTime() - now.getTime();
           if(countdown.timeLeft < 1000){
-            this.confettiService.confetti('card-'.concat(countdown.id.toString()),4000)
+            this.launchConfetti(countdown.id.toString(),4000)
           }
         });
     }, 1000)
+  }
+
+  launchConfetti(id: string, duration: number){
+    if( this.dialog.getDialogById('countdown-dialog-id-'.concat(id)) ){
+      this.confettiService.sidesConfetti(3000)
+    } else {
+      this.confettiService.confetti('card-'.concat(id),duration)
+    }
   }
 
   // LOGIN GUARD

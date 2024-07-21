@@ -24,7 +24,9 @@ export class CountdownDialogComponent {
   centuryInMiliseconds: number = this.yearInMiliseconds * 100;
 
   getTimeLeft( miliseconds: number | undefined ): TimeLeft | undefined {
-    if(miliseconds){
+    if(miliseconds === 0){
+      return { years: 0, days: 0, hours: 0, minutes: 0, seconds: 0 }
+    } else if(miliseconds){
       let milisecondsLeft = miliseconds
       const years = Math.floor( milisecondsLeft / this.yearInMiliseconds );
       milisecondsLeft -= years * this.yearInMiliseconds;

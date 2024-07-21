@@ -81,7 +81,6 @@ export class CountdownService {
         'countdowns', oldCountdown.id.toString()
       )
       updateDoc( docRef, {...newCountdown} )
-        .then(console.log)
         .catch( err => console.error(err))
     }
 

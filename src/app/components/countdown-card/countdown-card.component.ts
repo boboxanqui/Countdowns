@@ -73,6 +73,7 @@ export class CountdownCardComponent implements OnInit {
       width: '800px',
       panelClass: 'dialog-panel',
       backdropClass: 'dialog-backdrop',
+      id:`countdown-dialog-id-${this.countdown.id}`
     })
   }
 
@@ -94,15 +95,12 @@ export class CountdownCardComponent implements OnInit {
       this.countdownService.editCountdown(this.countdown,
         {
           ...this.countdown,
-          closed: true
+          // closed: true
         }
       );
       // this.countdown.closed = true;
     }, duration)
-    console.log( {
-      ...this.countdown,
-      closed: true
-    });
+
   }
 
 }
