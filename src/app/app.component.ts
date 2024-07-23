@@ -37,20 +37,23 @@ export class AppComponent implements OnInit {
       if (user) {
         this.unsubscribe = this.countdownService.getCollection(user.uid).subscribe(
           resp => {
+            // FIXME: getColletction launching everytime a countdown is update
+            console.log('getCollection subscription');
             if (resp.length > 0) {
+              console.table(resp);
               this.countdownService.setCountdowns(
-                resp.map(countdown => {
-                  return {
-                    caption: countdown.caption,
-                    creationDate: new Date(countdown.creationDate.seconds * 1000),
-                    date: new Date(countdown.date.seconds * 1000),
-                    id: Number(countdown.id),
-                    name: countdown.name,
-                    closed: countdown.closed,
-                    removed: countdown.removed,
-
-                  }
-                })
+                resp.filter(countdown => !countdown.closed && !countdown.removed)
+                  .map(countdown => {
+                    return {
+                      name: countdown.name,
+                      closed: countdown.closed,
+                      removed: countdown.removed,
+                      creationDate: new Date(countdown.creationDate.seconds * 1000),
+                      date: new Date(countdown.date.seconds * 1000),
+                      id: Number(countdown.id),
+                      caption: countdown.caption
+                    }
+                  })
               )
             } else if (resp.length === 0 && this.countdowns.length === 1) {
               this.countdownService.addCountdown(this.countdowns[0])
@@ -96,7 +99,7 @@ export class AppComponent implements OnInit {
 
   // COUNTDOWNS LOGIC
   get countdowns() {
-    return this.countdownService.countdowns.filter( countdown => 
+    return this.countdownService.countdowns.filter(countdown =>
       !countdown.closed && !countdown.removed
     )
   }
@@ -108,10 +111,10 @@ export class AppComponent implements OnInit {
       .forEach(countdown => countdown.timeLeft = 0);
     this.countdowns
       .filter(countdown => countdown.date > now)
-      .forEach(countdown =>{
+      .forEach(countdown => {
         countdown.timeLeft = countdown.date.getTime() - now.getTime();
-        if(countdown.timeLeft < 1000){
-          this.launchConfetti(countdown.id.toString(),4000)
+        if (countdown.timeLeft < 1000) {
+          this.launchConfetti(countdown.id.toString(), 4000)
         }
       })
     this.timer = setInterval(() => {
@@ -123,18 +126,18 @@ export class AppComponent implements OnInit {
         .filter(countdown => countdown.date > now)
         .forEach(countdown => {
           countdown.timeLeft = countdown.date.getTime() - now.getTime();
-          if(countdown.timeLeft < 1000){
-            this.launchConfetti(countdown.id.toString(),4000)
+          if (countdown.timeLeft < 1000) {
+            this.launchConfetti(countdown.id.toString(), 4000)
           }
         });
     }, 1000)
   }
 
-  launchConfetti(id: string, duration: number){
-    if( this.dialog.getDialogById('countdown-dialog-id-'.concat(id)) ){
+  launchConfetti(id: string, duration: number) {
+    if (this.dialog.getDialogById('countdown-dialog-id-'.concat(id))) {
       this.confettiService.sidesConfetti(3000)
     } else {
-      this.confettiService.confetti('card-'.concat(id),duration)
+      this.confettiService.confetti('card-'.concat(id), duration)
     }
   }
 
