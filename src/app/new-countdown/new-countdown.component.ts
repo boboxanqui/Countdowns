@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { CountdownService } from '../service/countdown.service';
-import { Countdown } from '../interfaces';
+import { Countdown, COUNTDOWN_COLORS, COUNTDOWN_ICONS } from '../interfaces';
 
 @Component({
   selector: 'app-new-countdown',
@@ -31,8 +31,13 @@ export class NewCountdownComponent implements OnInit {
       this.setValue( 'hour', this.countdown.date.getHours() );
       this.setValue( 'minute', this.countdown.date.getMinutes() );
       this.setValue( 'caption', this.countdown.caption )
+      this.setValue( 'color', this.countdown.color ?? '' )
+      this.setValue( 'icon', this.countdown.icon ?? '' )
     }
   }
+
+  colors = COUNTDOWN_COLORS
+  icons = COUNTDOWN_ICONS
 
   countdownForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.maxLength(40)]],
@@ -45,7 +50,9 @@ export class NewCountdownComponent implements OnInit {
                 Validators.max(59), 
                 Validators.maxLength(2)]
               ],
-    caption: ['', Validators.maxLength(300)]
+    caption: ['', Validators.maxLength(300)],
+    color: [''],
+    icon: ['']
   })
 
   submitted: boolean = false;
@@ -78,6 +85,14 @@ export class NewCountdownComponent implements OnInit {
 
   getError( input: string ) {
     return this.countdownForm.controls[input].errors
+  }
+
+  selectColor( color: string ){
+    this.setValue( 'color', color )
+  }
+
+  selectIcon( icon: string ){
+    this.setValue( 'icon', icon )
   }
 
   increase( input: string ){
@@ -119,6 +134,8 @@ export class NewCountdownComponent implements OnInit {
       id: this.countdownService.countdowns.length +1,
       name: this.getValue('name'),
       caption: this.getValue('caption'),
+      color: this.getValue('color'),
+      icon: this.getValue('icon'),
       closed: false,
       removed: false
     }
@@ -142,6 +159,8 @@ export class NewCountdownComponent implements OnInit {
       id: this.countdown.id,
       name: this.getValue('name'),
       caption: this.getValue('caption'),
+      color: this.getValue('color'),
+      icon: this.getValue('icon'),
       lastUpdate: new Date(),
       closed: this.countdown.closed,
       removed: this.countdown.removed

@@ -205,6 +205,51 @@
                       maxlength="300"
                       formControlName="caption"></textarea>
         </div>
+        <!-- COLOR PICKER -->
+        <div class="color-picker">
+            <label class="label-input muted">{{ 'NEW-COUNTDOWN.COLOR' | translate | titlecase }}</label>
+            <div class="color-options">
+                <button type="button"
+                        class="color-option no-color"
+                        [class.selected]="getValue('color') === ''"
+                        [attr.aria-label]="'NEW-COUNTDOWN.NO-COLOR' | translate"
+                        [attr.title]="'NEW-COUNTDOWN.NO-COLOR' | translate"
+                        (click)="selectColor('')">
+                </button>
+                <button type="button"
+                        class="color-option"
+                        *ngFor="let color of colors.slice(1)"
+                        [class.selected]="getValue('color') === color"
+                        [ngClass]="'countdown-color-' + color"
+                        [attr.aria-label]="color"
+                        [attr.title]="color"
+                        (click)="selectColor(color)">
+                </button>
+            </div>
+        </div>
+        <!-- ICON PICKER -->
+        <div class="icon-picker">
+            <label class="label-input muted">{{ 'NEW-COUNTDOWN.ICON' | translate | titlecase }}</label>
+            <div class="icon-options">
+                <button type="button"
+                        class="icon-option"
+                        [class.selected]="getValue('icon') === ''"
+                        [attr.aria-label]="'NEW-COUNTDOWN.NO-ICON' | translate"
+                        [attr.title]="'NEW-COUNTDOWN.NO-ICON' | translate"
+                        (click)="selectIcon('')">
+                    <mat-icon>block</mat-icon>
+                </button>
+                <button type="button"
+                        class="icon-option"
+                        *ngFor="let icon of icons.slice(1)"
+                        [class.selected]="getValue('icon') === icon"
+                        [attr.aria-label]="icon"
+                        [attr.title]="icon"
+                        (click)="selectIcon(icon)">
+                    <mat-icon>{{ icon }}</mat-icon>
+                </button>
+            </div>
+        </div>
     </form>
 
 </mat-dialog-content>

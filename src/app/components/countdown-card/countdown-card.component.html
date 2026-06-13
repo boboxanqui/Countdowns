@@ -1,4 +1,5 @@
-<article class="countdown-card" [id]="'card-'.concat(countdown.id.toString())">
+<article class="countdown-card" [id]="'card-'.concat(countdown.id.toString())" [ngClass]="colorClass">
+    <mat-icon class="theme-icon" *ngIf="countdown.icon">{{ countdown.icon }}</mat-icon>
     <div class="card-title">
         <h3> {{ countdown.name }} </h3>
     </div>

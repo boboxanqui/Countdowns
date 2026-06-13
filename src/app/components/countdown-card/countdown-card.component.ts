@@ -58,6 +58,10 @@ export class CountdownCardComponent implements OnInit {
     return this.translate.currentLang
   }
 
+  get colorClass() {
+    return this.countdown.color ? 'countdown-color-' + this.countdown.color : ''
+  }
+
   editCountdown(){
     this.dialog.open( NewCountdownComponent, {
       data: this.countdown,

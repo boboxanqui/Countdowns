@@ -27,6 +27,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatIconModule} from '@angular/material/icon';
 
 import { DatePipe } from './pipe/date.pipe';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
@@ -70,6 +71,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatFormFieldModule,
     MatNativeDateModule,
     MatTooltipModule,
+    MatIconModule,
     // Firebase
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),

@@ -9,13 +9,15 @@ export interface Countdown {
         caption?: string,
         date: Date,
         style?: string,
+        color?: string,
+        icon?: string,
         creationDate: Date,
         id: number,
         timeLeft?: number,
         lastUpdate?: Date,
         closed: boolean,
         removed: boolean,
-        removeDate?: Date 
+        removeDate?: Date
 }
 
 export interface TimeLeft {
@@ -41,10 +43,22 @@ export interface CountdownFirestore {
         id: string;
         date: CreationDateClass;
         caption: string;
+        color?: string;
+        icon?: string;
 }
 
 export interface CreationDateClass {
         seconds: number;
         nanoseconds: number;
 }
+
+// Card color presets for countdowns. Each value maps to a `.countdown-color-{value}`
+// class (defined per-theme in styles.scss) so the swatch and card background
+// adapt to light/dark mode while keeping the existing text/accent contrast.
+// The first entry ('') represents "no color" (theme's default card background).
+export const COUNTDOWN_COLORS: string[] = ['', 'blue', 'green', 'rose', 'purple', 'amber']
+
+// Predefined Material Icons symbols used to mark a countdown's theme.
+// Shown subtly in a corner of the card. The first entry ('') means "no icon".
+export const COUNTDOWN_ICONS: string[] = ['', 'cake', 'flight', 'celebration', 'favorite', 'school']
 
