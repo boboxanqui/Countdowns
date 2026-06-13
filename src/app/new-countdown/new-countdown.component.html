@@ -49,6 +49,7 @@
                        [class.invalid]="submitted && !isValid('name')"
                        autocomplete="off"
                        formControlName="name"
+                       maxlength="40"
                        autofocus>
                 <div class="invalid-input-msg invalid-name-msg"
                      *ngIf="submitted && !isValid('name')">
@@ -201,6 +202,7 @@
                       type="text"
                       id="caption"
                       rows="3"
+                      maxlength="300"
                       formControlName="caption"></textarea>
         </div>
     </form>

@@ -35,18 +35,13 @@ export class CountdownService {
     newCountdowns.forEach(newCountdown => {
       let oldCountdown  = oldCountdownsNoTimeLeft.find( oldCountdown => newCountdown.id === oldCountdown.id );
       delete oldCountdown?.timeLeft;
-      console.log( JSON.stringify(newCountdown) == JSON.stringify(oldCountdown) );
       if ( JSON.stringify(newCountdown) != JSON.stringify(oldCountdown) ) {
-        console.log('Updated countdown');
-        console.table(newCountdown);
-        console.table(oldCountdown);
         this._countdowns.splice(
           this.countdowns.findIndex(oldCountdown => newCountdown.id === oldCountdown.id),
           1,
           newCountdown)
       }
     })
-    // this._countdowns = [...newCountdowns]
   }
 
   // GETTERS FIRESTORE

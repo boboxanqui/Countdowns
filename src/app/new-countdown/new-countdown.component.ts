@@ -35,7 +35,7 @@ export class NewCountdownComponent implements OnInit {
   }
 
   countdownForm: FormGroup = this.fb.group({
-    name: ['', Validators.required],
+    name: ['', [Validators.required, Validators.maxLength(40)]],
     day: [ , Validators.required],
     hour: [ 0, [Validators.min(0), 
               Validators.max(23), 
@@ -45,7 +45,7 @@ export class NewCountdownComponent implements OnInit {
                 Validators.max(59), 
                 Validators.maxLength(2)]
               ],
-    caption: ['']
+    caption: ['', Validators.maxLength(300)]
   })
 
   submitted: boolean = false;

@@ -37,10 +37,7 @@ export class AppComponent implements OnInit {
       if (user) {
         this.unsubscribe = this.countdownService.getCollection(user.uid).subscribe(
           resp => {
-            // FIXME: getColletction launching everytime a countdown is update
-            console.log('getCollection subscription');
             if (resp.length > 0) {
-              console.table(resp);
               this.countdownService.setCountdowns(
                 resp.filter(countdown => !countdown.closed && !countdown.removed)
                   .map(countdown => {

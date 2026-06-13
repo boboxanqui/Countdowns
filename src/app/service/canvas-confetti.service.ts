@@ -38,6 +38,13 @@ export class CanvasConfettiService {
     const endTime = Date.now() + duration;
 
     let myCanvas = document.querySelector('canvas');
+
+    // The CDK dialog overlay sits at z-index 1000, above the confetti
+    // canvas's default (100). Raise it so bursts render over the dialog.
+    if (myCanvas) {
+      myCanvas.style.zIndex = '1001';
+    }
+
     let myConfetti = confetti.create(myCanvas!, {
       resize: true,
       useWorker: true
@@ -56,9 +63,14 @@ export class CanvasConfettiService {
         spread: 55,
         origin: { x: 1 },
       });
+
+      if (Date.now() < endTime) {
+        requestAnimationFrame(frame);
+      }
     }
 
     frame();
+    setTimeout(() => myConfetti.reset(), duration);
   }
 
 
