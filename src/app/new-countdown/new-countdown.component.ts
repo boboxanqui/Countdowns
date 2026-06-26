@@ -144,6 +144,7 @@ export class NewCountdownComponent implements OnInit {
       color: this.getValue('color'),
       icon: this.getValue('icon'),
       recurrence: this.getValue('recurrence'),
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       closed: false,
       removed: false
     }
@@ -170,6 +171,7 @@ export class NewCountdownComponent implements OnInit {
       color: this.getValue('color'),
       icon: this.getValue('icon'),
       recurrence: this.getValue('recurrence'),
+      timezone: this.countdown.timezone ?? Intl.DateTimeFormat().resolvedOptions().timeZone,
       lastUpdate: new Date(),
       closed: this.countdown.closed,
       removed: this.countdown.removed

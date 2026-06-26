@@ -4,6 +4,18 @@ import { Firestore, collection, collectionData, setDoc, getDocs, doc, deleteDoc,
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 import { DocumentData, DocumentSnapshot } from 'rxfire/firestore/interfaces';
+import * as dayjs from 'dayjs';
+import * as utc from 'dayjs/plugin/utc';
+import * as timezone from 'dayjs/plugin/timezone';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+const RECURRENCE_UNIT: { [key: string]: dayjs.ManipulateType } = {
+  weekly: 'week',
+  monthly: 'month',
+  yearly: 'year'
+}
 
 @Injectable({
   providedIn: 'root'
@@ -91,6 +103,17 @@ export class CountdownService {
       this._countdowns.indexOf(countdown),
       1
     )
+  }
+
+  // Recalculates the next occurrence of an expired recurring countdown,
+  // preserving the original local hour/minute and letting the target
+  // timezone's DST offset be re-resolved for the new calendar date.
+  getNextRecurrenceDate(expiredDate: Date, tz: string, recurrence: string): Date {
+    const unit = RECURRENCE_UNIT[recurrence]
+    const localExpired = dayjs(expiredDate).tz(tz)
+    const nextLocal = localExpired.add(1, unit)
+    const wallClock = nextLocal.format('YYYY-MM-DD HH:mm:ss')
+    return dayjs.tz(wallClock, tz).toDate()
   }
 
   editCountdown(oldCountdown: Countdown, newCountdown: Countdown) {

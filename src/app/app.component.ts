@@ -8,6 +8,7 @@ import { Unsubscribable, every, filter, map, mergeMap, sampleTime, switchMap, ta
 import { AuthDialogComponent } from './auth-dialog/auth-dialog.component';
 import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 import { CanvasConfettiService } from './service/canvas-confetti.service';
+import { Countdown } from './interfaces';
 
 @Component({
   selector: 'app-root',
@@ -50,7 +51,9 @@ export class AppComponent implements OnInit {
                       id: Number(countdown.id),
                       caption: countdown.caption,
                       color: countdown.color,
-                      icon: countdown.icon
+                      icon: countdown.icon,
+                      recurrence: countdown.recurrence,
+                      timezone: countdown.timezone
                     }
                   })
               )
@@ -104,10 +107,15 @@ export class AppComponent implements OnInit {
   }
 
   startTimer() {
+    this.tick()
+    this.timer = setInterval(() => this.tick(), 1000)
+  }
+
+  private tick() {
     const now = new Date()
     this.countdowns
       .filter(countdown => countdown.date < now)
-      .forEach(countdown => countdown.timeLeft = 0);
+      .forEach(countdown => this.handleExpired(countdown));
     this.countdowns
       .filter(countdown => countdown.date > now)
       .forEach(countdown => {
@@ -116,20 +124,21 @@ export class AppComponent implements OnInit {
           this.launchConfetti(countdown.id.toString(), 4000)
         }
       })
-    this.timer = setInterval(() => {
-      const now = new Date()
-      this.countdowns
-        .filter(countdown => countdown.date < now)
-        .forEach(countdown => countdown.timeLeft = 0);
-      this.countdowns
-        .filter(countdown => countdown.date > now)
-        .forEach(countdown => {
-          countdown.timeLeft = countdown.date.getTime() - now.getTime();
-          if (countdown.timeLeft < 1000) {
-            this.launchConfetti(countdown.id.toString(), 4000)
-          }
-        });
-    }, 1000)
+  }
+
+  private handleExpired(countdown: Countdown) {
+    if (countdown.recurrence && countdown.recurrence !== 'none' && countdown.timezone) {
+      const nextDate = this.countdownService.getNextRecurrenceDate(
+        countdown.date, countdown.timezone, countdown.recurrence
+      )
+      this.countdownService.editCountdown(countdown, {
+        ...countdown,
+        date: nextDate,
+        lastUpdate: new Date()
+      })
+    } else {
+      countdown.timeLeft = 0
+    }
   }
 
   launchConfetti(id: string, duration: number) {

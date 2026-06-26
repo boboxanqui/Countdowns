@@ -12,6 +12,7 @@ export interface Countdown {
         color?: string,
         icon?: string,
         recurrence?: string,
+        timezone?: string,
         creationDate: Date,
         id: number,
         timeLeft?: number,
@@ -47,6 +48,7 @@ export interface CountdownFirestore {
         color?: string;
         icon?: string;
         recurrence?: string;
+        timezone?: string;
 }
 
 export interface CreationDateClass {
