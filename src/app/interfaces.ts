@@ -11,6 +11,7 @@ export interface Countdown {
         style?: string,
         color?: string,
         icon?: string,
+        recurrence?: string,
         creationDate: Date,
         id: number,
         timeLeft?: number,
@@ -45,6 +46,7 @@ export interface CountdownFirestore {
         caption: string;
         color?: string;
         icon?: string;
+        recurrence?: string;
 }
 
 export interface CreationDateClass {
@@ -61,4 +63,8 @@ export const COUNTDOWN_COLORS: string[] = ['', 'blue', 'green', 'rose', 'purple'
 // Predefined Material Icons symbols used to mark a countdown's theme.
 // Shown subtly in a corner of the card. The first entry ('') means "no icon".
 export const COUNTDOWN_ICONS: string[] = ['', 'cake', 'flight', 'celebration', 'favorite', 'school']
+
+// Recurrence options for a countdown. The first entry ('none') means the
+// countdown does not repeat once it reaches zero.
+export const COUNTDOWN_RECURRENCES: string[] = ['none', 'weekly', 'monthly', 'yearly']
 

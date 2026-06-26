@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { CountdownService } from '../service/countdown.service';
-import { Countdown, COUNTDOWN_COLORS, COUNTDOWN_ICONS } from '../interfaces';
+import { Countdown, COUNTDOWN_COLORS, COUNTDOWN_ICONS, COUNTDOWN_RECURRENCES } from '../interfaces';
 
 @Component({
   selector: 'app-new-countdown',
@@ -33,11 +33,13 @@ export class NewCountdownComponent implements OnInit {
       this.setValue( 'caption', this.countdown.caption )
       this.setValue( 'color', this.countdown.color ?? '' )
       this.setValue( 'icon', this.countdown.icon ?? '' )
+      this.setValue( 'recurrence', this.countdown.recurrence ?? 'none' )
     }
   }
 
   colors = COUNTDOWN_COLORS
   icons = COUNTDOWN_ICONS
+  recurrences = COUNTDOWN_RECURRENCES
 
   countdownForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.maxLength(40)]],
@@ -52,7 +54,8 @@ export class NewCountdownComponent implements OnInit {
               ],
     caption: ['', Validators.maxLength(300)],
     color: [''],
-    icon: ['']
+    icon: [''],
+    recurrence: ['none']
   })
 
   submitted: boolean = false;
@@ -93,6 +96,10 @@ export class NewCountdownComponent implements OnInit {
 
   selectIcon( icon: string ){
     this.setValue( 'icon', icon )
+  }
+
+  selectRecurrence( recurrence: string ){
+    this.setValue( 'recurrence', recurrence )
   }
 
   increase( input: string ){
@@ -136,6 +143,7 @@ export class NewCountdownComponent implements OnInit {
       caption: this.getValue('caption'),
       color: this.getValue('color'),
       icon: this.getValue('icon'),
+      recurrence: this.getValue('recurrence'),
       closed: false,
       removed: false
     }
@@ -161,6 +169,7 @@ export class NewCountdownComponent implements OnInit {
       caption: this.getValue('caption'),
       color: this.getValue('color'),
       icon: this.getValue('icon'),
+      recurrence: this.getValue('recurrence'),
       lastUpdate: new Date(),
       closed: this.countdown.closed,
       removed: this.countdown.removed

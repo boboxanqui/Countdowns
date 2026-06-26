@@ -209,15 +209,16 @@
     }
 
     &.no-color {
-      background-color: var(--bg-color-neutral);
-      background-image: linear-gradient(45deg,
-          transparent 0%,
-          transparent calc(50% - 2px),
-          #e53935 calc(50% - 2px),
-          #e53935 calc(50% + 2px),
-          transparent calc(50% + 2px),
-          transparent 100%);
-      border-color: #e53935;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      color: var(--text-color);
+
+      &:hover {
+        background-color: var(--bg-color-neutral);
+        filter: none;
+      }
     }
   }
 }
@@ -253,6 +254,44 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    &:hover {
+      background-color: var(--bg-color-neutral);
+    }
+
+    &.selected {
+      box-shadow: 0 0 0 2px var(--bg-color), 0 0 0 4px var(--text-color);
+    }
+  }
+}
+
+.recurrence-picker {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 10px;
+
+  .label-input {
+    text-align: center;
+  }
+
+  .recurrence-options {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 6px;
+  }
+
+  .recurrence-option {
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 2px solid var(--bg-color-neutral);
+    background-color: transparent;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: 0.15s ease;
 
     &:hover {
       background-color: var(--bg-color-neutral);

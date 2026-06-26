@@ -215,6 +215,7 @@
                         [attr.aria-label]="'NEW-COUNTDOWN.NO-COLOR' | translate"
                         [attr.title]="'NEW-COUNTDOWN.NO-COLOR' | translate"
                         (click)="selectColor('')">
+                    <mat-icon>block</mat-icon>
                 </button>
                 <button type="button"
                         class="color-option"
@@ -247,6 +248,19 @@
                         [attr.title]="icon"
                         (click)="selectIcon(icon)">
                     <mat-icon>{{ icon }}</mat-icon>
+                </button>
+            </div>
+        </div>
+        <!-- RECURRENCE PICKER -->
+        <div class="recurrence-picker">
+            <label class="label-input muted">{{ 'NEW-COUNTDOWN.RECURRENCE' | translate | titlecase }}</label>
+            <div class="recurrence-options">
+                <button type="button"
+                        class="recurrence-option"
+                        *ngFor="let recurrence of recurrences"
+                        [class.selected]="getValue('recurrence') === recurrence"
+                        (click)="selectRecurrence(recurrence)">
+                    {{ 'NEW-COUNTDOWN.RECURRENCE-' + recurrence.toUpperCase() | translate | titlecase }}
                 </button>
             </div>
         </div>
