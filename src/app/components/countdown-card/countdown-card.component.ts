@@ -99,10 +99,9 @@ export class CountdownCardComponent implements OnInit {
       this.countdownService.editCountdown(this.countdown,
         {
           ...this.countdown,
-          // closed: true
+          closed: true
         }
       );
-      // this.countdown.closed = true;
     }, duration)
 
   }
