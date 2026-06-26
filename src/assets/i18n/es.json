@@ -40,6 +40,7 @@
         "NO-COLOR":"sin color",
         "ICON":"icono",
         "NO-ICON":"sin icono",
+        "ADVANCED-OPTIONS":"opciones avanzadas",
         "RECURRENCE":"recurrencia",
         "RECURRENCE-NONE":"ninguna",
         "RECURRENCE-WEEKLY":"semanal",

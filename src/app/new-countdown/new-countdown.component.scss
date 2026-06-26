@@ -265,6 +265,21 @@
   }
 }
 
+.advanced-options {
+  margin-top: 30px;
+  background-color: var(--bg-color-neutral);
+  box-shadow: none !important;
+
+  .recurrence-picker,
+  .caption {
+    margin-top: 20px;
+  }
+
+  .recurrence-picker:first-child {
+    margin-top: 0;
+  }
+}
+
 .recurrence-picker {
   margin-top: 30px;
   display: flex;

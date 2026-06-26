@@ -28,6 +28,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatIconModule} from '@angular/material/icon';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import { DatePipe } from './pipe/date.pipe';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
@@ -72,6 +73,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatNativeDateModule,
     MatTooltipModule,
     MatIconModule,
+    MatExpansionModule,
     // Firebase
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),

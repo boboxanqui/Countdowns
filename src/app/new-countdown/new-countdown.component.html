@@ -192,19 +192,6 @@
                 {{ 'NEW-COUNTDOWN.INVALID-DATE' | translate }}
             </div>
         </div>
-        <!-- CAPTION INPUT -->
-        <div class="caption">
-            <label for="caption">
-                {{ "NEW-COUNTDOWN.CAPTION" | translate | titlecase }}
-                <span class="muted">({{ "NEW-COUNTDOWN.OPTIONAL" | translate }})</span>
-            </label>
-            <textarea class="input"
-                      type="text"
-                      id="caption"
-                      rows="3"
-                      maxlength="300"
-                      formControlName="caption"></textarea>
-        </div>
         <!-- COLOR PICKER -->
         <div class="color-picker">
             <label class="label-input muted">{{ 'NEW-COUNTDOWN.COLOR' | translate | titlecase }}</label>
@@ -251,19 +238,41 @@
                 </button>
             </div>
         </div>
-        <!-- RECURRENCE PICKER -->
-        <div class="recurrence-picker">
-            <label class="label-input muted">{{ 'NEW-COUNTDOWN.RECURRENCE' | translate | titlecase }}</label>
-            <div class="recurrence-options">
-                <button type="button"
-                        class="recurrence-option"
-                        *ngFor="let recurrence of recurrences"
-                        [class.selected]="getValue('recurrence') === recurrence"
-                        (click)="selectRecurrence(recurrence)">
-                    {{ 'NEW-COUNTDOWN.RECURRENCE-' + recurrence.toUpperCase() | translate | titlecase }}
-                </button>
+        <!-- ADVANCED OPTIONS -->
+        <mat-expansion-panel class="advanced-options">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{ 'NEW-COUNTDOWN.ADVANCED-OPTIONS' | translate | titlecase }}
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <!-- RECURRENCE PICKER -->
+            <div class="recurrence-picker">
+                <label class="label-input muted">{{ 'NEW-COUNTDOWN.RECURRENCE' | translate | titlecase }}</label>
+                <div class="recurrence-options">
+                    <button type="button"
+                            class="recurrence-option"
+                            *ngFor="let recurrence of recurrences"
+                            [class.selected]="getValue('recurrence') === recurrence"
+                            (click)="selectRecurrence(recurrence)">
+                        {{ 'NEW-COUNTDOWN.RECURRENCE-' + recurrence.toUpperCase() | translate | titlecase }}
+                    </button>
+                </div>
             </div>
-        </div>
+            <!-- CAPTION INPUT -->
+            <div class="caption">
+                <label for="caption">
+                    {{ "NEW-COUNTDOWN.CAPTION" | translate | titlecase }}
+                    <span class="muted">({{ "NEW-COUNTDOWN.OPTIONAL" | translate }})</span>
+                </label>
+                <textarea class="input"
+                          type="text"
+                          id="caption"
+                          rows="3"
+                          maxlength="300"
+                          formControlName="caption"></textarea>
+            </div>
+        </mat-expansion-panel>
     </form>
 
 </mat-dialog-content>
