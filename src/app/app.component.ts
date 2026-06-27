@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
                       removed: countdown.removed,
                       creationDate: new Date(countdown.creationDate.seconds * 1000),
                       date: new Date(countdown.date.seconds * 1000),
-                      id: Number(countdown.id),
+                      id: countdown.id,
                       caption: countdown.caption,
                       color: countdown.color,
                       icon: countdown.icon,

@@ -14,7 +14,7 @@ export interface Countdown {
         recurrence?: string,
         timezone?: string,
         creationDate: Date,
-        id: number,
+        id: string,
         timeLeft?: number,
         lastUpdate?: Date,
         closed: boolean,

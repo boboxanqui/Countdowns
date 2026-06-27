@@ -88,25 +88,35 @@ export class CountdownService {
   // Firestore rejects fields with an `undefined` value (it throws synchronously,
   // before any promise is created), so optional Countdown fields must be
   // stripped out rather than sent as `undefined`.
+  // Local-only id for anonymous users (no Firestore doc to derive an id from).
+  private generateLocalId(): string {
+    return `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 10)}`
+  }
+
   private withoutUndefinedFields(countdown: Countdown): Partial<Countdown> {
     return Object.fromEntries(
       Object.entries(countdown).filter(([, value]) => value !== undefined)
     ) as Partial<Countdown>
   }
 
-  addCountdown(newCountdown: Countdown) {
+  addCountdown(newCountdown: Omit<Countdown, 'id'>) {
+    let countdown: Countdown
     if (this.authService.userData.active) {
-      const docRef = doc(
+      const collectionRef = collection(
         this.firestore,
         'userUID', this.authService.userData.UID!,
-        'countdowns', newCountdown.id.toString()
+        'countdowns'
       );
-      setDoc(docRef, this.withoutUndefinedFields(newCountdown))
+      const docRef = doc(collectionRef)
+      countdown = { ...newCountdown, id: docRef.id }
+      setDoc(docRef, this.withoutUndefinedFields(countdown))
         .then(console.log)
         .catch(err => console.error(err))
+    } else {
+      countdown = { ...newCountdown, id: this.generateLocalId() }
     }
-    this.syncTimeLeft(newCountdown)
-    this._countdowns.push(newCountdown)
+    this.syncTimeLeft(countdown)
+    this._countdowns.push(countdown)
   }
 
   //NOTE: function not in usage

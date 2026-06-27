@@ -135,10 +135,9 @@ export class NewCountdownComponent implements OnInit {
     let date:Date = new Date( this.getValue('day') )
     date.setHours( this.getValue('hour'), this.getValue('minute'))
 
-    const newCountdown: Countdown = {
+    const newCountdown: Omit<Countdown, 'id'> = {
       date: date,
       creationDate: new Date(),
-      id: Date.now(),
       name: this.getValue('name'),
       caption: this.getValue('caption'),
       color: this.getValue('color'),
