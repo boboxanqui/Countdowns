@@ -33,8 +33,15 @@ export class CountdownService {
     return this._countdowns
   }
 
+  // Computes timeLeft synchronously so a countdown never renders blank while
+  // waiting for AppComponent's 1-second tick() to catch up.
+  private syncTimeLeft(countdown: Countdown): void {
+    countdown.timeLeft = Math.max(countdown.date.getTime() - Date.now(), 0)
+  }
+
   setCountdowns(newCountdowns: Countdown[]) {
     if (this.countdowns.length === 0) {
+      newCountdowns.forEach(countdown => this.syncTimeLeft(countdown))
       this._countdowns = [...newCountdowns]
       return
     }
@@ -48,12 +55,17 @@ export class CountdownService {
       let oldCountdown  = oldCountdownsNoTimeLeft.find( oldCountdown => newCountdown.id === oldCountdown.id );
       delete oldCountdown?.timeLeft;
       if ( JSON.stringify(newCountdown) != JSON.stringify(oldCountdown) ) {
+        this.syncTimeLeft(newCountdown)
         this._countdowns.splice(
           this.countdowns.findIndex(oldCountdown => newCountdown.id === oldCountdown.id),
           1,
           newCountdown)
       }
     })
+    // Drop local countdowns no longer present in the latest snapshot
+    // (e.g. on logout, when newCountdowns is empty).
+    const newIds = newCountdowns.map(countdown => countdown.id)
+    this._countdowns = this._countdowns.filter(countdown => newIds.includes(countdown.id))
   }
 
   // GETTERS FIRESTORE
@@ -93,6 +105,7 @@ export class CountdownService {
         .then(console.log)
         .catch(err => console.error(err))
     }
+    this.syncTimeLeft(newCountdown)
     this._countdowns.push(newCountdown)
   }
 
@@ -136,6 +149,7 @@ export class CountdownService {
         .catch( err => console.error(err))
     }
 
+    this.syncTimeLeft(newCountdown)
     this.countdowns.splice(
       this.countdowns.indexOf(oldCountdown),
       1,
