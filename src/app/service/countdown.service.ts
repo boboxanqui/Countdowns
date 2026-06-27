@@ -73,6 +73,15 @@ export class CountdownService {
 
   }
 
+  // Firestore rejects fields with an `undefined` value (it throws synchronously,
+  // before any promise is created), so optional Countdown fields must be
+  // stripped out rather than sent as `undefined`.
+  private withoutUndefinedFields(countdown: Countdown): Partial<Countdown> {
+    return Object.fromEntries(
+      Object.entries(countdown).filter(([, value]) => value !== undefined)
+    ) as Partial<Countdown>
+  }
+
   addCountdown(newCountdown: Countdown) {
     if (this.authService.userData.active) {
       const docRef = doc(
@@ -80,7 +89,7 @@ export class CountdownService {
         'userUID', this.authService.userData.UID!,
         'countdowns', newCountdown.id.toString()
       );
-      setDoc(docRef, newCountdown)
+      setDoc(docRef, this.withoutUndefinedFields(newCountdown))
         .then(console.log)
         .catch(err => console.error(err))
     }
@@ -123,7 +132,7 @@ export class CountdownService {
         'userUID', this.authService.userData.UID!,
         'countdowns', oldCountdown.id.toString()
       )
-      updateDoc( docRef, {...newCountdown} )
+      updateDoc( docRef, this.withoutUndefinedFields(newCountdown) )
         .catch( err => console.error(err))
     }
 

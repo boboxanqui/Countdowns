@@ -23,7 +23,8 @@
         "HOURS": "horas",
         "MINUTES": "min",
         "SECONDS": "seg",
-        "CLOSE-CARD":"Cerrar"
+        "CLOSE-CARD":"Cerrar",
+        "RESTART-CARD":"Reiniciar"
     },
 
     "NEW-COUNTDOWN":{

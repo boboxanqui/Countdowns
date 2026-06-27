@@ -62,6 +62,10 @@ export class CountdownCardComponent implements OnInit {
     return this.countdown.color ? 'countdown-color-' + this.countdown.color : ''
   }
 
+  get isRecurring(): boolean {
+    return !!this.countdown.recurrence && this.countdown.recurrence !== 'none'
+  }
+
   editCountdown(){
     this.dialog.open( NewCountdownComponent, {
       data: this.countdown,
@@ -96,12 +100,25 @@ export class CountdownCardComponent implements OnInit {
     const duration = 4000; // in milliseconds
     this.confettiService.confetti(id, duration);
     setTimeout( () =>{
-      this.countdownService.editCountdown(this.countdown,
-        {
-          ...this.countdown,
-          closed: true
-        }
-      );
+      if ( this.isRecurring && this.countdown.timezone ) {
+        const nextDate = this.countdownService.getNextRecurrenceDate(
+          this.countdown.date, this.countdown.timezone, this.countdown.recurrence!
+        )
+        this.countdownService.editCountdown(this.countdown,
+          {
+            ...this.countdown,
+            date: nextDate,
+            lastUpdate: new Date()
+          }
+        );
+      } else {
+        this.countdownService.editCountdown(this.countdown,
+          {
+            ...this.countdown,
+            closed: true
+          }
+        );
+      }
     }, duration)
 
   }

@@ -74,7 +74,7 @@
              *ngIf="countdown.timeLeft === 0; else captionAndOptions">
             <button class="btn-color text-center close-card-btn"
                     (click)="closeCard('card-'.concat(countdown.id.toString()))">
-                {{ 'COUNTDOWN-CARD.CLOSE-CARD' | translate }}
+                {{ (isRecurring ? 'COUNTDOWN-CARD.RESTART-CARD' : 'COUNTDOWN-CARD.CLOSE-CARD') | translate }}
             </button>
         </div>
         <ng-template #captionAndOptions>
