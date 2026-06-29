@@ -79,7 +79,7 @@ export class CountdownCardComponent implements OnInit {
     this.dialog.open( CountdownDialogComponent, {
       data: this.countdown,
       width: '800px',
-      panelClass: 'dialog-panel',
+      panelClass: ['dialog-panel', 'countdown-dialog-panel'],
       backdropClass: 'dialog-backdrop',
       id:`countdown-dialog-id-${this.countdown.id}`
     })

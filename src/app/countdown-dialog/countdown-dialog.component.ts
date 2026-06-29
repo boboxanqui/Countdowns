@@ -47,4 +47,8 @@ export class CountdownDialogComponent {
     return this.translate.currentLang
   }
 
+  get colorClass() {
+    return this.countdown.color ? 'countdown-color-' + this.countdown.color : ''
+  }
+
 }

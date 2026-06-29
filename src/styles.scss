@@ -391,26 +391,15 @@ main {
     }
   }
 
-  .btn-zoom {
-    opacity: 0;
-    filter: saturate(0) brightness(3);
-    cursor: pointer;
-    transition: 0.15s ease;
-
-    &:hover {
-      filter: saturate(0.8) brightness(2) hue-rotate(240deg);
-    }
-  }
-
   &:hover {
     scale: 1.02;
+    cursor: pointer;
 
     .card-title {
       color: var(--accent);
     }
 
     .btn-edit,
-    .btn-zoom,
     .btn-delete {
       opacity: 1;
       transition: opacity 0.2s ease-out;
@@ -488,6 +477,22 @@ main {
   font-size: 1.5rem;
 }
 
+// Removes the mat-dialog-container's default padding/scroll so the
+// .countdown-dialog's custom color/background fills the panel edge-to-edge.
+.countdown-dialog-panel {
+  .mat-dialog-container {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .mat-dialog-content {
+    margin: 0;
+    padding: 0;
+    max-height: none;
+    overflow: hidden;
+  }
+}
+
 .dialog-backdrop {
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(3px) saturate(0.7);
@@ -510,8 +515,22 @@ body.light-theme .dark-theme-icon {
   padding: 15px 20px;
   border-radius: 20px;
   min-height: 200px;
+  height: 100%;
+  box-sizing: border-box;
   z-index: 0;
+  position: relative;
   transition: 0.15s ease-out;
+
+  .theme-icon {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 1.2rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    color: var(--muted);
+    opacity: 0.5;
+  }
 
   .dialog-title {
     font-size: 1.8rem;
