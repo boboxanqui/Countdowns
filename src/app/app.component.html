@@ -1,6 +1,6 @@
 <app-navbar (darkModeOn)="switchTheme($event)"></app-navbar>
 
-<main *ngIf="authReady">
+<main *ngIf="authReady" [class.countdowns-active]="countdowns.length > 0">
     <!-- COUNTDOWN RENDER -->
     <div class="countdowns-wrapper"
          *ngIf="countdowns.length > 0; else noCountdowns">
