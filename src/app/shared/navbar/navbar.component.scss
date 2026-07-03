@@ -194,15 +194,28 @@ nav {
     visibility: visible;
   }
 
+  // Username label inside the account menu — only rendered/visible on narrow
+  // screens, where the trigger collapses to just the avatar and drops its
+  // inline name text. Shown first, above logout.
+  .dropdown-username {
+    display: none;
+    text-align: center;
+    font-size: 0.9rem;
+    padding: 4px 4px 10px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid var(--box-shadow);
+  }
+
   // Language flags inside the account menu — only rendered/visible on narrow
   // screens (styled like the color/icon pickers in the new-countdown dialog).
+  // Placed last, below logout.
   .menu-lang-options {
     display: none;
     justify-content: center;
     gap: 12px;
-    padding: 4px 4px 14px;
-    margin-bottom: 6px;
-    border-bottom: 1px solid var(--box-shadow);
+    padding: 14px 4px 4px;
+    margin-top: 6px;
+    border-top: 1px solid var(--box-shadow);
   }
 
   .menu-lang-option {
@@ -269,6 +282,13 @@ nav {
     gap: 5px;
   }
 
+  .user-options {
+    li{
+      padding: 5px;
+      padding-right: 0px;
+    }    
+  }
+
   .lang-option {
     padding-right: 20px;
   }
@@ -312,9 +332,25 @@ nav {
     display: none;
   }
 
-  // Reveal the language flags that live inside the account dropdown.
+  // Only the theme toggle and the avatar remain — keep them on one row,
+  // vertically centered and close together.
+  .settings.logged-in {
+    align-items: center;
+    gap: 15px;
+  }
+
+  .theme-selector {
+    gap: 15px;
+  }
+
+  // Reveal the username label and language flags that live inside the
+  // account dropdown.
+  .user-account .dropdown-username,
   .user-account .menu-lang-options {
     display: flex;
+  }
+  .user-account .dropdown-username {
+    display: block;
   }
 
   // Account trigger collapses to just the avatar, sized to match the 40px
@@ -333,6 +369,13 @@ nav {
         height: 40px;
       }
     }
+
+    .user-options {
+    li{
+      padding: 5px;
+      padding-right: 0px;
+    }    
+  }
 
     .user-name-text,
     .lang-arrow-menu {

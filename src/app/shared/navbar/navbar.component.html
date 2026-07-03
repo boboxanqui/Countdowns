@@ -69,8 +69,7 @@
                         </svg>
 
                     <span class="user-name-text">
-                        {{ userData.displayName?.slice(0, userData.displayName?.indexOf(' ')) ||
-                         userData.email?.slice(0, userData.email?.indexOf('@')) }}
+                        {{ accountLabel }}
                     </span>
                 </span>
                 <img src="../../../assets/icons/arrow-clay-80x80.webp"
@@ -87,20 +86,9 @@
             <div class="user-options"
                  [class.show-user-options]="userOptionsOpen"
                  (blur)="userOptionsOpen = false">
-                <!-- LANGUAGE OPTIONS (only shown here on narrow screens, where the
-                     standalone language dropdown is hidden) -->
-                <div class="menu-lang-options">
-                    <button type="button"
-                            class="menu-lang-option"
-                            *ngFor="let lenguage of langList"
-                            [class.selected]="lenguage.lang === currentLang"
-                            [attr.aria-label]="lenguage.name"
-                            [attr.title]="lenguage.name"
-                            (click)="changeLang(lenguage.lang)">
-                        <img [src]="lenguage.flag"
-                             class="flag-lang">
-                    </button>
-                </div>
+                <!-- Shown only on narrow screens, where the account trigger
+                     collapses to just the avatar and loses its name label. -->
+                <div class="dropdown-username muted"> {{ accountLabel }} </div>
                 <ul>
                     <li class="logout" (click)="logout()">
                         <svg width="24"
@@ -127,6 +115,20 @@
                         <span> {{ 'NAVBAR.LOGOUT' | translate }} </span>
                     </li>
                 </ul>
+                <!-- LANGUAGE OPTIONS (only shown here on narrow screens, where the
+                     standalone language dropdown is hidden) -->
+                <div class="menu-lang-options">
+                    <button type="button"
+                            class="menu-lang-option"
+                            *ngFor="let lenguage of langList"
+                            [class.selected]="lenguage.lang === currentLang"
+                            [attr.aria-label]="lenguage.name"
+                            [attr.title]="lenguage.name"
+                            (click)="changeLang(lenguage.lang)">
+                        <img [src]="lenguage.flag"
+                             class="flag-lang">
+                    </button>
+                </div>
             </div>
         </div>
 

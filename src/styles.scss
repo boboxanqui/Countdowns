@@ -496,6 +496,11 @@ main {
     .card-title {
       font-size: 1.1rem;
     }
+
+    .btn-edit img,
+    .btn-delete img {
+      width: 32px;
+    }
   }
 
   // Down to the requested 300px floor: shrink further so the time row
@@ -512,6 +517,11 @@ main {
 
     .card-title {
       font-size: 0.95rem;
+    }
+
+    .btn-edit img,
+    .btn-delete img {
+      width: 26px;
     }
   }
 }
@@ -709,6 +719,9 @@ body.light-theme .dark-theme-icon {
         line-height: 4rem;
         min-width: 85px;
       }
+      .countdown-caption-dialog {
+        font-size: 1.05rem;
+      }
     }
 
     @media (max-width: 800px) {
@@ -721,12 +734,16 @@ body.light-theme .dark-theme-icon {
         line-height: 3rem;
         min-width: 65px;
       }
+      .countdown-caption-dialog {
+        font-size: 0.95rem;
+      }
     }
 
     @media (max-width: 600px) {
       margin-top: 15px;
       .countdown-caption-dialog {
         margin-top: 20px;
+        font-size: 0.85rem;
       }
       .countdown-time {
         flex-wrap: wrap;
@@ -777,12 +794,15 @@ body.light-theme .dark-theme-icon {
       .time-description {
         font-size: 0.65rem;
       }
+      .countdown-caption-dialog {
+        font-size: 0.75rem;
+      }
     }
   }
 
   @media (max-width: 1000px) {
     .dialog-title h2 {
-      font-size: 1.6rem;
+      font-size: 1.7rem;
     }
     .final-date {
       font-size: 1.3rem;
@@ -792,7 +812,7 @@ body.light-theme .dark-theme-icon {
   @media (max-width: 800px) {
     padding: 12px 16px;
     .dialog-title h2 {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
     }
     .final-date {
       font-size: 1.1rem;
@@ -802,7 +822,7 @@ body.light-theme .dark-theme-icon {
   @media (max-width: 600px) {
     padding: 10px 14px;
     .dialog-title h2 {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
     }
     .final-date {
       font-size: 0.95rem;
@@ -812,7 +832,7 @@ body.light-theme .dark-theme-icon {
   @media (max-width: 300px) {
     padding: 8px 10px;
     .dialog-title h2 {
-      font-size: 1rem;
+      font-size: 1.1rem;
     }
     .final-date {
       font-size: 0.8rem;

@@ -91,6 +91,11 @@ export class NavbarComponent implements OnInit {
     return this.authService.userData
   }
 
+  get accountLabel(): string {
+    return this.userData.displayName?.slice(0, this.userData.displayName?.indexOf(' ')) ||
+      this.userData.email?.slice(0, this.userData.email?.indexOf('@')) || ''
+  }
+
   logout() {
     this.authService.logoutUser()
       .then(resp => {
